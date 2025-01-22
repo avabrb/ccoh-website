@@ -4,6 +4,10 @@ import "slick-carousel/slick/slick-theme.css";
 
 import { homeImages } from "./HomeModel"
 
+const Highlight = ({ children }) => {
+    return <span className="highlight">{children}</span>;
+  };  
+
 const HomeView = ({ events, buttons, images }) => {
     // const images = images
 
@@ -79,7 +83,7 @@ const HomeView = ({ events, buttons, images }) => {
 
     return (
         <div className="main-content">
-            <h1 className="title">The Consular Corps of Houston: A Dynamic, Diverse, and Global Community</h1>
+            <h1 className="title">The <Highlight> Consular Corps of Houston </Highlight>: A Dynamic, Diverse, and Global Community</h1>
 
             {/* scrolling images section */}
             <div className="scroll-images">
