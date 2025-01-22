@@ -101,7 +101,7 @@ const HomeView = ({ events, buttons, images }) => {
                 <h2 id="who-are-we">Who are we?</h2>
 
                 <div className="content">
-                    <p className="general">The Consular Corps of Houston (CCH) is a non-profit organization dedicated to supporting its members in their official functions under the Vienna Convention on Consular Relations of 1963.</p>
+                    <p className="general">The Consular Corps of Houston (CCH) is a <Highlight>non-profit organization</Highlight> dedicated to supporting its members in their official functions under the Vienna Convention on Consular Relations of 1963.</p>
 
                     <div className="info-grid">
                         {whoWeAre.map((section) => (
