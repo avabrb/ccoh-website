@@ -1,0 +1,156 @@
+/* Carousel images */
+
+.scroll-images {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+}
+
+.carousel-image {
+    display: block;
+    width: 100%;
+    max-height: 400px; 
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+    /* border: 2px solid red; */
+}
+
+/* Custom navigation arrows */
+/* .custom-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+.custom-arrow:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.custom-arrow.prev {
+    left: 10px;
+}
+
+.custom-arrow.next {
+    right: 10px;
+} */
+
+
+
+/* General layout */
+.main-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    /* padding: 20px; */
+    box-sizing: border-box;
+}
+
+.title {
+    text-align: center;
+    font-size: 3.5rem;
+    /* margin: 20px 0; */
+    font-weight: bold;
+    /* color: #0a57a3;  */
+}
+
+/* Subsection container with grid layout */
+.subsection {
+    display: grid;
+    grid-template-columns: 1fr 3fr; /* 1/4 for the title, 3/4 for the content */
+    max-width: 1200px;
+    margin: 40px auto;
+    gap: 20px; /* Space between columns */
+    padding: 20px;
+    box-sizing: border-box;
+    align-items: start; /* Align items to the top */
+}
+
+/* Title on the left */
+.subsection h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #000; /* Black color for the title */
+    text-align: left; /* Align text to the left */
+    margin: 0; /* Remove default margins */
+}
+
+/* Content (description and grid) on the right */
+.subsection .content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* General description */
+.subsection .general {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: #555; /* Slightly lighter than black */
+}
+
+/* Grid container for info boxes */
+.subsection .info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columns */
+    gap: 20px; /* Space between grid items */
+}
+
+/* Individual info box */
+.info-section {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+/* Bold section title */
+.bold-section {
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    line-height: 1.4;
+    color: #000;
+}
+
+/* Normal section text */
+.text-section {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #555;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    .subsection {
+        grid-template-columns: 1fr; /* Single-column layout */
+    }
+
+    .subsection h2 {
+        text-align: center; /* Center the title for smaller screens */
+        margin-bottom: 20px; /* Add spacing below title */
+    }
+
+    .subsection .content {
+        gap: 20px; /* Space out description and grid */
+    }
+}
