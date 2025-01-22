@@ -1,20 +1,21 @@
 import './App.css'
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import Home from './Home'
+import Home from './home/HomeController'
+import { HomeBar } from './components/Homebar'
 
 function App() {
   return (
     <div>
       <Router>
-        {/* <Home /> */}
-        {/* <HomeBar /> */}
-    
+      <HomeBar />
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/home' element={<Home />} />
         </Routes>
       </Router>
+      
+
       
     </div>
   )
