@@ -1,4 +1,5 @@
-/* Footer Container */
+/*
+Footer Container */
 .footer-top {
     background-color: #000000; /* Dark background */
     color: white; /* White text */
@@ -6,13 +7,13 @@
     text-align: left; /* Align text to the left */
   }
   
-  .footer-top .statement p {
-    font-size: 67px; /* Increase font size for larger text */
+ #Footer .footer-top .statement p {
     font-weight: 700; /* Make the text bold */
     line-height: 1.3; /* Increase line spacing for better readability */
     margin-bottom: 35px; /* Space below the text */
     margin-right: 35%;
     margin-left: 3%;
+    font-size: 67px;
   }
   
   .footer-link1 {
@@ -30,78 +31,63 @@
     margin-bottom: 35px;
   }
   
-  .footer-link:hover {
+  .footer-link1:hover {
     background-color: #0073ff; /* Blue hover effect */
     color: white; /* Change text color on hover */
     transform: scale(1.05); /* Slightly enlarge on hover */
   }
   .footer-lower {
     background-color: #005DFF; /* Blue background */
-    color: black; /* White text */
-    padding: 20px 0;
+    color: black; /* Black text */
+    padding: 10px 0; /* Add some vertical padding */
   }
   
   .footer-container {
-    max-width: 1200px; /* Limit container width */
-    margin: 0 auto; 
-    display: flex; /* Flexbox for horizontal alignment */
-    justify-content: space-between; /* Spread out content */
-    align-items: center; /* Vertically center content */
-    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    max-width: 100%; /* Ensure container takes the full width */
+    margin: 0 auto;
+    display: grid; /* Use CSS Grid for layout */
+    grid-template-columns: 1fr 1fr 1fr 1fr; /* Four equal columns */
+    gap: 20px; /* Space between columns */
+    align-items: center; /* Vertically align items */
   }
   
-  /* Branding Section */
   .footer-branding {
-    flex: 1; /* Allow branding to take up space */
+    grid-column: 1; /* Place branding in the first column */
     text-align: left; /* Align branding to the left */
-    padding-left: 20px; /* Push branding closer to the left edge */
+    margin-left: 20px;
   }
   
-  .footer-branding p,
-  .footer-branding a {
-    display: inline-block; /* Keep branding text inline */
-    margin: 0; /* Remove extra margin */
-  }
+#Footer  .footer-other {
+    grid-column: 2; /* Ensure this is in the second column */
+    display: flex; /* Use flexbox to align children horizontally */
+    align-items: center; /* Vertically center the items */
+    width: 100%; /* Make sure the container spans the full width of its column */
+    justify-content: space-between;
+    display: inline-block;
+}
+
+#Footer .footer-other .footer-link2 {
+    color: black; /* Set the text color to black */
+    text-decoration: none; /* Remove the underline */
+    font-size: 16px; /* Adjust font size if necessary */
+}
+
+#Footer .footer-other .footer-social {
+    display: flex; /* Keep social icons aligned horizontally */
+    gap: 20px; /* Space between icons */
+}
   
-  .footer-link2 {
-    color: black;
-    margin-left: 30px; /* Add more space between branding and Legal Terms */
-    text-decoration: underline;
-  }
-  
-  .footer-link2:hover {
-    text-decoration: none;
-    color: #FFD700; /* Gold hover effect */
-  }
-  
-  /* Social Media Section */
-  .footer-social {
-    flex: 1; /* Allow social media to take up space */
-    text-align: center; /* Center icons */
-    display: flex;
-    justify-content: center; /* Center icons horizontally */
-    gap: 15px; /* Space between icons */
-  }
-  
-  .social-icon {
-    color: black;
-    font-size: 24px;
-    text-decoration: none;
-  }
-  
-  .social-icon:hover {
-    color: #FFD700; /* Gold hover effect */
-  }
-  
-  /* Credits Section */
   .footer-credits {
-    flex: 2; /* Allow credits to take up space */
+    grid-column: 3 / 5; /* Span columns 3 and 4 */
     text-align: right; /* Align credits to the right */
     font-size: 16px;
+    margin-right: 20px;
     color: black;
+    align-self: center; /* Align credits vertically with other items */
   }
   
-  .highlight{
-    color: #005dFF; 
+  .highlight {
+    color: #005DFF; 
     font-weight: bold;
-}
+  }
+  
