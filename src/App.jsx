@@ -9,15 +9,15 @@ function App() {
   return (
     <div>
       <Router>
-      <HomeBar />
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/home' element={<Home />} />
-        </Routes>
+        <HomeBar />
+        <main style={{ minHeight: 'calc(100vh - 200px)' }}>
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/home' element={<Home />} />
+          </Routes>
+        </main>
       </Router>
-      
       <Footer />
-      
     </div>
   )
 }
