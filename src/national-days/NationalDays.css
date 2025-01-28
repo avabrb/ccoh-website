@@ -1,13 +1,108 @@
-/* Main container styles */
-.highlight {
-    color: #0066ff;
-    font-weight: 500;
+.page {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    max-width: 90%;
+    margin: auto;
   }
   
   h1 {
-    font-size: 1.2rem;
-    font-weight: normal;
-    margin-bottom: 2rem;
-    color: #333;
+    font-size: 50px;
+    font-weight: bold;
+    text-align: center;
   }
- 
+  
+  .highlight {
+    color: #005DFF;
+    font-weight: bold;
+  }
+  
+  .month-block {
+    margin-top: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  
+  .title-open {
+    background-color: #e5e5e5;
+    padding: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 20px;
+  }
+  
+  .title-open:first-child {
+    margin-top: 0;
+  }
+  
+  .title-open:hover {
+    background-color: #005DFF;
+  }
+  
+  .section {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin-top: 5px;
+    padding: 10px;
+  }
+  
+  .month-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .month-box:last-child {
+    border-bottom: none;
+  }
+  
+  .date-country {
+    display: flex;
+    align-items: center;
+  }
+  
+  .date {
+    font-weight: bold;
+    margin-right: 10px;
+  }
+  
+  .flag {
+    width: 20px;
+    height: 14px;
+    display: inline-block;
+    margin-right: 10px;
+  }
+  
+  .flag img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .country {
+    font-weight: bold;
+  }
+  
+  .event {
+    color: gray;
+    font-size: 14px;
+  }
+  
+  .title-open span:last-child {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  .title-open span:last-child {
+    color: black;
+  }
+  
+  .title-open[aria-expanded="true"] span:last-child {
+    color: red;
+  }
+  

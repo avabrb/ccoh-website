@@ -1,6 +1,7 @@
 /* currently just testing on NationalDaysTest.jsx -- do not look here*/
 import React from 'react'
-import datesData from "./nationalDays.json"
+import datesData from "./ND.json"
+import "./NationalDays.css"
 
 const DaysModel = () => {
     return (
@@ -62,7 +63,7 @@ const DaysModel = () => {
           <p className="country">{country}</p>
         </div>
         <div className="flag-event">
-          <p className="flag">{flag}</p>
+          <img src={flag} />
           <p className="event">{event}</p>
         </div>
       </div>
