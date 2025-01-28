@@ -1,5 +1,5 @@
 import React from 'react'
-import DaysModel from './NationalDaysVM'
+import DaysModel from './NationalDaysTest'
 import "./NationalDays.css"
 
 export default function NationalDays() {
