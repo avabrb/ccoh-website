@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getUpcomingEvents, homeImages, homeLinks } from "./HomeModel";
+import { getUpcomingEvents, homeImages } from "./HomeModel";
 
 const useHomeModel = () => {
     const [events, setEvents] = useState([])
@@ -16,7 +16,7 @@ const useHomeModel = () => {
 
     return {
         events, 
-        buttons: homeLinks,
+        // buttons: homeLinks,
         images: homeImages
     }
 }

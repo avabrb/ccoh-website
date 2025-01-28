@@ -1,8 +1,5 @@
-const API_KEY = '1'
-const CALENDAR_ID = '2'
-
-// input later with environmental variables 
-// i have both key and calendar id
+const API_KEY = import.meta.env.VITE_API_KEY
+const CALENDAR_ID = import.meta.env.VITE_CALENDAR_ID
 
 export async function getUpcomingEvents () {
     try {
@@ -16,22 +13,23 @@ export async function getUpcomingEvents () {
         }
 
         const data = await response.json()
+        console.log("API Response:", data);
+        console.log("Raw Event Data:", data.items);
+
         return data.items.map((event) => ({
             id: event.id,
-            title: event.summary, 
-            date: event.start.date
+            title: event.summary || "no title", 
+            date: event.start?.dateTime || event.start?.date || null,
+            link: event.htmlLink || "#",
+            recurring: !!event.recurringEventId,
         }))
+
+        console.log("Mapped Events:", events)
 
     } catch (error) {
         console.error(error)
         // display to user (later)
-    }
-}
-
-export const homeLinks = {
-    buttons: {
-        joinUs: '/login',
-        seeEvents: '/program'
+        return []
     }
 }
 
