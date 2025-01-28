@@ -19,37 +19,6 @@
     /* border: 2px solid red; */
 }
 
-/* Custom navigation arrows */
-/* .custom-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.5);
-    color: #fff;
-    border: none;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    z-index: 1000;
-}
-
-.custom-arrow:hover {
-    background: rgba(0, 0, 0, 0.8);
-}
-
-.custom-arrow.prev {
-    left: 10px;
-}
-
-.custom-arrow.next {
-    right: 10px;
-} */
-
-
 
 /* General layout */
 .main-content {
@@ -83,22 +52,22 @@
 /* Subsection container with grid layout */
 .subsection {
     display: grid;
-    grid-template-columns: 1fr 3fr; /* 1/4 for the title, 3/4 for the content */
+    grid-template-columns: 1fr 3fr; 
     max-width: 1200px;
     margin: 40px auto;
-    gap: 20px; /* Space between columns */
+    gap: 20px; 
     padding: 20px;
     box-sizing: border-box;
-    align-items: start; /* Align items to the top */
+    align-items: start; 
 }
 
 /* Title on the left */
 .subsection h2 {
     font-size: 2rem;
     font-weight: bold;
-    color: #000; /* Black color for the title */
-    text-align: left; /* Align text to the left */
-    margin: 0; /* Remove default margins */
+    color: #000; 
+    text-align: left;
+    margin: 0; 
 }
 
 /* Content (description and grid) on the right */
@@ -112,23 +81,23 @@
 .subsection .general {
     font-size: 1.2rem;
     line-height: 1.6;
-    color: #555; /* Slightly lighter than black */
+    color: #555;
 }
 
 /* Grid container for info boxes */
 .subsection .info-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 2 columns */
-    gap: 20px; /* Space between grid items */
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px; 
 }
 
 /* Individual info box */
 .info-section {
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 8px;
+    background-color: #e5e5e5;
+    /* border: 1px solid #ddd; */
+    border-radius: 10px;
     padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
     text-align: left;
 }
 
@@ -145,7 +114,8 @@
 .text-section {
     font-size: 1rem;
     line-height: 1.6;
-    color: #555;
+    /* color: #555; */
+    color: black;
 }
 
 /* Responsive adjustments for smaller screens */
@@ -161,5 +131,444 @@
 
     .subsection .content {
         gap: 20px; /* Space out description and grid */
+    }
+}
+
+/* Become Member  */
+/* Subsection Container */
+.subsection-2 {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+    box-sizing: border-box;
+    /* background-color: #f9f9f9; */
+    background-color: #e5e5e5;
+    border-radius: 8px;
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+}
+
+/* Section Title */
+.subsection-2 h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    /* color: #0a57a3; */
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Member Content: Grid Layout */
+.member-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two columns: Image and Information */
+    gap: 20px;
+    /* align-items: start; */
+    align-items: stretch;
+    height: 100%;
+    margin-bottom: 20px;
+}
+
+/* Image Section */
+.member-image img {
+    width: 100%;
+    height: 100%;
+    /* height: auto; */
+    object-fit: cover;
+    border-radius: 8px;
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+}
+
+/* Member Grid: Information Section */
+.member-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Space between questions */
+}
+
+/* Individual Info Section */
+.member-info {
+    padding: 15px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+    text-align: left; 
+}
+
+/* Question Title (e.g., WHO?, HOW?) */
+.question-section {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between icon and text */
+    margin-bottom: 10px;
+}
+
+/* Answer Section */
+.answer-section {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #555;
+    text-align: left; 
+}
+
+/* Footer Section */
+.member-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    /* text-align: center; */
+    /* margin-top: 20px; */
+    margin: 0;
+    font-size: 1rem;
+    color: #333;
+}
+
+.member-footer p {
+    margin-right: 10vh;
+}
+
+/* Join Button */
+.join-button {
+    background-color: #0a57a3;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.join-button:hover {
+    background-color: #083d7a; /* Darker blue on hover */
+}
+
+@media (max-width: 768px) {
+    .member-content {
+        grid-template-columns: 1fr; /* Single column */
+    }
+
+    .member-image img {
+        height: auto; /* Allow the image to resize proportionally */
+    }
+
+    .member-footer {
+        flex-direction: column; /* Stack text and button vertically */
+        align-items: flex-start; /* Align to the left */
+        gap: 10px; /* Add spacing between text and button */
+    }
+
+    .join-button {
+        width: auto; /* Maintain natural size */
+    }
+}
+
+
+/* Organize Events subsection */
+.subsection-3 {
+    display: grid;
+    grid-template-columns: 1fr 3fr; 
+    max-width: 1200px;
+    margin: 40px auto;
+    gap: 20px; 
+    padding: 20px;
+    box-sizing: border-box;
+    align-items: start; 
+}
+
+/* Title on the left */
+.subsection-3 h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #000; 
+    text-align: left;
+    margin: 0; 
+}
+
+/* Content (description and grid) on the right */
+.subsection-2 .event-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+
+/* Grid container for info boxes */
+.subsection-3 .event-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px; 
+}
+
+/* Individual info box */
+.event-info {
+    grid-column: 1 / span 2;
+    background-color: #e5e5e5;
+    /* border: 1px solid #ddd; */
+    border-radius: 10px;
+    /* padding: 20px; */
+    padding: 2px 5px;
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+    text-align: left;
+
+    display: flex;
+    align-items: center;
+    gap: 10vh;
+}
+
+/* Bold section title */
+.id-section {
+    font-weight: bold;
+    font-size: 1.1rem;
+    /* margin-bottom: 10px; */
+    /* line-height: 1.4; */
+    color: #000;
+    width: 50px;
+    text-align: right;
+}
+
+/* Normal section text */
+.event-section {
+    font-size: 1rem;
+    line-height: 1.6;
+    /* color: #555; */
+    color: black;
+    flex: 1;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    .subsection {
+        grid-template-columns: 1fr; /* Single-column layout */
+    }
+
+    .subsection h2 {
+        text-align: center; /* Center the title for smaller screens */
+        margin-bottom: 20px; /* Add spacing below title */
+    }
+
+    .subsection .content {
+        gap: 20px; /* Space out description and grid */
+    }
+}
+
+
+/* Upcoming events */
+.subsection-4 {
+    text-align: center;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 900px; /* Keeps section from stretching too wide */
+}
+
+#upcoming-events {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: black;
+    margin-bottom: 30px;
+}
+
+/* Grid layout for alternating rows */
+.calendar-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Style for individual rows */
+.calendar-row {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+/* Left row */
+.row-left .calendar-bubble {
+    order: 1;
+}
+.row-left .calendar-details {
+    order: 2;
+    text-align: left;
+}
+
+/* Right row */
+.row-right .calendar-bubble {
+    order: 2;
+}
+.row-right .calendar-details {
+    order: 1;
+    text-align: right;
+}
+
+/* Bubble styling */
+.calendar-bubble {
+    background-color: #4caf50; /* Default color */
+    border-radius: 25px;
+    padding: 15px 20px;
+    min-width: 200px;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Details styling */
+.calendar-details {
+    flex-grow: 1;
+}
+
+.calendar-details p {
+    font-size: 1rem;
+    margin: 0 0 10px;
+    color: black;
+}
+
+.calendar-details a {
+    font-size: 0.9rem;
+    color: #005dFF;
+    text-decoration: underline;
+}
+
+.calendar-details a:hover {
+    color: #003bb3;
+    text-decoration: none;
+}
+
+/* Alternating bubble colors */
+.calendar-row:nth-child(1) .calendar-bubble {
+    background-color: #4caf50; /* Green */
+}
+.calendar-row:nth-child(2) .calendar-bubble {
+    background-color: #2196f3; /* Blue */
+}
+.calendar-row:nth-child(3) .calendar-bubble {
+    background-color: #ff9800; /* Orange */
+}
+.calendar-row:nth-child(4) .calendar-bubble {
+    background-color: #f44336; /* Red */
+}
+.calendar-row:nth-child(5) .calendar-bubble {
+    background-color: #673ab7; /* Purple */
+}
+.calendar-row:nth-child(6) .calendar-bubble {
+    background-color: #ff5722; /* Deep Orange */
+}
+
+/* Event footer */
+/* .event-footer {
+    margin-top: 30px;
+}
+
+.event-footer p {
+    font-size: 1.2rem;
+    font-weight: bold;
+} */
+
+.event-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    /* text-align: center; */
+    /* margin-top: 20px; */
+    margin: 0;
+    font-size: 1rem;
+    color: #333;
+}
+
+.event-footer p {
+    margin-right: 10vh;
+}
+
+.join-button {
+    background-color: #005dFF;
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 1rem;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.join-button:hover {
+    background-color: #003bb3;
+}
+
+/* 📱 Mobile (up to 768px) */
+@media (max-width: 768px) {
+    .subsection-4 {
+        padding: 15px;
+        max-width: 100%;
+    }
+
+    #upcoming-events {
+        font-size: 2rem; /* Reduce heading size for smaller screens */
+    }
+
+    .calendar-row {
+        flex-direction: column; /* Stack bubbles and details vertically */
+        gap: 10px;
+    }
+
+    .calendar-bubble {
+        min-width: auto; /* Allow the bubble to be flexible */
+        width: 100%; /* Full width */
+        text-align: center;
+    }
+
+    .calendar-details {
+        text-align: center; /* Center-align text and links */
+    }
+
+    .calendar-details a {
+        display: block;
+        margin-top: 5px;
+    }
+
+    .event-footer {
+        flex-direction: column;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .event-footer p {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+}
+
+/* 💻 Tablets & Small Laptops (up to 1024px) */
+@media (max-width: 1024px) {
+    .subsection-4 {
+        max-width: 95%;
+    }
+
+    .calendar-row {
+        gap: 15px;
+    }
+
+    .calendar-bubble {
+        min-width: 180px; /* Adjust bubble size */
+        font-size: 1.1rem; /* Slightly reduce text size */
+    }
+
+    .calendar-details {
+        font-size: 0.9rem;
+    }
+}
+
+/* 🖥️ Large Screens (above 1024px) */
+@media (min-width: 1025px) {
+    .subsection-4 {
+        max-width: 900px;
     }
 }
