@@ -1,6 +1,6 @@
 /* currently just testing on NationalDaysTest.jsx -- do not look here*/
 import React from 'react'
-import datesData from "./ND.json"
+import datesData from "./NationalDays.json"
 import "./NationalDays.css"
 
 const DaysModel = () => {
