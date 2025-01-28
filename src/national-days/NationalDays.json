@@ -1,0 +1,524 @@
+{
+  "January": [
+    {
+      "date": "01st",
+      "country": "Czech Republic",
+      "flag": "./Czech_Republic_flag.jpg",
+      "event": "Restoration Day of the Independent Czech State"
+    },
+    {
+      "date": "26th",
+      "country": "Australia",
+      "flag": "./Australia_flag.png",
+      "event": "Australia Day"
+    }
+  ],
+  "February": [
+    {
+      "date": "04th",
+      "country": "Sri Lanka",
+      "flag": "./Sri_Lanka_flag.png",
+      "event": "Independence Day"
+    },
+    {
+      "date": "06th",
+      "country": "New Zealand",
+      "flag": "./New_Zealand_flag.png",
+      "event": "Waitangi Day"
+    },
+    {
+      "date": "12th",
+      "country": "Chile",
+      "flag": "./Chile_flag.png",
+      "event": "Independence Day"
+    },
+    {
+      "date": "16th",
+      "country": "Lithuania",
+      "flag": "./Lithuania_flag.png",
+      "event": "Independence Day"
+    },
+    {
+      "date": "24th",
+      "country": "Estonia",
+      "flag": "./Estonia_flag.png",
+      "event": "Independence Day"
+    },
+    {
+      "date": "25th",
+      "country": "Kuwait",
+      "flag": "./Kuwait_flag.png",
+      "event": "Independence Day"
+    },
+    {
+      "date": "27th",
+      "country": "Dominican Republic",
+      "flag": "./Dominican_Republic_flag.png",
+      "event": "Independence Day"
+    }
+  ],
+  "March": [
+    {
+      "date": "03rd",
+      "country": "Bulgaria",
+      "flag": "./Bulgaria_flag.png",
+      "event": "National Day"
+    },
+    {
+      "date": "11th",
+      "country": "Lithuania",
+      "flag": "./Lithuania_flag.png",
+      "event": "Act of the Re-Establishment of the State of Lithuania"
+    },
+    {
+      "date": "12th",
+      "country": "Mauritius",
+      "flag": "./Mauritius_flag.png",
+      "event": "Independence Day"
+    },
+    {
+      "date": "21st",
+      "country": "Namibia",
+      "flag": "./Namibia_flag.png",
+      "event": "Independence Day"
+    },
+    {
+      "date": "25th",
+      "country": "Greece",
+      "flag": "./Greece_flag.png",
+      "event": "Independence Day"
+    },
+    {
+      "date": "26th",
+      "country": "Bangladesh",
+      "flag": "./Bangladesh_flag.png",
+      "event": "Independence Day"
+    }
+  ],
+  "April": [
+    {
+      "date": "04th",
+      "country": "Senegal",
+      "flag": "./Senegal_flag.png",
+      "event": "Independence Day"
+    },
+    {
+      "date": "16th",
+      "country": "Denmark",
+      "flag": "./Denmark_flag.png",
+      "event": "Birthday of Queen Margrethe II"
+    },
+    {
+      "date": "19th",
+      "country": "Swaziland",
+      "flag": "./Swaziland_flag.png",
+      "event": "Birthday of King Mswati III"
+    },
+    {
+      "date": "24th",
+      "country": "Ireland",
+      "flag": "./Ireland_flag.png",
+      "event": "Proclamation of the Irish Republic"
+    },
+    {
+      "date": "27th",
+      "country": "Togo",
+      "flag": "./Togo_flag.png",
+      "event": "Independence Day"
+    },
+    {
+      "date": "28th",
+      "country": "Japan",
+      "flag": "./Japan_flag.png",
+      "event": "Independence Day"
+    },
+    {
+      "date": "30th",
+      "country": "Netherlands",
+      "flag": "./Netherlands_flag.png",
+      "event": "Koningsdag (King's Day)"
+    }
+  ],
+  "May": [
+    {
+      "date": "04th",
+      "country": "Latvia",
+      "flag": "./Latvia_flag.png",
+      "event": "Restoration of independence from Soviet Union"
+    },
+    {
+      "date": "09th",
+      "country": "Romania",
+      "flag": "./Romania_flag.png",
+      "event": "Independence Day"
+    },
+    {
+      "date": "15th",
+      "country": "Paraguay",
+      "flag": "./Paraguay_flag.png",
+      "event": "Independence Day"
+    },
+    {
+      "date": "17th",
+      "country": "Norway",
+      "flag": "./Norway_flag.png",
+      "event": "Constitution Day"
+    },
+    {
+      "date": "24th",
+      "country": "Ecuador",
+      "flag": "./Ecuador_flag.png",
+      "event": "Independence Day"
+    },
+    {
+      "date": "25th",
+      "country": "Argentina",
+      "flag": "./Argentina_flag.png",
+      "event": "National Day"
+    },
+    {
+      "date": "26th",
+      "country": "Guyana",
+      "flag": "./Guyana_flag.png",
+      "event": "Independence Day"
+    },
+    {
+      "date": "28th",
+      "country": "Armenia",
+      "flag": "./Armenia_flag.png",
+      "event": "Independence Day"
+    },
+    {
+      "date": "28th",
+      "country": "Azerbaijan",
+      "flag": "./Azerbaijan_flag.png",
+      "event": "Independence Day"
+    }
+  ],
+  "June": [
+    {
+      "date": "02nd",
+      "country": "Italy",
+      "flag": "./Italy_flag.png",
+      "event": "Republic Day"
+    },
+    {
+      "date": "10th",
+      "country": "Portugal",
+      "flag": "./Portugal_flag.png",
+      "event": "National Day"
+    },
+    {
+      "date": "12th",
+      "country": "Philippines",
+      "flag": "./Philippines_flag.png",
+      "event": "Independence Day"
+    },
+    {
+      "date": "17th",
+      "country": "Iceland",
+      "flag": "./Iceland_flag.png",
+      "event": "Icelandic National Day"
+    },
+    {
+      "date": "25th",
+      "country": "Croatia",
+      "flag": "./Croatia_flag.png",
+      "event": "Statehood Day"
+    }
+  ],
+"July": [
+  {
+    "date": "01st",
+    "country": "Canada",
+    "flag": "./Canada_flag.png",
+    "event": "Canada Day"
+  },
+  {
+    "date": "03rd",
+    "country": "Belarus",
+    "flag": "./Belarus_flag.png",
+    "event": "Independence Day"
+  },
+  {
+    "date": "04th",
+    "country": "United States of America",
+    "flag": "./United_States_of_America_flag.png",
+    "event": "Independence Day"
+  },
+  {
+    "date": "05th",
+    "country": "Venezuela",
+    "flag": "./Venezuela_flag.png",
+    "event": "Independence Day"
+  },
+  {
+    "date": "09th",
+    "country": "Argentina",
+    "flag": "./Argentina_flag.png",
+    "event": "Independence Day"
+  },
+  {
+    "date": "10th",
+    "country": "Bahamas",
+    "flag": "./Bahamas_flag.png",
+    "event": "Independence Day"
+  },
+  {
+    "date": "14th",
+    "country": "France",
+    "flag": "./France_flag.png",
+    "event": "Bastille Day"
+  },
+  {
+    "date": "20th",
+    "country": "Colombia",
+    "flag": "./Colombia_flag.png",
+    "event": "Independence Day"
+  },
+  {
+    "date": "21st",
+    "country": "Belgium",
+    "flag": "./Belgium_flag.png",
+    "event": "National Day"
+  },
+  {
+    "date": "23rd",
+    "country": "Egypt",
+    "flag": "./Egypt_flag.png",
+    "event": "Revolution Day"
+  },
+  {
+    "date": "28th",
+    "country": "Peru",
+    "flag": "./Peru_flag.png",
+    "event": "Independence Day"
+  }
+],
+"August": [
+  {
+    "date": "01st",
+    "country": "Switzerland",
+    "flag": "./Switzerland_flag.png",
+    "event": "Swiss National Day"
+  },
+  {
+    "date": "06th",
+    "country": "Bolivia",
+    "flag": "./Bolivia_flag.png",
+    "event": "Independence Day"
+  },
+  {
+    "date": "06th",
+    "country": "Jamaica",
+    "flag": "./Jamaica_flag.png",
+    "event": "Independence Day"
+  },
+  {
+    "date": "07th",
+    "country": "Côte d'Ivoire",
+    "flag": "./Côte_d'Ivoire_flag.png",
+    "event": "Independence Day"
+  },
+  {
+    "date": "10th",
+    "country": "Ecuador",
+    "flag": "./Ecuador_flag.png",
+    "event": "Independence Day"
+  },
+  {
+    "date": "15th",
+    "country": "India",
+    "flag": "./India_flag.png",
+    "event": "Independence Day"
+  },
+  {
+    "date": "15th",
+    "country": "South Korea",
+    "flag": "./South_Korea_flag.png",
+    "event": "Liberation Day"
+  },
+  {
+    "date": "17th",
+    "country": "Indonesia",
+    "flag": "./Indonesia_flag.png",
+    "event": "Independence Day"
+  },
+  {
+    "date": "31st",
+    "country": "Malaysia",
+    "flag": "./Malaysia_flag.png",
+    "event": "Independence Day"
+  }
+],
+"September": [
+  {
+    "date": "07th",
+    "country": "Brazil",
+    "flag": "./Brazil_flag.png",
+    "event": "Independence Day"
+  },
+  {
+    "date": "15th",
+    "country": "Costa Rica",
+    "flag": "./Costa_Rica_flag.png",
+    "event": "Independence Day"
+  },
+  {
+    "date": "15th",
+    "country": "El Salvador",
+    "flag": "./El_Salvador_flag.png",
+    "event": "Independence Day"
+  },
+  {
+    "date": "15th",
+    "country": "Guatemala",
+    "flag": "./Guatemala_flag.png",
+    "event": "Independence Day"
+  },
+  {
+    "date": "15th",
+    "country": "Honduras",
+    "flag": "./Honduras_flag.png",
+    "event": "Independence Day"
+  },
+  {
+    "date": "15th",
+    "country": "Nicaragua",
+    "flag": "./Nicaragua_flag.png",
+    "event": "Independence Day"
+  },
+  {
+    "date": "16th",
+    "country": "Mexico",
+    "flag": "./Mexico_flag.png",
+    "event": "Independence Day"
+  },
+  {
+    "date": "18th",
+    "country": "Chile",
+    "flag": "./Chile_flag.png",
+    "event": "Independence Day"
+  },
+  {
+    "date": "21st",
+    "country": "Belize",
+    "flag": "./Belize_flag.png",
+    "event": "Independence Day"
+  },
+  {
+    "date": "21st",
+    "country": "Malta",
+    "flag": "./Malta_flag.png",
+    "event": "Independence Day"
+  }
+],
+"October": [
+  {
+    "date": "01st",
+    "country": "Cyprus",
+    "flag": "./Cyprus_flag.png",
+    "event": "Independence Day"
+  },
+  {
+    "date": "03rd",
+    "country": "Germany",
+    "flag": "./Germany_flag.png",
+    "event": "Unity Day"
+  },
+  {
+    "date": "12th",
+    "country": "Spain",
+    "flag": "./Spain_flag.png",
+    "event": "National Day"
+  },
+  {
+    "date": "24th",
+    "country": "Zambia",
+    "flag": "./Zambia_flag.png",
+    "event": "Independence Day"
+  },
+  {
+    "date": "26th",
+    "country": "Austria",
+    "flag": "./Austria_flag.png",
+    "event": "National Day"
+  }
+],
+  "November": [
+    {
+      "date": "01st",
+      "country": "Algeria",
+      "flag": "./Algeria_flag.png",
+      "event": "Revolution Day"
+    },
+    {
+      "date": "03rd",
+      "country": "Panama",
+      "flag": "./Panama_flag.png",
+      "event": "Independence Day"
+    },
+    {
+      "date": "11th",
+      "country": "Poland",
+      "flag": "./Poland_flag.png",
+      "event": "Independence Day"
+    },
+    {
+      "date": "18th",
+      "country": "Latvia",
+      "flag": "./Latvia_flag.png",
+      "event": "Proclamation of Independence"
+    },
+    {
+      "date": "22nd",
+      "country": "Lebanon",
+      "flag": "./Lebanon_flag.png",
+      "event": "Independence Day"
+    }
+  ],
+  "December": [
+    {
+      "date": "01st",
+      "country": "Romania",
+      "flag": "./Romania_flag.png",
+      "event": "Great Union Day"
+    },
+    {
+      "date": "02nd",
+      "country": "United Arab Emirates",
+      "flag": "./United_Arab_Emirates_flag.png",
+      "event": "National Day"
+    },
+    {
+      "date": "06th",
+      "country": "Finland",
+      "flag": "./Finland_flag.png",
+      "event": "Independence Day"
+    },
+    {
+      "date": "11th",
+      "country": "Burkina Faso",
+      "flag": "./Burkina_Faso_flag.png",
+      "event": "Proclamation of the Republic"
+    },
+    {
+      "date": "12th",
+      "country": "Kenya",
+      "flag": "./Kenya_flag.png",
+      "event": "Independence Day"
+    },
+    {
+      "date": "16th",
+      "country": "Bahrain",
+      "flag": "./Bahrain_flag.png",
+      "event": "National Day"
+    },
+    {
+      "date": "18th",
+      "country": "Qatar",
+      "flag": "./Qatar_flag.png",
+      "event": "National Day"
+    }
+  ]
+}
