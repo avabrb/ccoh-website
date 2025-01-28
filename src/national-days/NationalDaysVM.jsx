@@ -1,3 +1,4 @@
+/* currently just testing on NationalDaysTest.jsx -- do not look here*/
 import React from 'react'
 import datesData from "./nationalDays.json"
 
@@ -15,6 +16,10 @@ const DaysModel = () => {
   };  
 
   const renderEvents = () => {
+    console.log(datesData); // Debugging
+    if (!datesData || typeof datesData !== "object") {
+      return <p>No data available</p>; // Handle undefined or invalid data
+    }
     return Object.entries(datesData).map(([month, data]) => (
       <MonthSection key={month} month={month} data={data} />
     ));
