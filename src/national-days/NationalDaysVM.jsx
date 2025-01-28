@@ -63,7 +63,7 @@ const DaysModel = () => {
           <p className="country">{country}</p>
         </div>
         <div className="flag-event">
-          <img src={flag} />
+          <p className="flag">{flag}</p>
           <p className="event">{event}</p>
         </div>
       </div>

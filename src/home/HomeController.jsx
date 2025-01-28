@@ -5,7 +5,7 @@ import "./Home.css"
 
 
 export default function Home() {
-    const { events, buttons, images } = useHomeModel()
+    const { events, images } = useHomeModel()
 
-    return <HomeView events={events} buttons={buttons} />
+    return <HomeView events={events}/>
 }
