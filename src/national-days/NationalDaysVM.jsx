@@ -46,7 +46,10 @@ const DaysModel = () => {
     const [isOpen, setIsOpen] = React.useState(false); // Ensure React is imported
     return (
       <div className="month-block">
-        <div className="title-open" onClick={() => setIsOpen(!isOpen)}>
+        <div 
+        className={`title-open ${isOpen ? "active" : ""}`} 
+        onClick={() => setIsOpen(!isOpen)}
+      >
           <span>{title}</span>
           <span>{isOpen ? "x" : "+"}</span>
         </div>
