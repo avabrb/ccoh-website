@@ -34,8 +34,8 @@ export async function getUpcomingEvents () {
 }
 
 export const homeImages = [
-    'logo-removebg.png',
-    'logo.png'
+    "images/slider/slidepic1.png",
+    "images/slider/slidepic2.png"
 ]
 
 export default getUpcomingEvents

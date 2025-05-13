@@ -6,7 +6,39 @@ import { homeImages } from "./HomeModel"
 
 const Highlight = ({ children }) => {
     return <span className="highlight">{children}</span>;
-  };  
+};  
+
+const escapeRegExp = (string) => {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+};
+
+const highlightText = (text = "", keywords = [], color = "#005dFF", fontWeight = "bold") => {
+    if (typeof text !== "string" || !Array.isArray(keywords) || keywords.length === 0) {
+        return text;
+    }
+
+    // Escape each keyword to avoid special character issues
+    const escapedKeywords = keywords.map(keyword => escapeRegExp(keyword));
+
+    // Filter out keywords that are not in the text (exact match)
+    const filteredKeywords = escapedKeywords.filter(keyword => 
+        text.toLowerCase().includes(keyword.toLowerCase().replace(/\\/g, ""))
+    );
+    
+    if (filteredKeywords.length === 0) return text;
+
+    // Split the text using only the existing keywords (escaped)
+    const parts = text.split(new RegExp(`(${filteredKeywords.join('|')})`, 'gi'));
+
+    return parts.map((part, index) => 
+        filteredKeywords.some(keyword => keyword.toLowerCase().replace(/\\/g, "") === part.toLowerCase()) ? (
+            <span key={index} style={{ color: color, fontWeight: fontWeight }}>{part}</span>
+        ) : (
+            part
+        )
+    );
+};
+
 
 const HomeView = ({ events, images }) => {
     // const images = images
@@ -14,11 +46,16 @@ const HomeView = ({ events, images }) => {
     const sliderSettings ={
         dots: true,
         infinite: true,
-        speed: 500,
+        speed: 500,             // Fast transition speed
         slidesToShow: 1,
         slidesToScroll: 1,
-        autoplay: true,
-        autoplaySpeed: 3000,
+        autoplay: true,         // Enable autoplay
+        autoplaySpeed: 8000,    // Change slides every 1 second (1000ms)
+        pauseOnHover: false,    // Do not pause on hover (ensures it keeps autoplaying)
+        pauseOnFocus: false,    // Do not pause on focus
+        cssEase: "cubic-bezier(0.47, 0, 0.745, 0.715)",      // Makes the transition smoother
+        waitForAnimate: true,
+        adaptiveHeight: true,
     }
 
     const whoWeAre = [
@@ -119,9 +156,24 @@ const HomeView = ({ events, images }) => {
                     <div className="info-grid">
                         {whoWeAre.map((section) => (
                             <div key={section.id} className="info-section">
-                                <p className="bold-section">{section.boldText}</p>
-                                <p className="text-section">{section.text}</p>
+                                <p className="bold-section">
+                                    {highlightText(
+                                        section.boldText || "", // Fallback to empty string
+                                        ["official country representatives", "thriving international hub", "history", "city of Houston", "Consuls General", "Honorary Consuls", "all around the world"]
+                                    )}
+                                </p>
 
+                                <p className="text-section">{highlightText(
+                                        section.text,
+                                        ["rich event-driven program", "official entities", "private sector", "local communities", 
+                                        "90 official representatives", "diverse", "third-largest consular presence in the United States", 
+                                        "a century ago", "Houston’s first consulate—the Consulate of Mexico—", "50% Consuls General and 50% Honorary Consuls", 
+                                        "Europe", "38%", "Americas", "26%", "Asia & Oceania", "20%", "Africa", "16%", "(", ")"
+                                        ], 
+                                        "#000", 
+                                        "500"
+                                    )}
+                                </p>
                             </div>
                         ))}
                     </div>
@@ -131,31 +183,27 @@ const HomeView = ({ events, images }) => {
             </div>
 
             <div className="subsection-2">
-                <h2 id="become-member">Become a member of the Consular Corps of Houston</h2>
+                <h2 id="become-member"><Highlight>Become a member</Highlight> of the Consular Corps of Houston organization</h2>
 
                 <div className="member-content">
                     <div className="member-image">
-                        <img src="houstonsunset.jpg" alt="Houston sunset"/>
+                        <img src="sunset.jpg" alt="Houston sunset"/>
                     </div>
 
                     <div className="member-grid">
                         {becomeMember.map((section) => (
                             <div key={section.title} className="member-info">
                                 <p className="question-section">{section.title}</p>
-                                <p className="answer-section">{section.text}</p>
-
+                                <div className="answer-section">{section.text}</div>
                             </div>
                         ))}
                     </div>
-
-                    <div className="member-footer">
-                        <p>Already a member or want to become one?</p>
-                        {/* <button className="join-button">Join us!</button> */}
-                        <a href="/login" className="join-button">Join us!</a>
-                    </div>
-
                 </div>
-            
+
+                <div className="member-footer">
+                    <p>Already a member or want to become one?</p>
+                    <a href="/login" className="join-button">Join us!</a>
+                </div>
             </div>
 
             
