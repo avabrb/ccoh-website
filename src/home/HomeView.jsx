@@ -1,6 +1,7 @@
 import Slider from "react-slick"
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import React, { useState } from "react";
 
 import { homeImages } from "./HomeModel"
 
@@ -36,6 +37,37 @@ const highlightText = (text = "", keywords = [], color = "#005dFF", fontWeight =
         ) : (
             part
         )
+    );
+};
+
+// Directly in HomeView
+const Accordion = ({ title, children }) => {
+    const [isOpen, setIsOpen] = React.useState(false);
+    const contentRef = React.useRef(null);
+
+    return (
+        <div className="accordion-container">
+            <div 
+                className="accordion-header" 
+                onClick={() => setIsOpen(!isOpen)}
+            >
+                <div>{title}</div>
+                <div>{isOpen ? "✕" : "＋"}</div>
+            </div>
+            <div 
+                className="accordion-content" 
+                style={{ 
+                    height: isOpen ? `${contentRef.current?.scrollHeight}px` : "0px",
+                    overflow: "hidden",
+                    transition: "height 0.4s ease"
+                }}
+                ref={contentRef}
+            >
+                <div style={{ padding: "10px 0" }}>
+                    {children}
+                </div>
+            </div>
+        </div>
     );
 };
 
@@ -84,26 +116,22 @@ const HomeView = ({ events, images }) => {
     const becomeMember= [
         {
             title: "WHO?",
-            text: "Eligible Members are consular officers (career diplomats and honorary consular officers) and emeriti consular officers. All the consular officers serving in the Greater Houston region, accredited by their respective governments to the United States, and holding an Exequatur (or equivalent document) issued by the United States Government are eligible Members."
+            text: "Eligible Members are all consular officers (career diplomats and honorary consular officers) and emeriti consular officers. All the consular officers serving in the Greater Houston region, accredited by their respective governments to the United States, and holding an Exequatur (or equivalent document) issued by the United States Government are eligible Members."
         },
         {
             title: "HOW?",
-            text: (
-                <ul>
-                    <li>Complete the membership application form.</li>
-                    <li>Pay the annual membership fee of $200.</li>
-                </ul>
-            )
+            elements: [
+                "Complete the membership application form.",
+                "Pay the annual membership fee of $200."
+            ]
         },
         {
             title: "WHEN?",
-            text: (
-                <ul>
-                    <li>Membership Campaign: Opens on December 1st of the previous year.</li>
-                    <li>Deadline: Finalize your membership before February 15th each year.</li>
-                    <li>Annual Meeting in February.</li>
-                </ul>
-            )
+            elements: [
+                "Membership Campaign: Opens on December 1st of the previous year.",
+                "Deadline: Finalize your membership before February 15th each year.",
+                "Annual Meeting in February."
+            ]
         }
     ]
 
@@ -187,16 +215,29 @@ const HomeView = ({ events, images }) => {
 
                 <div className="member-content">
                     <div className="member-image">
-                        <img src="sunset.jpg" alt="Houston sunset"/>
+                        <img src="sunset.jpg" alt="Houston sunset" />
                     </div>
 
                     <div className="member-grid">
-                        {becomeMember.map((section) => (
-                            <div key={section.title} className="member-info">
-                                <p className="question-section">{section.title}</p>
-                                <div className="answer-section">{section.text}</div>
-                            </div>
-                        ))}
+                        <Accordion title="WHO?">
+                            {highlightText(becomeMember.find((section) => section.title === "WHO?").text, ["all consular officers", "emeriti consular officers"], "#000")}
+                        </Accordion>
+
+                        <Accordion title="HOW?">
+                            <ul>
+                                {becomeMember[1].elements.map((elem, index) => (
+                                    <li key={index}>{highlightText(elem, ["application form", "$200"], "#000")}</li>
+                                ))}
+                            </ul>
+                        </Accordion>
+
+                        <Accordion title="WHEN?">
+                        <ul>
+                            {becomeMember[2].elements.map((elem, index) => (
+                                <li key={index}>{highlightText(elem, ["December 1st", "February 15th", "Annual Meeting"], "#000")}</li>
+                            ))}
+                        </ul>
+                        </Accordion>
                     </div>
                 </div>
 
