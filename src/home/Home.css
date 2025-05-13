@@ -1,8 +1,8 @@
 /* Carousel images */
 
 .scroll-images {
-    width: 100%;
-    max-width: 1200px;
+    width: 100vw; /* Full viewport width */
+    height: 100vh; /* Adjust height as needed*/
     margin: 0 auto;
     overflow: hidden;
     position: relative;
@@ -10,13 +10,11 @@
 
 .carousel-image {
     display: block;
-    width: 100%;
-    max-height: 400px; 
-    object-fit: cover;
-    border-radius: 8px;
+    width: 100vw; /* Full viewport width */
+    height: 100%; /* Ensures image covers the entire height */
+    object-fit: cover; /* Keeps image aspect ratio while covering area */
+    border-radius: 0; /* Remove radius for full width effect */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-
-    /* border: 2px solid red; */
 }
 
 
@@ -39,35 +37,37 @@
 
 .title {
     text-align: left;
-    font-size: 4rem;
     font-family: 'Inter', sans-serif;
-    margin-right: 25%;
-    margin-left: 5%;
     font-weight: bold;
     line-height: 1.2em;
-    margin-top: 130px;
-    /* color: #0a57a3;  */
+    margin-top: 30px;
+    
+    /* Responsive Font Size using clamp() */
+    font-size: clamp(2rem, 4vw + 1rem, 4.5rem);
+    margin-top: clamp(40px, 8vw, 120px);
+    max-width: 90%;
+    margin-left: 5%;
+    margin-right: 25%;
 }
 
-/* Subsection container with grid layout */
+/* Subsection container with full-width layout */
 .subsection {
     display: grid;
-    grid-template-columns: 1fr 3fr; 
-    max-width: 1200px;
-    margin: 40px auto;
-    gap: 20px; 
-    padding: 20px;
-    box-sizing: border-box;
-    align-items: start; 
+    grid-template-columns: 1fr 3fr; /* 1/4 for the title, 3/4 for the text content */
+    max-width: 90vw; /* Use 90% of the screen width */
+    margin: 0 auto;
+    padding: 40px 2%;
+    align-items: flex-start;
+    gap: 40px;
 }
 
-/* Title on the left */
+/* Title section with proportional width */
 .subsection h2 {
-    font-size: 2rem;
+    font-size: clamp(2rem, 4vw, 2.6rem);
     font-weight: bold;
-    color: #000; 
+    color: #000;
+    margin: 0;
     text-align: left;
-    margin: 0; 
 }
 
 /* Content (description and grid) on the right */
@@ -77,111 +77,134 @@
     gap: 20px;
 }
 
-/* General description */
+/* General description with larger font */
 .subsection .general {
-    font-size: 1.2rem;
-    line-height: 1.6;
-    color: #555;
-}
-
-/* Grid container for info boxes */
-.subsection .info-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px; 
-}
-
-/* Individual info box */
-.info-section {
-    background-color: #e5e5e5;
-    /* border: 1px solid #ddd; */
-    border-radius: 10px;
-    padding: 20px;
-    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
-    text-align: left;
-}
-
-/* Bold section title */
-.bold-section {
-    font-weight: bold;
-    font-size: 1.1rem;
-    margin-bottom: 10px;
-    line-height: 1.4;
+    font-size: clamp(0.8rem, 2.5vw, 1.5rem);
+    font-weight: 400;
+    line-height: 1.3;
     color: #000;
 }
 
-/* Normal section text */
-.text-section {
-    font-size: 1rem;
-    line-height: 1.6;
-    /* color: #555; */
-    color: black;
+/* Grid container for info boxes with better layout */
+.subsection .info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    padding-top: 10px;
 }
 
-/* Responsive adjustments for smaller screens */
-@media (max-width: 768px) {
+/* Individual info boxes with padding and background */
+.subsection .info-section {
+    background-color: #f2f2f2;
+    padding: 5px 8px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Info box hover effect */
+.subsection .info-section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.subsection .info-section .text-section {
+    margin-top: 0; /* No space between bold text and normal text */
+    line-height: 1.3; /* Slightly tighter line spacing */
+}
+
+/* Bold text for section titles */
+.subsection .bold-section {
+    font-weight: 600;
+    font-size: clamp(0.8rem, 1.8vw, 1.2rem);
+    color: #000;
+    margin-bottom: 6px;
+}
+
+/* Normal text for section content */
+.subsection .text-section {
+    font-size: clamp(0.8rem, 1.8vw, 1.2rem);
+    line-height: 1.3;
+    color: #444;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 1200px) {
     .subsection {
-        grid-template-columns: 1fr; /* Single-column layout */
+        grid-template-columns: 1fr;
+        padding: 20px 5%;
+        max-width: 100vw;
     }
 
     .subsection h2 {
-        text-align: center; /* Center the title for smaller screens */
-        margin-bottom: 20px; /* Add spacing below title */
+        text-align: center;
+        width: 100%;
+        margin-bottom: 20px;
     }
 
-    .subsection .content {
-        gap: 20px; /* Space out description and grid */
+    .subsection .info-grid {
+        grid-template-columns: 1fr;
     }
 }
 
-/* Become Member  */
+
+
+
+
+
 /* Subsection Container */
 .subsection-2 {
-    max-width: 1200px;
-    margin: 40px auto;
+    max-width: 95vw; /* Use 95% of the viewport width */
+    margin: 20px auto;
     padding: 20px;
     box-sizing: border-box;
-    /* background-color: #f9f9f9; */
-    background-color: #e5e5e5;
+    background-color: #f2f2f2;
     border-radius: 8px;
-    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
 }
 
-/* Section Title */
 .subsection-2 h2 {
-    font-size: 2rem;
-    font-weight: bold;
-    /* color: #0a57a3; */
-    margin-bottom: 20px;
     text-align: center;
+    line-height: 1.2; /* Adjust line height for better spacing */
+    font-size: clamp(2rem, 4vw, 2.6rem);
+    margin-top: 45px; /* Spacing above the text */
+    margin-bottom: 45px; /* Spacing below the text */
 }
 
 /* Member Content: Grid Layout */
 .member-content {
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Two columns: Image and Information */
+    grid-template-columns: 1fr 2fr; /* 1/3 for image, 2/3 for text */
     gap: 20px;
-    /* align-items: start; */
-    align-items: stretch;
+    align-items: stretch; /* Make columns stretch vertically */
+    width: 100%; /* Full width */
     height: 100%;
-    margin-bottom: 20px;
+    min-height: 500px; /* Minimum height for a taller layout */
 }
 
 /* Image Section */
+.member-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    height: 100%; /* Full height of the content */
+    max-height: 700px; /* Adjust for a taller image */
+}
+
 .member-image img {
     width: 100%;
     height: 100%;
-    /* height: auto; */
-    object-fit: cover;
+    object-fit: cover; /* Ensures image covers the full area */
     border-radius: 8px;
-    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
 }
 
 /* Member Grid: Information Section */
 .member-grid {
     display: flex;
     flex-direction: column;
-    gap: 20px; /* Space between questions */
+    gap: 20px;
+    width: 100%;
+    height: 100%; /* Full height to match image */
 }
 
 /* Individual Info Section */
@@ -190,24 +213,24 @@
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 8px;
-    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
     text-align: left; 
+    flex: 1;
 }
 
 /* Question Title (e.g., WHO?, HOW?) */
 .question-section {
-    font-size: 1.2rem;
+    font-size: clamp(1rem, 1.2vw, 1.5rem);
     font-weight: bold;
     color: #333;
     display: flex;
     align-items: center;
-    gap: 10px; /* Space between icon and text */
+    gap: 10px;
     margin-bottom: 10px;
 }
 
 /* Answer Section */
 .answer-section {
-    font-size: 1rem;
+    font-size: clamp(0.9rem, 1vw, 1.2rem);
     line-height: 1.6;
     color: #555;
     text-align: left; 
@@ -217,16 +240,9 @@
 .member-footer {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    /* text-align: center; */
-    /* margin-top: 20px; */
-    margin: 0;
-    font-size: 1rem;
-    color: #333;
-}
-
-.member-footer p {
-    margin-right: 10vh;
+    justify-content: space-between;
+    width: 100%; /* Full width */
+    margin-top: 20px;
 }
 
 /* Join Button */
@@ -246,25 +262,29 @@
     background-color: #083d7a; /* Darker blue on hover */
 }
 
+/* Media Query for Smaller Screens */
 @media (max-width: 768px) {
-    .member-content {
-        grid-template-columns: 1fr; /* Single column */
+    .subsection-2 {
+        max-width: 100%; /* Full width on mobile */
+        padding: 10px;
     }
 
-    .member-image img {
-        height: auto; /* Allow the image to resize proportionally */
+    .member-content {
+        grid-template-columns: 1fr; /* Single column layout */
+    }
+
+    .member-image {
+        height: auto;
+        max-height: 300px; /* Restrict height on mobile */
     }
 
     .member-footer {
-        flex-direction: column; /* Stack text and button vertically */
-        align-items: flex-start; /* Align to the left */
-        gap: 10px; /* Add spacing between text and button */
-    }
-
-    .join-button {
-        width: auto; /* Maintain natural size */
+        flex-direction: column;
+        gap: 10px;
     }
 }
+
+
 
 
 /* Organize Events subsection */
@@ -502,7 +522,7 @@
     background-color: #003bb3;
 }
 
-/* 📱 Mobile (up to 768px) */
+/* Mobile (up to 768px) */
 @media (max-width: 768px) {
     .subsection-4 {
         padding: 15px;
@@ -546,7 +566,7 @@
     }
 }
 
-/* 💻 Tablets & Small Laptops (up to 1024px) */
+/* Tablets & Small Laptops (up to 1024px) */
 @media (max-width: 1024px) {
     .subsection-4 {
         max-width: 95%;
@@ -566,7 +586,7 @@
     }
 }
 
-/* 🖥️ Large Screens (above 1024px) */
+/* Large Screens */
 @media (min-width: 1025px) {
     .subsection-4 {
         max-width: 900px;
