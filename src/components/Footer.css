@@ -15,7 +15,7 @@ Footer Container */
     margin-left: 3%;
     font-size: 67px;
   }
-  
+
   .footer-link1 {
     display: inline-block; /* Make the link behave like a button */
     padding: 15px 30px; /* Add padding for a larger button */
@@ -85,9 +85,3 @@ Footer Container */
     color: black;
     align-self: center; /* Align credits vertically with other items */
   }
-  
-  .highlight {
-    color: #005DFF; 
-    font-weight: bold;
-  }
-  

@@ -35,6 +35,24 @@
     font-weight: bold;
 }
 
+.effect {
+    font-weight: bold;
+    background: linear-gradient(to right, #000 20%, #005dFF 40%, #005dFF 60%, #000 80%);
+    background-size: 200% auto;
+    color: #000;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine 2s linear infinite;
+    display: inline-block; /* Ensure it works properly */
+}
+
+@keyframes shine {
+    to {
+        background-position: 200% center;
+    }
+}
+
 .title {
     text-align: left;
     font-family: 'Inter', sans-serif;
@@ -63,7 +81,7 @@
 
 /* Title section with proportional width */
 .subsection h2 {
-    font-size: clamp(2rem, 4vw, 2.6rem);
+    font-size: clamp(1.5rem, 4vw, 2.6rem);
     font-weight: bold;
     color: #000;
     margin: 0;
@@ -210,7 +228,7 @@
 /* Join Button */
 .join-button {
     background-color: #0a57a3;
-    color: #fff;
+    color: #f2f2f2;
     padding: 10px 20px;
     font-size: 1rem;
     font-weight: bold;
@@ -284,96 +302,165 @@
     }
 }
 
+/* Footer Text */
+
+.member-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Align text and button to the left */
+    gap: 15px; /* Adjust spacing between text and button */
+}
+
+.member-footer p {
+    margin: 40px;
+    font-size: clamp(1rem, 2.2vw, 2rem);
+}
+
+.member-footer .join-button {
+    background-color: #000;
+    color: #fff;
+    padding: 10px 25px ;
+    font-size: clamp(0.8rem, 1.8vw, 1.6rem);
+    font-weight: bold;
+    border: none ;
+    border-radius: 999px;
+}
+
+.member-footer .join-button:hover {
+    transform: scale(1.02);
+    background-color: #005dFF;
+}
+
+/* Styles for the Accordion Icons */
+.accordion-title img.icon {
+    width: clamp(20px, 3vw, 35px);
+    height: 35px;
+    margin-right: 15px; /* Space between icon and text */
+    vertical-align: middle; /* Align icon with text */
+}
+
+
+
 
 
 
 /* Organize Events subsection */
 .subsection-3 {
     display: grid;
-    grid-template-columns: 1fr 3fr; 
-    max-width: 1200px;
-    margin: 40px auto;
-    gap: 20px; 
-    padding: 20px;
-    box-sizing: border-box;
-    align-items: start; 
+    grid-template-columns: 1fr 3fr;
+    max-width: 90vw;
+    margin: 0 auto;
+    padding: 40px 2%;
+    align-items: flex-start;
+    gap: 40px;
 }
 
 /* Title on the left */
 .subsection-3 h2 {
-    font-size: 2rem;
+    font-size: clamp(2rem, 4vw, 2.6rem);
     font-weight: bold;
-    color: #000; 
+    color: #000;
+    margin: 0;
     text-align: left;
-    margin: 0; 
 }
 
 /* Content (description and grid) on the right */
-.subsection-2 .event-content {
+.subsection-3 .event-content {
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
-
 /* Grid container for info boxes */
 .subsection-3 .event-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px; 
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 /* Individual info box */
 .event-info {
-    grid-column: 1 / span 2;
-    background-color: #e5e5e5;
-    /* border: 1px solid #ddd; */
-    border-radius: 10px;
-    /* padding: 20px; */
-    padding: 2px 5px;
-    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
-    text-align: left;
-
+    background-color: #f2f2f2;
+    border-radius: 12px;
+    padding: 12px 20px;
     display: flex;
     align-items: center;
-    gap: 10vh;
+    gap: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Box shadow for normal state */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Bold section title */
+.subsection-3 .event-info:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Bold section title (numbered) */
 .id-section {
-    font-weight: bold;
-    font-size: 1.1rem;
-    /* margin-bottom: 10px; */
-    /* line-height: 1.4; */
+    font-weight: 900;
+    font-size: clamp(0.9rem, 1.3vw, 1.7rem);;
     color: #000;
-    width: 50px;
-    text-align: right;
+    min-width: 50px;
+    text-align: left;
 }
 
-/* Normal section text */
+/* Normal section text with styled keywords */
 .event-section {
-    font-size: 1rem;
+    font-size: clamp(0.8rem, 1.3vw, 1.5rem);
     line-height: 1.6;
-    /* color: #555; */
-    color: black;
-    flex: 1;
+    color: #000;
+    font-weight: 400;
+    font-weight: bold;
+    text-align: left;
+}
+
+/* Style for specific highlighted words */
+.event-section strong {
+    font-size: clamp(0.9rem, 1.3vw, 1.7rem);
+    font-weight: 900;
+}
+
+/* Color customization for each keyword */
+.event-section .meet {
+    color: #0073e6;
+}
+
+.event-section .explore {
+    color: #2ecc71;
+}
+
+.event-section .celebrate {
+    color: #e74c3c;
+}
+
+.event-section .enjoy {
+    color: #f39c12;
 }
 
 /* Responsive adjustments for smaller screens */
 @media (max-width: 768px) {
-    .subsection {
-        grid-template-columns: 1fr; /* Single-column layout */
+    .subsection-3 {
+        grid-template-columns: 1fr;
+        text-align: center;
     }
 
-    .subsection h2 {
-        text-align: center; /* Center the title for smaller screens */
-        margin-bottom: 20px; /* Add spacing below title */
+    .subsection-3 h2 {
+        text-align: center;
+        margin-bottom: 20px;
     }
 
-    .subsection .content {
-        gap: 20px; /* Space out description and grid */
+    .subsection-3 .event-info {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .id-section {
+        text-align: center;
+        margin-bottom: 10px;
     }
 }
+
+
 
 
 /* Upcoming events */
