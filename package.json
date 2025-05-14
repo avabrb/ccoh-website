@@ -10,10 +10,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-<<<<<<< HEAD
-=======
-    "axios": "^1.7.9",
->>>>>>> ac5d90a9b32cdf6c781bb42cacca5ab04b2becbc
     "firebase": "^11.3.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
