@@ -2,12 +2,18 @@ import Slider from "react-slick"
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import React, { useState } from "react";
+import WhoIcon from '/who.png';
+import HowIcon from '/how.png';
+import WhenIcon from '/when.png';
+
 
 import { homeImages } from "./HomeModel"
 
 const Highlight = ({ children }) => {
     return <span className="highlight">{children}</span>;
 };  
+
+
 
 const escapeRegExp = (string) => {
     return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -161,7 +167,9 @@ const HomeView = ({ events, images }) => {
 
     return (
         <div className="main-content">
-            <h1 className="title">The <Highlight> Consular Corps of Houston </Highlight>: A Dynamic, Diverse, and Global Community</h1>
+            <h1 className="title">
+                The <span className="effect">Consular Corps of Houston</span>: A Dynamic, Diverse, and Global Community
+            </h1>
 
             {/* scrolling images section */}
             <div className="scroll-images">
@@ -219,11 +227,11 @@ const HomeView = ({ events, images }) => {
                     </div>
 
                     <div className="member-grid">
-                        <Accordion title="WHO?">
+                        <Accordion title={<div className="accordion-title"><img src={WhoIcon} alt="Who Icon" className="icon" /> WHO?</div>}>
                             {highlightText(becomeMember.find((section) => section.title === "WHO?").text, ["all consular officers", "emeriti consular officers"], "#000")}
                         </Accordion>
 
-                        <Accordion title="HOW?">
+                        <Accordion title={<div className="accordion-title"><img src={HowIcon} alt="How Icon" className="icon" /> HOW?</div>}>
                             <ul>
                                 {becomeMember[1].elements.map((elem, index) => (
                                     <li key={index}>{highlightText(elem, ["application form", "$200"], "#000")}</li>
@@ -231,7 +239,7 @@ const HomeView = ({ events, images }) => {
                             </ul>
                         </Accordion>
 
-                        <Accordion title="WHEN?">
+                        <Accordion title={<div className="accordion-title"><img src={WhenIcon} alt="When Icon" className="icon" /> WHEN?</div>}>
                         <ul>
                             {becomeMember[2].elements.map((elem, index) => (
                                 <li key={index}>{highlightText(elem, ["December 1st", "February 15th", "Annual Meeting"], "#000")}</li>
@@ -247,21 +255,31 @@ const HomeView = ({ events, images }) => {
                 </div>
             </div>
 
-            
-            <div className="subsection-3">
+            <div class="subsection-3">
                 <h2 id="organize-events">What kind of events do we organize?</h2>
 
-                <div className="event-content">
-                    <div className="event-grid">
-                        {organizeEvents.map((section) => (
-                            <div key={section.title} className="event-info">
-                                <p className="id-section">{section.id}</p>
-                                <p className="event-section">{section.text}</p>
-                            </div>
-                        ))}
+                <div class="event-content">
+                    <div class="event-grid">
+                        <div class="event-info">
+                            <p class="id-section">01</p>
+                            <p class="event-section"><strong class="meet">MEET</strong> the leaders who inspire Houston’s greatness.</p>
+                        </div>
+                        <div class="event-info">
+                            <p class="id-section">02</p>
+                            <p class="event-section"><strong class="explore">EXPLORE</strong> the places that define Houston’s vision.</p>
+                        </div>
+                        <div class="event-info">
+                            <p class="id-section">03</p>
+                            <p class="event-section"><strong class="celebrate">CELEBRATE</strong> the traditions that unite Houston’s international community.</p>
+                        </div>
+                        <div class="event-info">
+                            <p class="id-section">04</p>
+                            <p class="event-section"><strong class="enjoy">ENJOY</strong> the experiences that make Houston unforgettable.</p>
+                        </div>
                     </div>
                 </div>
             </div>
+
 
             <div className="subsection-4">
                 <h2 id="upcoming-events">Look at our upcoming events!</h2>
