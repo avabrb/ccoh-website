@@ -280,62 +280,30 @@ const HomeView = ({ events, images }) => {
                 </div>
             </div>
 
-
             <div className="subsection-4">
-                <h2 id="upcoming-events">Look at our upcoming events!</h2>
+                <h2 id="upcoming-events">Take a look at our upcoming events!</h2>
 
-                {events.length === 0 ? (
-                    <p>No upcoming events found.</p>
-                ) : (
-                    <div className="calendar-grid">
-                        {events.slice(0, 4).map((event, index) => (
-                            <div key={event.id} 
-                            className={`calendar-row ${index % 2 === 0 ? "row-left" : "row-right"}`}>
-                                {/* <div className="calendar-content"> */}
-                                    {/* <h3>{event.title}</h3> */}
-                                    <div className="calendar-bubble">
-                                        <h3>{event.title} {event.recurring ? "(Recurring)" : ""}</h3>    
-                                    </div>
-                                    
-                                    <div className="calendar-details">
-                                        <p>
-                                            {event.date
-                                            ? new Date(event.date).toLocaleString("en-US", {
-                                                weekday: "long",
-                                                year: "numeric",
-                                                month: "long",
-                                                day: "numeric",
-                                                hour: "2-digit",
-                                                minute: "2-digit",
-                                                timeZone: "America/Chicago", // Use the time zone from the raw data
-                                            })
-                                            : "Date not available"}   
-                                        </p>
-                                        
+                <div className="event-cards">
+                    {events.slice(0, 6).map((event, index) => (
+                        <div key={event.id} className={`event-card card-${index % 3}`}>  
+                            <h3>{event.title}</h3>
+                            <p>{new Date(event.date).toLocaleString("en-US", {
+                                weekday: "long",
+                                month: "long",
+                                day: "numeric",
+                                hour: "2-digit",
+                                minute: "2-digit"
+                            })}</p>
+                            <p className="event-type">{event.type}</p>
+                        </div>
+                    ))}
+                </div>
 
-
-                                        {/* <p>{formatDateTime(event.date)}</p> */}
-                                        {/* <p>{event.date ? new Date(event.date).toLocaleString() : "Date not available"}</p> */}
-                                        <a href={event.link} target="_blank" rel="noopener noreferrer">
-                                            Click here for more information
-                                        </a>
-
-                                    </div>
-                    
-
-                                </div>
-                            // </div>
-                        ))}
-                    </div>
-                )}
-
-                {events.length > 4 && (
+                {events.length > 6 && (
                     <div className="event-footer">
-                        <p>Check out all our exciting upcoming events!</p>
-                        <a href="/program" className="join-button">Join us!</a>
+                        <a href="/program" className="join-button">Click for more events!</a>
                     </div>
                 )}
-                
             </div>
         </div>
     )
