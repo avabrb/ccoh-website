@@ -43,7 +43,7 @@
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: shine 2s linear infinite;
+    animation: shine 4s linear infinite;
     display: inline-block; /* Ensure it works properly */
 }
 
@@ -461,221 +461,47 @@
 }
 
 
-
-
-/* Upcoming events */
 .subsection-4 {
     text-align: center;
     margin: 40px auto;
     padding: 20px;
-    background-color: #f9f9f9;
+    max-width: 900px;
+    overflow: hidden;
+}
+
+.event-cards {
+    display: flex;
+    justify-content: flex-start;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+}
+
+.event-card {
+    flex-shrink: 0;
+    border: 2px solid;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 900px; /* Keeps section from stretching too wide */
-}
-
-#upcoming-events {
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: black;
-    margin-bottom: 30px;
-}
-
-/* Grid layout for alternating rows */
-.calendar-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-/* Style for individual rows */
-.calendar-row {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    justify-content: space-between;
-}
-
-/* Left row */
-.row-left .calendar-bubble {
-    order: 1;
-}
-.row-left .calendar-details {
-    order: 2;
-    text-align: left;
-}
-
-/* Right row */
-.row-right .calendar-bubble {
-    order: 2;
-}
-.row-right .calendar-details {
-    order: 1;
-    text-align: right;
-}
-
-/* Bubble styling */
-.calendar-bubble {
-    background-color: #4caf50; /* Default color */
-    border-radius: 25px;
-    padding: 15px 20px;
+    padding: 15px;
     min-width: 200px;
     text-align: center;
-    color: white;
-    font-weight: bold;
-    font-size: 1.2rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Details styling */
-.calendar-details {
-    flex-grow: 1;
-}
-
-.calendar-details p {
-    font-size: 1rem;
-    margin: 0 0 10px;
-    color: black;
-}
-
-.calendar-details a {
-    font-size: 0.9rem;
-    color: #005dFF;
-    text-decoration: underline;
-}
-
-.calendar-details a:hover {
-    color: #003bb3;
-    text-decoration: none;
-}
-
-/* Alternating bubble colors */
-.calendar-row:nth-child(1) .calendar-bubble {
-    background-color: #4caf50; /* Green */
-}
-.calendar-row:nth-child(2) .calendar-bubble {
-    background-color: #2196f3; /* Blue */
-}
-.calendar-row:nth-child(3) .calendar-bubble {
-    background-color: #ff9800; /* Orange */
-}
-.calendar-row:nth-child(4) .calendar-bubble {
-    background-color: #f44336; /* Red */
-}
-.calendar-row:nth-child(5) .calendar-bubble {
-    background-color: #673ab7; /* Purple */
-}
-.calendar-row:nth-child(6) .calendar-bubble {
-    background-color: #ff5722; /* Deep Orange */
-}
-
-/* Event footer */
-/* .event-footer {
-    margin-top: 30px;
-}
-
-.event-footer p {
-    font-size: 1.2rem;
-    font-weight: bold;
-} */
+.card-0 { border-color: #4caf50; color: #4caf50; }
+.card-1 { border-color: #f44336; color: #f44336; }
+.card-2 { border-color: #2196f3; color: #2196f3; }
 
 .event-footer {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    /* text-align: center; */
-    /* margin-top: 20px; */
-    margin: 0;
-    font-size: 1rem;
-    color: #333;
-}
-
-.event-footer p {
-    margin-right: 10vh;
+    margin-top: 20px;
 }
 
 .join-button {
-    background-color: #005dFF;
+    background-color: black;
     color: white;
-    text-decoration: none;
-    padding: 10px 15px;
+    padding: 10px 20px;
     border-radius: 5px;
-    font-size: 1rem;
-    display: inline-block;
-    margin-top: 10px;
+    text-decoration: none;
 }
 
 .join-button:hover {
-    background-color: #003bb3;
-}
-
-/* Mobile (up to 768px) */
-@media (max-width: 768px) {
-    .subsection-4 {
-        padding: 15px;
-        max-width: 100%;
-    }
-
-    #upcoming-events {
-        font-size: 2rem; /* Reduce heading size for smaller screens */
-    }
-
-    .calendar-row {
-        flex-direction: column; /* Stack bubbles and details vertically */
-        gap: 10px;
-    }
-
-    .calendar-bubble {
-        min-width: auto; /* Allow the bubble to be flexible */
-        width: 100%; /* Full width */
-        text-align: center;
-    }
-
-    .calendar-details {
-        text-align: center; /* Center-align text and links */
-    }
-
-    .calendar-details a {
-        display: block;
-        margin-top: 5px;
-    }
-
-    .event-footer {
-        flex-direction: column;
-        text-align: center;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .event-footer p {
-        margin-right: 0;
-        margin-bottom: 10px;
-    }
-}
-
-/* Tablets & Small Laptops (up to 1024px) */
-@media (max-width: 1024px) {
-    .subsection-4 {
-        max-width: 95%;
-    }
-
-    .calendar-row {
-        gap: 15px;
-    }
-
-    .calendar-bubble {
-        min-width: 180px; /* Adjust bubble size */
-        font-size: 1.1rem; /* Slightly reduce text size */
-    }
-
-    .calendar-details {
-        font-size: 0.9rem;
-    }
-}
-
-/* Large Screens */
-@media (min-width: 1025px) {
-    .subsection-4 {
-        max-width: 900px;
-    }
+    background-color: #333;
 }
