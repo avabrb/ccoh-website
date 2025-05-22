@@ -255,26 +255,26 @@ const HomeView = ({ events, images }) => {
                 </div>
             </div>
 
-            <div class="subsection-3">
+            <div className="subsection-3">
                 <h2 id="organize-events">What kind of events do we organize?</h2>
 
-                <div class="event-content">
-                    <div class="event-grid">
-                        <div class="event-info">
-                            <p class="id-section">01</p>
-                            <p class="event-section"><strong class="meet">MEET</strong> the leaders who inspire Houston’s greatness.</p>
+                <div className="event-content">
+                    <div className="event-grid">
+                        <div className="event-info">
+                            <p className="id-section">01</p>
+                            <p className="event-section"><strong className="meet">MEET</strong> the leaders who inspire Houston’s greatness.</p>
                         </div>
-                        <div class="event-info">
-                            <p class="id-section">02</p>
-                            <p class="event-section"><strong class="explore">EXPLORE</strong> the places that define Houston’s vision.</p>
+                        <div className="event-info">
+                            <p className="id-section">02</p>
+                            <p className="event-section"><strong className="explore">EXPLORE</strong> the places that define Houston’s vision.</p>
                         </div>
-                        <div class="event-info">
-                            <p class="id-section">03</p>
-                            <p class="event-section"><strong class="celebrate">CELEBRATE</strong> the traditions that unite Houston’s international community.</p>
+                        <div className="event-info">
+                            <p className="id-section">03</p>
+                            <p className="event-section"><strong className="celebrate">CELEBRATE</strong> the traditions that unite Houston’s international community.</p>
                         </div>
-                        <div class="event-info">
-                            <p class="id-section">04</p>
-                            <p class="event-section"><strong class="enjoy">ENJOY</strong> the experiences that make Houston unforgettable.</p>
+                        <div className="event-info">
+                            <p className="id-section">04</p>
+                            <p className="event-section"><strong className="enjoy">ENJOY</strong> the experiences that make Houston unforgettable.</p>
                         </div>
                     </div>
                 </div>
