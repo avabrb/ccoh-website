@@ -1,7 +1,7 @@
-/* currently just testing on NationalDaysTest.jsx -- do not look here*/
 import React from 'react'
 import datesData from "./NationalDays.json"
 import "./NationalDays.css"
+import Flag from 'react-country-flag';
 
 const DaysModel = () => {
     return (
@@ -10,6 +10,16 @@ const DaysModel = () => {
         {renderEvents()}
       </div>
     );
+  };
+
+  const toSuperscript = (dateStr) => {
+    const superscripts = { s: 'ˢ', t: 'ᵗ', n: 'ⁿ', d: 'ᵈ', r: 'ʳ', h:'ʰ'};
+    const match = dateStr.match(/^0?(\d+)(st|nd|rd|th)$/);
+    if (!match) return dateStr;
+  
+    const [, num, suffix] = match;
+    const supSuffix = suffix.split('').map(c => superscripts[c] || c).join('');
+    return `${num}${supSuffix}`;
   };
 
   const Highlight = ({ children }) => {
@@ -31,10 +41,11 @@ const DaysModel = () => {
       <Accordion title={month}>
         {data.map((event, index) => (
           <CountryRow
+            month = {month}
             key={index}
             date={event.date}
             country={event.country}
-            flag={event.flag}
+            flag = {event.flag}
             event={event.event}
           />
         ))}
@@ -58,15 +69,22 @@ const DaysModel = () => {
     );
   };
   
-  const CountryRow = ({ date, country, flag, event }) => {
+  const CountryRow = ({ date, country, flag, event, month }) => {
     return (
       <div className="month-box">
         <div className="date-country">
-          <p className="date">{date}</p>
+          <p className="date">{month}{" "}{toSuperscript(date)}</p>
           <p className="country">{country}</p>
         </div>
         <div className="flag-event">
-          <p className="flag">{flag}</p>
+          <div className="flag-wrapper">
+            <Flag
+              countryCode={flag}
+              svg
+              className="flag"
+            />
+          </div>
+
           <p className="event">{event}</p>
         </div>
       </div>
