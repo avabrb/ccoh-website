@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { db, auth, handleSignOut } from './Login'; 
 import { deleteUser } from 'firebase/auth';
 import { doc, setDoc, getDoc, deleteDoc } from 'firebase/firestore';
+import { useNavigate } from 'react-router-dom';
 import "./Profile.css";
 
 const Profile = () => {
@@ -23,8 +24,14 @@ const Profile = () => {
         profileImage: '',
         showEmail: false,
         showPhone: false,
+        membershipPayment: false,
+        membershipPaymentDate: '',
+        membershipPaymentYear: '',
         isProfileComplete: false
     });
+
+    const navigate = useNavigate();
+    const nextYear = new Date().getFullYear() + 1;
 
     useEffect(() => {
         const handleNavigation = (e) => {
@@ -115,6 +122,14 @@ const Profile = () => {
             const updatedUser = { ...userData, isProfileComplete: true, email: auth.currentUser.email };
             const userDoc = doc(db, 'users-ccoh', userId);
             await setDoc(userDoc, updatedUser);
+
+            // Fetch updated user data from Firestore
+            const docSnap = await getDoc(userDoc);
+            if (docSnap.exists()) {
+                const updatedData = docSnap.data();
+                setUserData(updatedData); // Update local state
+            }
+
             alert('Profile updated successfully!');
             setIsEditing(false);
             setIsProfileComplete(true);
@@ -178,18 +193,36 @@ const Profile = () => {
                             />
                         )}
                     </label>
-                    <div className="profile-name">{userData.firstName} {userData.lastName}</div>
+                    <div className="profile-name">
+                        {userData.firstName} {userData.lastName}
+                    </div>
                     <div className="profile-email">{userData.email}</div>
                 </div>
                 <div className="profile-fields">
                     <div className="profile-field">
-                        <label>Name</label>
+                        <label>First Name</label>
                         <input
                             type="text"
-                            value={`${userData.firstName} ${userData.lastName}`}
-                            disabled
+                            name="firstName"
+                            value={userData.firstName || ''}
+                            onChange={handleChange}
+                            required
+                            disabled={!isEditing}
                             className="profile-input"
-                            placeholder="Pre-filled from registration"
+                            placeholder="Enter your first name"
+                        />
+                    </div>
+                    <div className="profile-field">
+                        <label>Last Name</label>
+                        <input
+                            type="text"
+                            name="lastName"
+                            value={userData.lastName || ''}
+                            onChange={handleChange}
+                            required
+                            disabled={!isEditing}
+                            className="profile-input"
+                            placeholder="Enter your last name"
                         />
                     </div>
                     <div className="profile-field">
@@ -202,7 +235,7 @@ const Profile = () => {
                             disabled={!isEditing}
                             className="profile-input"
                         >
-                            <option value="">Pre-filled from registration</option>
+                            {/* <option value="">Pre-filled from registration</option> */}
                             <option value="Consul General">Consul General</option>
                             <option value="Honorary Consul">Honorary Consul</option>
                         </select>
@@ -217,7 +250,7 @@ const Profile = () => {
                             disabled={!isEditing}
                             className="profile-input"
                         >
-                            <option value="">Pre-filled from registration</option>
+                            {/* <option value="">Pre-filled from registration</option> */}
                             <option value="Current">Current</option>
                             <option value="Emeritus">Emeritus</option>
                         </select>
@@ -232,7 +265,7 @@ const Profile = () => {
                             disabled={!isEditing}
                             className="profile-input"
                         >
-                            <option value="">Pre-filled from registration</option>
+                            {/* <option value="">Pre-filled from registration</option> */}
                             <option value="United States">United States</option>
                             <option value="Canada">Canada</option>
                             <option value="Mexico">Mexico</option>
@@ -350,6 +383,14 @@ const Profile = () => {
                 </div>
             </div>
             <div className="profile-bottom-buttons">
+                {(!userData.membershipPaymentYear || userData.membershipPaymentYear === '' || Number(userData.membershipPaymentYear) < nextYear) && (
+                    <button
+                        className="profile-pay-btn"
+                        onClick={() => navigate('/cart')}
+                    >
+                        Pay Membership
+                    </button>
+                )}
                 <button onClick={handleSignOut} className="profile-signout-btn">
                     Sign Out
                 </button>
