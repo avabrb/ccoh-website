@@ -1,0 +1,121 @@
+/* === Container === */
+.login-container {
+  display: flex;
+  height: 100vh;
+  font-family: 'Inter', sans-serif;
+}
+
+/* === Left Side: Login Form === */
+.login-form-section {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  padding: 40px;
+  box-sizing: border-box;
+}
+
+.login-form {
+  width: 100%;
+  max-width: 440px; /* INCREASED WIDTH */
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* === Headers === */
+.login-form h1 {
+  font-size: 32px; /* INCREASED SIZE */
+  font-weight: 700;
+  margin-bottom: 0;
+}
+
+.login-form p {
+  font-size: 16px; /* INCREASED SIZE */
+  margin: 0;
+  color: #333;
+}
+
+/* === Input Fields === */
+.input-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-group input {
+  padding: 14px 16px; /* INCREASED PADDING */
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: #f0f6ff;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+/* === Login Button === */
+.login-button {
+  width: 100%;
+  padding: 14px;
+  background-color: #005DFF;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.login-button:hover {
+  background-color: #0044cc;
+}
+
+/* === Links === */
+.link-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 15px;
+  margin-top: -4px;
+}
+
+.link-row a {
+  color: #005DFF;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.link-row a:hover {
+  text-decoration: underline;
+}
+
+/* === Right Side: Quote === */
+.quote-section {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px;
+  text-align: center;
+  color: #000;
+  background-color: #fafafa;
+}
+
+.quote-box {
+  max-width: 520px;
+  font-size: 26px;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.quote-box .bold {
+  font-weight: bold;
+}
+
+.quote-box .blue {
+  color: #005DFF;
+}
+
+.login-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}

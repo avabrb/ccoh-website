@@ -1,0 +1,188 @@
+/* Profile.css */
+
+:root {
+  --gray-bg: #f3f4f6;
+  --border: #d1d5db;
+  --text-color: #111827;
+  --placeholder: #9ca3af;
+  --blue: #3b82f6;
+  --red: #ef4444;
+  --green: #10b981;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: #fafafa;
+}
+
+/* === Layout === */
+.profile-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 32px;
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.05);
+  font-size: 15px;
+  color: var(--text-color);
+}
+
+/* === Header === */
+.profile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.profile-edit-btn {
+  background-color: var(--blue);
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+/* === Profile Form === */
+.profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* === Profile Image === */
+.profile-image-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+}
+
+
+.profile-image {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--border);
+  margin-bottom: 12px;
+}
+
+.profile-image-input {
+  margin-top: 8px;
+}
+
+.profile-name {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.profile-email {
+  color: #6b7280;
+  font-size: 13px;
+}
+
+/* === Fields === */
+.profile-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+
+.profile-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.profile-input {
+  background-color: var(--gray-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 15px;
+  color: var(--text-color);
+}
+
+.profile-input:disabled {
+  color: var(--text-color);
+  opacity: 1;
+}
+
+textarea.profile-input {
+  resize: vertical;
+}
+
+/* === Actions === */
+.profile-actions {
+  grid-column: 1 / -1;
+  text-align: right;
+  margin-top: 24px;
+}
+
+.profile-save-btn {
+  background-color: var(--green);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* === Public Section === */
+.profile-public-section {
+  margin-top: 40px;
+  background-color: #f9fafb;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.profile-public-title {
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.profile-public-checkboxes {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.profile-public-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}
+
+/* === Bottom Buttons === */
+.profile-bottom-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px;
+}
+
+.profile-signout-btn,
+.profile-delete-btn {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+}
+
+.profile-signout-btn {
+  background-color: var(--blue);
+}
+
+.profile-delete-btn {
+  background-color: var(--red);
+}

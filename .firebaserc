@@ -1,0 +1,8 @@
+{
+  "projects": {
+    "default": "test-ccoh",
+    "testing": "test-ccoh"
+  },
+  "targets": {},
+  "etags": {}
+}
