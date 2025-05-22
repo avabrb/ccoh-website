@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import DaysModel from './NationalDaysVM'
 import "./NationalDays.css"
 import MovingPhotos from './NationalDaysPhotos'
