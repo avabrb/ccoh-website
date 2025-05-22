@@ -1,10 +1,10 @@
 // Import the functions you need from the SDKs you need
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { initializeApp } from "firebase/app";
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from "firebase/auth";   
 import { useNavigate } from 'react-router-dom';
-import { getFirestore } from 'firebase/firestore';
+import { getFirestore, doc, getDoc } from 'firebase/firestore';
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -45,6 +45,9 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isSignUp, setIsSignUp] = useState(false);
+  const [userData, setUserData] = useState({});
+  const [isProfileComplete, setIsProfileComplete] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -64,6 +67,34 @@ const Login = () => {
         .catch(console.error);
     }
   };
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+        const userId = auth.currentUser?.uid;
+        if (!userId) return;
+        const userDoc = doc(db, 'users-ccoh', userId);
+        const docSnap = await getDoc(userDoc);
+        if (docSnap.exists()) {
+            const data = docSnap.data();
+            setUserData({
+                ...userData, // Ensure all fields are preserved
+                ...data,
+                email: auth.currentUser.email || '',
+                membershipPaymentYear: data.membershipPaymentYear || '',
+                membershipPaymentDate: data.membershipPaymentDate || '',
+                membershipPayment: data.membershipPayment || false,
+            });
+            setIsProfileComplete(data.isProfileComplete || false);
+            setIsEditing(!(data.isProfileComplete));
+        } else {
+            setUserData(prev => ({
+                ...prev,
+                email: auth.currentUser.email || '',
+            }));
+        }
+    };
+    fetchUserData();
+}, []);
 
   return (
     <div className="login-container">

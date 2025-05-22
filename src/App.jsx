@@ -13,6 +13,9 @@ import { doc, getDoc } from 'firebase/firestore'
 import { db } from './login/Login'
 import { Navigate } from 'react-router-dom'
 import Profile from './login/Profile'
+import Cart from './payment/Cart'
+import Success from './payment/Success'
+import Cancel from './payment/Cancel'
 
 function App() {
   const [user, setUser] = useState(null);
@@ -56,6 +59,9 @@ function App() {
             <Route path='/home' element={<Home />} />
             <Route path='/national-days' element={<Days />} />
             <Route path='/login' element={<Login />} />
+            <Route path='/cart' element={<Cart />} />
+            <Route path='/success' element={<Success />} />
+            <Route path='/cancel' element={<Cancel />} />
             
             <Route
               path="/profile"

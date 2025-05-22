@@ -1,0 +1,68 @@
+/* Success.css */
+
+.success-container {
+  min-height: 100vh;
+  background-color: #f5f7fa;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  font-family: 'Inter', sans-serif;
+  text-align: center;
+}
+
+.success-icon {
+  font-size: 64px;
+  margin-bottom: 16px;
+}
+
+.success-title {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #111827;
+}
+
+.success-message {
+  font-size: 16px;
+  color: #4b5563;
+  margin-bottom: 32px;
+  max-width: 480px;
+}
+
+.success-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+}
+
+.btn {
+  padding: 10px 20px;
+  font-size: 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+}
+
+.btn-primary {
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #2563eb;
+}
+
+.btn-outline {
+  background-color: transparent;
+  border: 2px solid #3b82f6;
+  color: #3b82f6;
+}
+
+.btn-outline:hover {
+  background-color: #eff6ff;
+}

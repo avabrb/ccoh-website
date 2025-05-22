@@ -1,8 +1,5 @@
 {
   "projects": {
-    "default": "test-ccoh",
-    "testing": "test-ccoh"
-  },
-  "targets": {},
-  "etags": {}
+    "default": "teanook-4e11d"
+  }
 }
