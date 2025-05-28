@@ -26,3 +26,6 @@ dist-ssr
 *.env
 .env
 env
+
+./scripts
+./scripts/teanook-4e11d-firebase-adminsdk-fbsvc-a00d835a4f.json

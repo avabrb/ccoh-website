@@ -17,6 +17,7 @@ import Cart from './payment/Cart'
 import Success from './payment/Success'
 import Cancel from './payment/Cancel'
 import Admin from './admin/Admin'
+import Members from './members/Members'
 
 function App() {
   const [user, setUser] = useState(null);
@@ -65,6 +66,7 @@ function App() {
             <Route path='/cart' element={<Cart />} />
             <Route path='/success' element={<Success />} />
             <Route path='/cancel' element={<Cancel />} />
+            <Route path='/members' element={<Members />} />
           
             <Route
               path="/profile"

@@ -5,6 +5,8 @@ import { doc, setDoc, getDoc, deleteDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 import "./Profile.css";
 import { countries } from 'countries-list';
+import PhoneInput from 'react-phone-number-input';
+import 'react-phone-number-input/style.css';
 
 const Profile = () => {
     const [isEditing, setIsEditing] = useState(true);
@@ -370,7 +372,7 @@ const Profile = () => {
                             <option value={new Date().getFullYear() + 1}>{new Date().getFullYear() + 1}</option>
                         </select>
                     </div>
-                    <div className="profile-field">
+                    {/* <div className="profile-field">
                         <label>
                             Phone Number <span className="required-asterisk">*</span>
                         </label>
@@ -385,7 +387,21 @@ const Profile = () => {
                             pattern="^\+?\d{1,3}?[-.\s]?(\(?\d{1,4}?\))?[-.\s]?\d{1,4}[-.\s]?\d{1,9}$"
                             placeholder="(999) 999-9999"
                         />
+                    </div> */}
+
+                    <div className="profile-field">
+                    <label>
+                        Phone Number <span className="required-asterisk">*</span>
+                    </label>
+                    <PhoneInput
+                        defaultCountry="US"
+                        value={userData.phoneNumber}
+                        onChange={(value) => setUserData(prev => ({ ...prev, phoneNumber: value }))}
+                        disabled={!isEditing}
+                        className="profile-input"
+                    />
                     </div>
+
                     <div className="profile-field">
                         <label>Email</label>
                         <input
@@ -414,7 +430,7 @@ const Profile = () => {
                     ) : null}
                 </div>
             </form>
-            <div className="profile-public-section">
+            {/* <div className="profile-public-section">
                 <div className="profile-public-title">
                     Display on my public profile (open to other Consular Corps members only):
                 </div>
@@ -440,7 +456,7 @@ const Profile = () => {
                         {userData.phoneNumber}
                     </label>
                 </div>
-            </div>
+            </div> */}
             <div className="profile-bottom-buttons">
                 <button
                     className="profile-pay-btn"
