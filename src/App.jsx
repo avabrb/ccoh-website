@@ -16,28 +16,32 @@ import Profile from './login/Profile'
 import Cart from './payment/Cart'
 import Success from './payment/Success'
 import Cancel from './payment/Cancel'
+import Admin from './admin/Admin'
 
 function App() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [profileComplete, setProfileComplete] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
   
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       setUser(currentUser);
 
       if (currentUser) {
-        const userDocRef = doc(db, 'users', currentUser.uid);
+        const userDocRef = doc(db, 'users-ccoh', currentUser.uid);
         const userSnap = await getDoc(userDocRef);
         if (userSnap.exists()) {
-          setProfileComplete(userSnap.data().isProfileComplete || false);
+          const userData = userSnap.data();
+          setProfileComplete(userData.isProfileComplete || false);
+          setIsAdmin(userData.admin || false); // Check if the user is an admin
         }
       }
 
       setLoading(false);
     });
     return () => unsubscribe();
-  }, [])
+  }, []);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -47,7 +51,6 @@ function App() {
   const handleProfileComplete = () => {
     setProfileComplete(true); 
   };
-
 
   return (
     <div>
@@ -62,20 +65,28 @@ function App() {
             <Route path='/cart' element={<Cart />} />
             <Route path='/success' element={<Success />} />
             <Route path='/cancel' element={<Cancel />} />
-            
+          
             <Route
               path="/profile"
               element={
                 user ? (
-                <Profile onProfileComplete={handleProfileComplete} />
-              ) : (
-                <Navigate to="/login" />
-              )
+                  <Profile onProfileComplete={handleProfileComplete} />
+                ) : (
+                  <Navigate to="/login" />
+                )
               }
             />
 
-            
-
+            <Route 
+              path="/admin"
+              element={
+                user && isAdmin ? ( // Check if the user is an admin
+                  <Admin />
+                ) : (
+                  <Navigate to="/login" />
+                )
+              }
+            />
           </Routes>
         </main>
       </Router>
@@ -84,4 +95,4 @@ function App() {
   )
 }
 
-export default App
+export default App;

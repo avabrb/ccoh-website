@@ -119,3 +119,15 @@
   max-width: 1200px;
   margin: 0 auto;
 }
+
+/* === Error Box === */
+.error-box {
+  background-color: #f8d7da;
+  color: #842029;
+  border: 1px solid #f5c2c7;
+  border-radius: 8px;
+  padding: 10px 16px;
+  margin-bottom: 16px;
+  font-size: 14px;
+  text-align: center;
+}

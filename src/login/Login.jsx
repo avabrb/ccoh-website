@@ -45,26 +45,55 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isSignUp, setIsSignUp] = useState(false);
-  const [userData, setUserData] = useState({});
-  const [isProfileComplete, setIsProfileComplete] = useState(false);
-  const [isEditing, setIsEditing] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(''); // State for error messages
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const email = e.target.email.value;
-    const password = e.target.password.value;
+    setErrorMessage(''); // Clear any previous error messages
+
+    if (!email || !password) {
+      setErrorMessage('Please enter both email and password.');
+      return;
+    }
 
     if (isSignUp) {
       createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
+        .then(() => {
           navigate('/profile');
         })
-        .catch(console.error);
+        .catch((error) => {
+          handleAuthError(error);
+        });
     } else {
       signInWithEmailAndPassword(auth, email, password)
         .then(() => navigate('/home'))
-        .catch(console.error);
+        .catch((error) => {
+          handleAuthError(error);
+        });
+    }
+  };
+
+  const handleAuthError = (error) => {
+    console.error('Auth error:', error); 
+    switch (error.code) {
+      case 'auth/invalid-credential':
+        setErrorMessage('Invalid email address or password.');
+        break;
+      // case 'auth/user-not-found':
+      //   setErrorMessage('No account found with this email.');
+      //   break;
+      // case 'auth/wrong-password':
+      //   setErrorMessage('Incorrect password. Please try again.');
+      //   break;
+      case 'auth/email-already-in-use':
+        setErrorMessage('This email is already in use. Please log in.');
+        break;
+      case 'auth/weak-password':
+        setErrorMessage('Password should be at least 6 characters.');
+        break;
+      default:
+        setErrorMessage('An error occurred. Please try again.');
     }
   };
 
@@ -102,6 +131,9 @@ const Login = () => {
         <form className="login-form" onSubmit={handleSubmit}>
           <h1>Welcome back!</h1>
           <p>Login below or sign up if you don't have an account.</p>
+
+          {/* Error Message */}
+          {errorMessage && <div className="error-box">{errorMessage}</div>}
 
           <div className="input-group">
             <input

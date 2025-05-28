@@ -4,11 +4,11 @@ import { deleteUser } from 'firebase/auth';
 import { doc, setDoc, getDoc, deleteDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 import "./Profile.css";
+import { countries } from 'countries-list';
 
 const Profile = () => {
     const [isEditing, setIsEditing] = useState(true);
     const [isProfileComplete, setIsProfileComplete] = useState(false);
-
     const [userData, setUserData] = useState({
         firstName: '',
         lastName: '',
@@ -24,14 +24,52 @@ const Profile = () => {
         profileImage: '',
         showEmail: false,
         showPhone: false,
+        membershipPaymentAllowed: false,
         membershipPayment: false,
         membershipPaymentDate: '',
         membershipPaymentYear: '',
+        activeStatus: false,
         isProfileComplete: false
     });
+    const [originalUserData, setOriginalUserData] = useState(null); // Store original data
 
     const navigate = useNavigate();
     const nextYear = new Date().getFullYear() + 1;
+
+    useEffect(() => {
+        const fetchUserData = async () => {
+            const userId = auth.currentUser?.uid;
+            if (!userId) return;
+            const userDoc = doc(db, 'users-ccoh', userId);
+            const docSnap = await getDoc(userDoc);
+            if (docSnap.exists()) {
+                const data = docSnap.data();
+                setUserData({
+                    ...data,
+                    title: data.title || 'Consul General', // Default value for title
+                    status: data.status || 'Current',      // Default value for status
+                    email: auth.currentUser.email,
+                });
+                setOriginalUserData({
+                    ...data,
+                    title: data.title || 'Consul General',
+                    status: data.status || 'Current',
+                    email: auth.currentUser.email,
+                }); // Save original data
+                setIsProfileComplete(data.isProfileComplete || false);
+                setIsEditing(!(data.isProfileComplete));
+            } else {
+                const defaultData = {
+                    title: 'Consul General',
+                    status: 'Current',
+                    email: auth.currentUser.email,
+                };
+                setUserData(prev => ({ ...prev, ...defaultData }));
+                setOriginalUserData(prev => ({ ...prev, ...defaultData })); // Save original data
+            }
+        };
+        fetchUserData();
+    }, []);
 
     useEffect(() => {
         const handleNavigation = (e) => {
@@ -44,30 +82,6 @@ const Profile = () => {
         window.addEventListener('popstate', handleNavigation);
         return () => window.removeEventListener('popstate', handleNavigation);
     }, [isProfileComplete, isEditing]);
-
-    useEffect(() => {
-        const fetchUserData = async () => {
-            const userId = auth.currentUser?.uid;
-            if (!userId) return;
-            const userDoc = doc(db, 'users-ccoh', userId);
-            const docSnap = await getDoc(userDoc);
-            if (docSnap.exists()) {
-                const data = docSnap.data();
-                setUserData({
-                    ...data,
-                    email: auth.currentUser.email
-                });
-                setIsProfileComplete(data.isProfileComplete || false);
-                setIsEditing(!(data.isProfileComplete));
-            } else {
-                setUserData(prev => ({
-                    ...prev,
-                    email: auth.currentUser.email
-                }));
-            }
-        };
-        fetchUserData();
-    }, []);
 
     useEffect(() => {
         const handleBeforeUnload = (e) => {
@@ -115,11 +129,22 @@ const Profile = () => {
         }
     };
 
+    const handleCancel = () => {
+        setUserData(originalUserData); // Reset to original data
+        setIsEditing(false); // Exit editing mode
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         const userId = auth.currentUser.uid;
         try {
-            const updatedUser = { ...userData, isProfileComplete: true, email: auth.currentUser.email };
+            const updatedUser = {
+                ...userData,
+                title: userData.title || 'Consul General', // Ensure default value for title
+                status: userData.status || 'Current',      // Ensure default value for status
+                isProfileComplete: true,
+                email: auth.currentUser.email,
+            };
             const userDoc = doc(db, 'users-ccoh', userId);
             await setDoc(userDoc, updatedUser);
 
@@ -128,6 +153,7 @@ const Profile = () => {
             if (docSnap.exists()) {
                 const updatedData = docSnap.data();
                 setUserData(updatedData); // Update local state
+                setOriginalUserData(updatedData); // Update original data
             }
 
             alert('Profile updated successfully!');
@@ -175,6 +201,9 @@ const Profile = () => {
                     </button>
                 )}
             </div>
+            <p className="required-fields-note">
+                Fields marked with <span className="required-asterisk">*</span> are required.
+            </p>
             <form className="profile-form" onSubmit={handleSubmit}>
                 <div className="profile-image-section">
                     <label htmlFor="profileImage" className="profile-image-label">
@@ -200,7 +229,9 @@ const Profile = () => {
                 </div>
                 <div className="profile-fields">
                     <div className="profile-field">
-                        <label>First Name</label>
+                        <label>
+                            First Name <span className="required-asterisk">*</span>
+                        </label>
                         <input
                             type="text"
                             name="firstName"
@@ -213,7 +244,9 @@ const Profile = () => {
                         />
                     </div>
                     <div className="profile-field">
-                        <label>Last Name</label>
+                        <label>
+                            Last Name <span className="required-asterisk">*</span>
+                        </label>
                         <input
                             type="text"
                             name="lastName"
@@ -226,7 +259,9 @@ const Profile = () => {
                         />
                     </div>
                     <div className="profile-field">
-                        <label>Title</label>
+                        <label>
+                            Title <span className="required-asterisk">*</span>
+                        </label>
                         <select
                             name="title"
                             value={userData.title || ''}
@@ -235,13 +270,15 @@ const Profile = () => {
                             disabled={!isEditing}
                             className="profile-input"
                         >
-                            {/* <option value="">Pre-filled from registration</option> */}
+                            <option value="" disabled>Select Title</option>
                             <option value="Consul General">Consul General</option>
                             <option value="Honorary Consul">Honorary Consul</option>
                         </select>
                     </div>
                     <div className="profile-field">
-                        <label>Status</label>
+                        <label>
+                            Status <span className="required-asterisk">*</span>
+                        </label>
                         <select
                             name="status"
                             value={userData.status || ''}
@@ -250,13 +287,15 @@ const Profile = () => {
                             disabled={!isEditing}
                             className="profile-input"
                         >
-                            {/* <option value="">Pre-filled from registration</option> */}
+                            <option value="" disabled>Select Status</option>
                             <option value="Current">Current</option>
                             <option value="Emeritus">Emeritus</option>
                         </select>
                     </div>
                     <div className="profile-field">
-                        <label>Country Represented</label>
+                        <label>
+                            Country Represented <span className="required-asterisk">*</span>
+                        </label>
                         <select
                             name="country"
                             value={userData.country || ''}
@@ -266,9 +305,16 @@ const Profile = () => {
                             className="profile-input"
                         >
                             {/* <option value="">Pre-filled from registration</option> */}
-                            <option value="United States">United States</option>
+                            {/* <option value="United States">United States</option>
                             <option value="Canada">Canada</option>
-                            <option value="Mexico">Mexico</option>
+                            <option value="Mexico">Mexico</option> */}
+
+                            <option value="" disabled>Select Country</option>
+                            {Object.values(countries).map((country) => (
+                                <option key={country.name} value={country.name}>
+                                    {country.name}
+                                </option>
+                            ))}
                         </select>
                     </div>
                     <div className="profile-field">
@@ -308,7 +354,9 @@ const Profile = () => {
                         />
                     </div>
                     <div className="profile-field">
-                        <label>Payment Year</label>
+                        <label>
+                            Payment Year <span className="required-asterisk">*</span>
+                        </label>
                         <select
                             name="paymentYear"
                             value={userData.paymentYear || ''}
@@ -323,7 +371,9 @@ const Profile = () => {
                         </select>
                     </div>
                     <div className="profile-field">
-                        <label>Phone Number</label>
+                        <label>
+                            Phone Number <span className="required-asterisk">*</span>
+                        </label>
                         <input
                             type="tel"
                             name="phoneNumber"
@@ -349,9 +399,18 @@ const Profile = () => {
                 </div>
                 <div className="profile-actions">
                     {isEditing ? (
-                        <button type="submit" className="profile-save-btn">
-                            Save Profile
-                        </button>
+                        <>
+                            <button type="submit" className="profile-save-btn">
+                                Save Profile
+                            </button>
+                            <button
+                                type="button"
+                                className="profile-cancel-btn"
+                                onClick={handleCancel}
+                            >
+                                Cancel
+                            </button>
+                        </>
                     ) : null}
                 </div>
             </form>
@@ -383,14 +442,13 @@ const Profile = () => {
                 </div>
             </div>
             <div className="profile-bottom-buttons">
-                {(!userData.membershipPaymentYear || userData.membershipPaymentYear === '' || Number(userData.membershipPaymentYear) < nextYear) && (
-                    <button
-                        className="profile-pay-btn"
-                        onClick={() => navigate('/cart')}
-                    >
-                        Pay Membership
-                    </button>
-                )}
+                <button
+                    className="profile-pay-btn"
+                    onClick={() => navigate('/cart')}
+                    disabled={!userData.membershipPaymentAllowed} // Disable button if membershipPaymentAllowed is false
+                >
+                    Pay Membership
+                </button>
                 <button onClick={handleSignOut} className="profile-signout-btn">
                     Sign Out
                 </button>
