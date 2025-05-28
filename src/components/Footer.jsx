@@ -42,7 +42,7 @@ export default function Footer() {
 
                 {/* Credits */}
                 <div className="footer-credits">
-                    <p>Designed and developed by Ava Baraban, Nomin Rentsendorj, and Luisa Martinez.</p>
+                    <p>Designed and developed by Ava Baraban and Nomin Rentsendorj.</p>
                 </div>
             </div>
         </div>

@@ -1,37 +1,53 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './Homebar.css'
-import { auth, handleSignOut } from '../login/Login'
-import logo from '/logo.png'
+import './Homebar.css';
+import { auth, db, handleSignOut } from '../login/Login';
+import { doc, getDoc } from 'firebase/firestore';
 
 export function HomeBar() {
-    const navigate = useNavigate()
-    const [isMenu, setMenu] = useState("false")
-    
+    const navigate = useNavigate();
+    const [isMenu, setMenu] = useState(false);
+    const [isAdmin, setIsAdmin] = useState(false);
+
+    useEffect(() => {
+        const fetchAdminStatus = async () => {
+            if (auth.currentUser) {
+                const userDoc = doc(db, 'users-ccoh', auth.currentUser.uid);
+                const docSnap = await getDoc(userDoc);
+                if (docSnap.exists()) {
+                    const userData = docSnap.data();
+                    setIsAdmin(userData.admin || false);
+                }
+            }
+        };
+
+        fetchAdminStatus();
+    }, []);
+
     const navigateTo = (link) => {
-        navigate(link)
-        setMenu("false")
-    }
+        navigate(link);
+        setMenu(false);
+    };
 
     const toggleMenu = () => {
-        setMenu(!isMenu)
-    }
+        setMenu(!isMenu);
+    };
 
     const barSegments = [
-        {link: '/home', title: 'Home'},
-        {link: '/exec-comm', title: 'Executive Committee'},
-        {link: '/members', title: 'Members'},
-        {link: '/program', title: 'Program'},
-        {link: '/national-days', title: 'National Days'},
-    ]
+        { link: '/home', title: 'Home' },
+        { link: '/exec-comm', title: 'Executive Committee' },
+        { link: '/members', title: 'Members' },
+        { link: '/program', title: 'Program' },
+        { link: '/national-days', title: 'National Days' },
+    ];
 
     return (
-        <nav className='home-bar'>
-            <div className='logo' onClick={() => navigateTo('/')}>
-                <img src='logo-removebg.png' alt='logo'/>
+        <nav className="home-bar">
+            <div className="logo" onClick={() => navigateTo('/')}>
+                <img src="logo-removebg.png" alt="logo" />
             </div>
 
-            <button className='menu-toggle' onClick={toggleMenu}>☰</button>
+            <button className="menu-toggle" onClick={toggleMenu}>☰</button>
 
             <ul className={`nav-links ${isMenu ? 'open' : ''}`}>
                 {barSegments.map((segment, index) => (
@@ -45,6 +61,7 @@ export function HomeBar() {
                 {auth.currentUser && (
                     <>
                         <li onClick={() => navigateTo('/profile')}>Profile</li>
+                        {isAdmin && <li onClick={() => navigateTo('/admin')}>Admin</li>}
                         <li onClick={handleSignOut} style={{ color: 'red', cursor: 'pointer' }}>
                             Sign Out
                         </li>
@@ -52,5 +69,5 @@ export function HomeBar() {
                 )}
             </ul>
         </nav>
-    )
+    );
 }
