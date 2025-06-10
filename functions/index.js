@@ -9,11 +9,11 @@ const STRIPE_SECRET = defineSecret("STRIPE_KEY");
 admin.initializeApp();
 
 exports.createStripeCheckout = onRequest({ secrets: [STRIPE_SECRET] }, (req, res) => {
-  const stripe = new Stripe(STRIPE_SECRET.value(), {
-    apiVersion: "2022-11-15",
-  });
-
   cors(req, res, async () => {
+    const stripe = new Stripe(STRIPE_SECRET.value(), {
+      apiVersion: "2022-11-15",
+    });
+
     if (req.method !== 'POST') {
       return res.status(405).send('Method Not Allowed');
     }
@@ -52,6 +52,7 @@ exports.createStripeCheckout = onRequest({ secrets: [STRIPE_SECRET] }, (req, res
       return res.status(200).send({ sessionId: session.id });
 
     } catch (error) {
+      console.error("Stripe session creation error:", error); 
       return res.status(500).send('Internal Server Error');
     }
   });
