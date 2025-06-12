@@ -1,0 +1,118 @@
+.events-page {
+    font-family: 'Arial', sans-serif;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+  }
+  
+  .page-title {
+    font-size: 2rem;
+    color: #222;
+    margin-bottom: 1.5rem;
+  }
+  
+  .calendar-wrapper {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin-bottom: 3rem;
+    border-radius: 12px;
+  }
+  
+  .calendar-frame {
+    width: 100%;
+    height: 600px;
+    border: 0;
+  }
+  
+  .section-title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #333;
+  }
+  
+  /* Masonry Grid using CSS Grid with row auto-placement */
+  .masonry-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+    grid-auto-rows: 10px; /* This controls the granularity of row spans */
+  }
+  
+  .masonry-tile {
+    break-inside: avoid;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background: white;
+  }
+  
+  /* This is the masonry trick: span the grid rows dynamically based on height */
+  .masonry-tile img {
+    width: 100%;
+    display: block;
+    height: auto;
+    object-fit: cover;
+  }
+  
+  /* Responsive grid behavior */
+  @media (max-width: 600px) {
+    .calendar-frame {
+      height: 500px;
+    }
+  }
+
+  .masonry-grid {
+    column-count: 3;
+    column-gap: 16px;
+    padding: 16px;
+  }
+  
+  .masonry-tile {
+    break-inside: avoid;
+    margin-bottom: 16px;
+  }
+  
+  .masonry-tile img {
+    width: 100%;
+    border-radius: 8px;
+    display: block;
+  }
+  
+
+  .event-detail-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.event-detail-content {
+  background-color: white;
+  padding: 24px;
+  border-radius: 12px;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  position: relative;
+}
+
+.event-detail-content button {
+  margin-top: 16px;
+  background-color: #007BFF;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.event-detail-content button:hover {
+  background-color: #0056b3;
+}
