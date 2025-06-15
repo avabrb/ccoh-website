@@ -4,7 +4,10 @@ import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import { useEffect, useState } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from '../login/Login.jsx'; // your existing Firebase setup
+import { auth, db } from '../login/Login.jsx'; // your existing Firebase setup
+import PhotoUploader from "./photo-upload.jsx";
+import PhotoFeed from "./photo-feed.jsx"; 
+import './program.css';
 
 const CALENDAR_ID = import.meta.env.VITE_CALENDAR_ID
 const API_KEY = import.meta.env.VITE_API_KEY;
@@ -63,57 +66,64 @@ const EventsPage = () => {
     }
   };
 
-  return (
+    return (
     <div className="events-page">
-      <h1 className="page-title">Check out the upcoming events this month.</h1>
+        <h1 className="page-title">Check out the upcoming events this month.</h1>
 
-      <div className="calendar-wrapper">
+        <div className="calendar-wrapper">
         <FullCalendar
-          plugins={[dayGridPlugin]}
-          initialView="dayGridMonth"
-          events={events}
-          eventClick={handleEventClick}
+            plugins={[dayGridPlugin]}
+            initialView="dayGridMonth"
+            events={events}
+            eventClick={handleEventClick}
         />
-      </div>
+        </div>
 
-      {selectedEvent && (
+        {selectedEvent && (
         <div className="event-detail-modal">
-          <div className="event-detail-content">
+            <div className="event-detail-content">
             <h2>{selectedEvent.title}</h2>
             {selectedEvent.start && (
-              <p><strong>Start:</strong> {new Date(selectedEvent.start).toLocaleString()}</p>
+                <p><strong>Start:</strong> {new Date(selectedEvent.start).toLocaleString()}</p>
             )}
             {selectedEvent.end && (
-              <p><strong>End:</strong> {new Date(selectedEvent.end).toLocaleString()}</p>
+                <p><strong>End:</strong> {new Date(selectedEvent.end).toLocaleString()}</p>
             )}
             {selectedEvent.location && (
-              <p><strong>Location:</strong> {selectedEvent.location}</p>
+                <p><strong>Location:</strong> {selectedEvent.location}</p>
             )}
             <p><strong>Description:</strong> {selectedEvent.description}</p>
             <button onClick={() => setSelectedEvent(null)}>Close</button>
-          </div>
+            </div>
         </div>
-      )}
+        )}
 
-      {cannotSelectEvent && (
+        {cannotSelectEvent && (
         <div className="event-detail-modal">
-          <div className="event-detail-content">
+            <div className="event-detail-content">
             <h2>{cannotSelectEvent.title}</h2>
             {cannotSelectEvent.start && (
-              <p><strong>Start:</strong> {new Date(cannotSelectEvent.start).toLocaleString()}</p>
+                <p><strong>Start:</strong> {new Date(cannotSelectEvent.start).toLocaleString()}</p>
             )}
             {cannotSelectEvent.end && (
-              <p><strong>End:</strong> {new Date(cannotSelectEvent.end).toLocaleString()}</p>
+                <p><strong>End:</strong> {new Date(cannotSelectEvent.end).toLocaleString()}</p>
             )}
             <p>{cannotSelectEvent.additional_information}</p>
             <button onClick={() => setCannotSelectEvent(null)}>Close</button>
-          </div>
+            </div>
         </div>
-      )}
+        )}
 
-      <h2 className="section-title">Photos from past events:</h2>
+        <h1 className="section-title">Photos from past events:</h1>
+
+        <div className="photo-grid">
+          <PhotoFeed />
+        </div>
+        <div className="photo-uploader">
+          <PhotoUploader user={user} />
+        </div>
     </div>
-  );
+    );
 };
 
 export default EventsPage;

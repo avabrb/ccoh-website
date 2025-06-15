@@ -5,6 +5,8 @@ import { initializeApp } from "firebase/app";
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from "firebase/auth";   
 import { useNavigate } from 'react-router-dom';
 import { getFirestore, doc, getDoc } from 'firebase/firestore';
+import { getStorage } from 'firebase/storage';
+
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -25,6 +27,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app); 
+const storage = getStorage(app);
 // const functions = getFunctions(app);
 
 export const handleSignOut = () => {
@@ -182,4 +185,4 @@ const Login = () => {
 }; 
 
 export default Login;
-export { auth, app, db};
+export { auth, app, db, storage};

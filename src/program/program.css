@@ -26,59 +26,12 @@
   }
   
   .section-title {
-    font-size: 1.5rem;
+    font-size: 2rem;
     margin-bottom: 1rem;
     color: #333;
-  }
-  
-  /* Masonry Grid using CSS Grid with row auto-placement */
-  .masonry-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 1rem;
-    grid-auto-rows: 10px; /* This controls the granularity of row spans */
-  }
-  
-  .masonry-tile {
-    break-inside: avoid;
-    overflow: hidden;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    background: white;
-  }
-  
-  /* This is the masonry trick: span the grid rows dynamically based on height */
-  .masonry-tile img {
-    width: 100%;
-    display: block;
-    height: auto;
-    object-fit: cover;
-  }
-  
-  /* Responsive grid behavior */
-  @media (max-width: 600px) {
-    .calendar-frame {
-      height: 500px;
-    }
+    align-items: left;
   }
 
-  .masonry-grid {
-    column-count: 3;
-    column-gap: 16px;
-    padding: 16px;
-  }
-  
-  .masonry-tile {
-    break-inside: avoid;
-    margin-bottom: 16px;
-  }
-  
-  .masonry-tile img {
-    width: 100%;
-    border-radius: 8px;
-    display: block;
-  }
-  
 
   .event-detail-modal {
   position: fixed;
@@ -115,4 +68,106 @@
 
 .event-detail-content button:hover {
   background-color: #0056b3;
+}
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+  margin: 20px 0;
+}
+
+.photo-tile img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  object-fit: cover;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.photo-uploader input[type="file"] {
+  cursor: pointer;
+}
+
+.photo-uploader button {
+  padding: 0.5rem 1.25rem;
+  background-color: #005dFF;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.photo-uploader button:hover:enabled {
+  background-color: #125ea6;
+}
+
+.photo-uploader button:disabled {
+  background-color: black;
+  cursor: not-allowed;
+}
+
+.no-upload {
+  text-align: center;
+  font-size: 1.3rem;
+}
+
+.custom-file-button {
+  display: inline-block;
+  padding: 0.5rem 1.25rem;
+  background-color: white;
+  color: #005dFF;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  text-align: center;
+  margin-bottom: 1rem;
+  border: #005dFF 1px solid;
+}
+
+/* The main container for all columns */
+.masonry-flow {
+  display: flex;
+  justify-content: space-between; /* Add space between columns */
+  align-items: flex-start;
+  width: 100vw; /* Use full viewport width */
+  max-width: 1200px; /* Optional max width for aesthetics */
+  margin: 0 auto;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+/* Each column */
+.masonry-column {
+  flex: 1 1 min(33%, 400px);
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  padding: 0 0.5rem;
+}
+
+
+/* Each image wrapper */
+.photo-tile img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 0px;
+  object-fit: cover;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+@media (max-width: 900px) {
+  .masonry-column {
+    flex: 1 1 45%;
+  }
+}
+
+@media (max-width: 600px) {
+  .masonry-column {
+    flex: 1 1 100%;
+  }
 }
