@@ -6,14 +6,22 @@ import WhoIcon from '/who.png';
 import HowIcon from '/how.png';
 import WhenIcon from '/when.png';
 
-
-import { homeImages } from "./HomeModel"
+import { useHomeImages } from "./HomeModel";
 
 const Highlight = ({ children }) => {
     return <span className="highlight">{children}</span>;
 };  
 
+const getEventColor = (title) => {
+    const lowerTitle = title.toLowerCase();
 
+    if (lowerTitle.includes("meet")) return "#0073e6";    // Blue
+    if (lowerTitle.includes("explore")) return "#2ecc71"; // Green
+    if (lowerTitle.includes("celebrate")) return "#e74c3c"; // Red
+    if (lowerTitle.includes("enjoy")) return "#f39c12";    // Yellow
+  
+    return "#cccccc"; // Default gray
+};
 
 const escapeRegExp = (string) => {
     return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -78,7 +86,7 @@ const Accordion = ({ title, children }) => {
 };
 
 
-const HomeView = ({ events, images }) => {
+const HomeView = ({ events}) => {
     // const images = images
 
     const sliderSettings ={
@@ -140,6 +148,7 @@ const HomeView = ({ events, images }) => {
             ]
         }
     ]
+    const images = useHomeImages();
 
     const organizeEvents = [
         {
@@ -174,10 +183,9 @@ const HomeView = ({ events, images }) => {
             {/* scrolling images section */}
             <div className="scroll-images">
                 <Slider {...sliderSettings}>
-                    {/* for some reason this only works by passing homeimages but should work by passing images */}
-                    {homeImages.map((image, index) => (
+                    {images.map((image, index) => (
                         <div key={index}>
-                            <img src={image} className="carousel-image" />
+                        <img src={image} className="carousel-image" />
                         </div>
                     ))}
                 </Slider>
@@ -284,24 +292,33 @@ const HomeView = ({ events, images }) => {
                 <h2 id="upcoming-events">Take a look at our upcoming events!</h2>
 
                 <div className="event-cards">
-                    {events.slice(0, 6).map((event, index) => (
-                        <div key={event.id} className={`event-card card-${index % 3}`}>  
-                            <h3>{event.title}</h3>
-                            <p>{new Date(event.date).toLocaleString("en-US", {
-                                weekday: "long",
-                                month: "long",
-                                day: "numeric",
-                                hour: "2-digit",
-                                minute: "2-digit"
-                            })}</p>
-                            <p className="event-type">{event.type}</p>
-                        </div>
-                    ))}
+                    {events.slice(0, 6).map((event, index) => {
+                        return (
+                            <div
+                                key={event.id}
+                                className="event-card"
+                                style={{
+                                borderColor: getEventColor(event.title),
+                                color: getEventColor(event.title)
+                                }}
+                            >
+                                <h3>{event.title}</h3>
+                                <p>{new Date(event.date).toLocaleString("en-US", {
+                                    weekday: "long",
+                                    month: "long",
+                                    day: "numeric",
+                                    hour: "2-digit",
+                                    minute: "2-digit"
+                                })}</p>
+                                <p className="event-type">{event.type}</p>
+                            </div>
+                        );
+                    })}
                 </div>
 
                 {events.length > 6 && (
                     <div className="event-footer">
-                        <a href="/program" className="join-button">Click for more events!</a>
+                        <a href="/program" className="more-button">Click for more events!</a>
                     </div>
                 )}
             </div>

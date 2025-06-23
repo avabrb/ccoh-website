@@ -1,0 +1,173 @@
+.events-page {
+    font-family: 'Arial', sans-serif;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+  }
+  
+  .page-title {
+    font-size: 2rem;
+    color: #222;
+    margin-bottom: 1.5rem;
+  }
+  
+  .calendar-wrapper {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin-bottom: 3rem;
+    border-radius: 12px;
+  }
+  
+  .calendar-frame {
+    width: 100%;
+    height: 600px;
+    border: 0;
+  }
+  
+  .section-title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #333;
+    align-items: left;
+  }
+
+
+  .event-detail-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.event-detail-content {
+  background-color: white;
+  padding: 24px;
+  border-radius: 12px;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  position: relative;
+}
+
+.event-detail-content button {
+  margin-top: 16px;
+  background-color: #007BFF;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.event-detail-content button:hover {
+  background-color: #0056b3;
+}
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+  margin: 20px 0;
+}
+
+.photo-tile img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  object-fit: cover;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.photo-uploader input[type="file"] {
+  cursor: pointer;
+}
+
+.photo-uploader button {
+  padding: 0.5rem 1.25rem;
+  background-color: #005dFF;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.photo-uploader button:hover:enabled {
+  background-color: #125ea6;
+}
+
+.photo-uploader button:disabled {
+  background-color: black;
+  cursor: not-allowed;
+}
+
+.no-upload {
+  text-align: center;
+  font-size: 1.3rem;
+}
+
+.custom-file-button {
+  display: inline-block;
+  padding: 0.5rem 1.25rem;
+  background-color: white;
+  color: #005dFF;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  text-align: center;
+  margin-bottom: 1rem;
+  border: #005dFF 1px solid;
+}
+
+/* The main container for all columns */
+.masonry-flow {
+  display: flex;
+  justify-content: space-between; /* Add space between columns */
+  align-items: flex-start;
+  width: 100vw; /* Use full viewport width */
+  max-width: 1200px; /* Optional max width for aesthetics */
+  margin: 0 auto;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+/* Each column */
+.masonry-column {
+  flex: 1 1 min(33%, 400px);
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  padding: 0 0.5rem;
+}
+
+
+/* Each image wrapper */
+.photo-tile img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 0px;
+  object-fit: cover;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+@media (max-width: 900px) {
+  .masonry-column {
+    flex: 1 1 45%;
+  }
+}
+
+@media (max-width: 600px) {
+  .masonry-column {
+    flex: 1 1 100%;
+  }
+}

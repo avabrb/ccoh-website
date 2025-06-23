@@ -4,10 +4,19 @@ const admin = require("firebase-admin");
 const cors = require("cors")({ origin: true });
 const Stripe = require("stripe");
 
+const { onObjectFinalized } = require("firebase-functions/v2/storage");
+const functions = require("firebase-functions"); // for https + params
+
 const STRIPE_SECRET = defineSecret("STRIPE_KEY");
 
-admin.initializeApp();
+admin.initializeApp({
+  storageBucket:  "website-f9d19.appspot.com"
+});
 
+const db = admin.firestore();
+const bucket = admin.storage().bucket();
+
+// === 1. Stripe Checkout Function ===
 exports.createStripeCheckout = onRequest({ secrets: [STRIPE_SECRET] }, (req, res) => {
   cors(req, res, async () => {
     const stripe = new Stripe(STRIPE_SECRET.value(), {
@@ -56,4 +65,37 @@ exports.createStripeCheckout = onRequest({ secrets: [STRIPE_SECRET] }, (req, res
       return res.status(500).send('Internal Server Error');
     }
   });
+});
+
+
+
+// === 2. Sync Storage Upload to Firestore ===
+exports.syncImageUpload = onObjectFinalized({
+  region: "us-central1",
+}, async (event) => {
+  const object = event.data;
+  const filePath = object.name;
+  const contentType = object.contentType;
+
+  if (!filePath || !filePath.startsWith("photo-feed-images/")) {
+    console.log(`Skipping unrelated file: ${filePath}`);
+    return;
+  }
+
+  try {
+    // Generate Firebase-style public URL
+    const encodedPath = encodeURIComponent(filePath);
+    const publicUrl = `https://firebasestorage.googleapis.com/v0/b/website-f9d19.firebasestorage.app/o/${encodedPath}?alt=media`;
+
+    await db.collection('photo-feed').add({
+      url: publicUrl,
+      name: filePath,
+      contentType,
+      uploadedAt: admin.firestore.FieldValue.serverTimestamp(),
+    });
+
+    console.log(`Synced ${filePath} to Firestore with public URL`);
+  } catch (err) {
+    console.error(`Error syncing ${filePath}`, err);
+  }
 });

@@ -225,22 +225,7 @@
     margin-top: 20px;
 }
 
-/* Join Button */
-.join-button {
-    background-color: #0a57a3;
-    color: #f2f2f2;
-    padding: 10px 20px;
-    font-size: 1rem;
-    font-weight: bold;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
 
-.join-button:hover {
-    background-color: #083d7a; /* Darker blue on hover */
-}
 
 /* Accordion Header */
 /* Accordion Header (Title with Underline) */
@@ -460,14 +445,16 @@
     }
 }
 
-
 .subsection-4 {
     text-align: center;
     margin: 40px auto;
-    padding: 20px;
-    max-width: 900px;
+    max-width: 1200px;  
+    width: 95vw; 
     overflow: hidden;
+    padding-bottom: 10px;
+    overflow: visible;
 }
+
 
 .event-cards {
     display: flex;
@@ -475,6 +462,8 @@
     gap: 20px;
     overflow-x: auto;
     scroll-behavior: smooth;
+    padding-bottom: 12px;
+    
 }
 
 .event-card {
@@ -484,24 +473,31 @@
     padding: 15px;
     min-width: 200px;
     text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
 }
 
-.card-0 { border-color: #4caf50; color: #4caf50; }
-.card-1 { border-color: #f44336; color: #f44336; }
-.card-2 { border-color: #2196f3; color: #2196f3; }
+.event-card:hover {
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.5);
+}
 
 .event-footer {
     margin-top: 20px;
 }
 
-.join-button {
+.more-button {
     background-color: black;
     color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
+    padding: 10px 25px;
+    border-radius: 999px;
     text-decoration: none;
+    font-size: clamp(0.5rem, 1.8vw, 1.2rem);
+    font-weight: 600;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    display: inline-block;
 }
 
-.join-button:hover {
-    background-color: #333;
+
+.more-button:hover {
+    transform: scale(1.02);
+    background-color: #005dFF;
 }

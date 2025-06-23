@@ -1,3 +1,5 @@
+import { useState, useEffect } from "react";
+
 const API_KEY = import.meta.env.VITE_API_KEY
 const CALENDAR_ID = import.meta.env.VITE_CALENDAR_ID
 
@@ -22,6 +24,7 @@ export async function getUpcomingEvents () {
             date: event.start?.dateTime || event.start?.date || null,
             link: event.htmlLink || "#",
             recurring: !!event.recurringEventId,
+            colorId: event.colorId,
         }))
 
         console.log("Mapped Events:", events)
@@ -33,10 +36,39 @@ export async function getUpcomingEvents () {
     }
 }
 
-export const homeImages = [
-    "images/slider/slidepic1.png",
-    "images/slider/slidepic2.png"
-]
 
-export default getUpcomingEvents
+export function useHomeImages() {
+    const [loadedImages, setLoadedImages] = useState([]);
+  
+    useEffect(() => {
+      const tryLoadImages = async () => {
+        const promises = [];
+  
+        for (let i = 1; i <= 15; i++) {
+          const path = `/images/slider/slidepic${i}.png`;
+  
+          const p = new Promise((resolve) => {
+            const img = new Image();
+            img.src = path;
+            img.onload = () => resolve(path);
+            img.onerror = () => resolve(null);
+          });
+  
+          promises.push(p);
+        }
+  
+        const results = await Promise.all(promises);
+        const validImages = results.filter((path) => path !== null);
+        setLoadedImages(validImages);
+      };
+  
+      tryLoadImages();
+    }, []);
+  
+    return loadedImages;
+}
+
+export default getUpcomingEvents;
+
+
 
