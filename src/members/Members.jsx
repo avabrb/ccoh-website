@@ -66,54 +66,58 @@ const Members = () => {
 
   return (
     <div className="members-page">
-      <div className="top-bar">
-        <input
-          type="text"
-          placeholder="Search by name, country, or title"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          className="inline-search"
-        />
-        <button className="filter-toggle" onClick={() => setShowFilters(!showFilters)}>
-          <FaFilter />
-        </button>
-      </div>
-
-      {showFilters && (
-        <div className="filter-menu">
-          <div className="filter-group">
-            <strong>Filter by Country:</strong>
-            <Select
-              isMulti
-              options={uniqueCountries.map(country => ({ value: country, label: country }))}
-              value={selectedCountries.map(c => ({ value: c, label: c }))}
-              onChange={(selected) => setSelectedCountries(selected.map(s => s.value))}
-              className="country-select"
-              placeholder="Select countries..."
+      {isActive && (
+        <>
+          <div className="top-bar">
+            <input
+              type="text"
+              placeholder="Search by name, country, or title"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="inline-search"
             />
+            <button className="filter-toggle" onClick={() => setShowFilters(!showFilters)}>
+              <FaFilter />
+            </button>
           </div>
 
-
-          <div className="filter-group">
-            <strong>Filter by Title:</strong>
-            {uniqueTitles.map(title => (
-              <label key={title} className="filter-label">
-                <input
-                  type="checkbox"
-                  checked={selectedTitles.includes(title)}
-                  onChange={() => toggleFilter(title, setSelectedTitles, selectedTitles)}
+          {showFilters && (
+            <div className="filter-menu">
+              <div className="filter-group">
+                <strong>Filter by Country:</strong>
+                <Select
+                  isMulti
+                  options={uniqueCountries.map(country => ({ value: country, label: country }))}
+                  value={selectedCountries.map(c => ({ value: c, label: c }))}
+                  onChange={(selected) => setSelectedCountries(selected.map(s => s.value))}
+                  className="country-select"
+                  placeholder="Select countries..."
                 />
-                {title}
-              </label>
-            ))}
-          </div>
+              </div>
 
-          <button className="clear-button" onClick={clearFilters}>
-            Clear Filters
-          </button>
-        </div>
+
+              <div className="filter-group">
+                <strong>Filter by Title:</strong>
+                {uniqueTitles.map(title => (
+                  <label key={title} className="filter-label">
+                    <input
+                      type="checkbox"
+                      checked={selectedTitles.includes(title)}
+                      onChange={() => toggleFilter(title, setSelectedTitles, selectedTitles)}
+                    />
+                    {title}
+                  </label>
+                ))}
+              </div>
+
+              <button className="clear-button" onClick={clearFilters}>
+                Clear Filters
+              </button>
+            </div>
+          )}
+        </>
       )}
-
+      
       <ul className="member-list">
         {filteredMembers.map(member => {
           const showFull = isSignedIn && isActive;
