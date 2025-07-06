@@ -85,3 +85,12 @@ Footer Container */
     color: black;
     align-self: center; /* Align credits vertically with other items */
   }
+
+  #Footer .footer-other {
+    grid-column: 2;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;  /* Align items to the left */
+    gap: 30px;                    /* Space between link and icon */
+    width: 100%;
+}

@@ -24,21 +24,16 @@ export default function Footer() {
                 <div className="footer-branding">
                     <p>© 2025 Consular Corps of Houston</p>
                 </div>
-                <div className='other'>
+                <div className="footer-other">
                     <a href="/legal-terms" className="footer-link2">Legal Terms</a>
 
                     <div className="footer-social">
-                        <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
-                            <img src={FacebookIcon} alt="Icon" width="38" height="39" />
-                        </a>
-                        <a href="https://linkedin.com" aria-label="LinkedIn" className="social-icon" target="_blank" rel="noopener noreferrer">
-                            <img src={LinkedInIcon} alt="Icon" width="38" height="39" />
-                        </a>
-                        <a href="https://twitter.com" aria-label="Twitter" className="social-icon" target="_blank" rel="noopener noreferrer">
-                            <img src={TwitterIcon} alt="Icon" width="38" height="39" />
+                        <a href="https://www.facebook.com/ConsularCorpsHouston/" target="_blank" rel="noopener noreferrer">
+                        <img src={FacebookIcon} alt="Facebook" width="38" height="39" />
                         </a>
                     </div>
                 </div>
+
 
                 {/* Credits */}
                 <div className="footer-credits">
