@@ -38,7 +38,7 @@ const Members = () => {
                 : `${member.firstName} ${member.lastName?.charAt(0) || ''}.`;
 
             return (
-                <li key={member.id} className="member-card">
+                <li key={member.id} className="members-card">
                 <img
                     src={member.profileImage || '/default-profile.png'}
                     alt={`${member.firstName}'s profile`}

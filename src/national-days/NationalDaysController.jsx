@@ -1,12 +1,12 @@
 import React from "react";
 import DaysModel from './NationalDaysVM'
 import "./NationalDays.css"
-import MovingPhotos from './NationalDaysPhotos'
+import TopBanner from "./NationalDaysPhotos";
 
 export default function NationalDays() {
     return (
         <div>
-        <MovingPhotos />
+        <TopBanner />
         <DaysModel />
         </div>
     )

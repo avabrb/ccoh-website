@@ -7,10 +7,11 @@
   }
   
   .page-title {
-    font-size: 2rem;
-    color: #222;
-    margin-bottom: 1.5rem;
+    font-size: clamp(28px, 6vw, 2rem);
+    font-weight: 700;
+    text-align: left;
   }
+
   
   .calendar-wrapper {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -26,10 +27,9 @@
   }
   
   .section-title {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-    color: #333;
-    align-items: left;
+    font-size: clamp(28px, 6vw, 2rem);
+    font-weight: 700;
+    text-align: left;
   }
 
 

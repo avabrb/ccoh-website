@@ -19,6 +19,7 @@ import Cancel from './payment/Cancel'
 import Admin from './admin/Admin'
 import Members from './members/Members'
 import EventsPage from './program/program.jsx'
+import ExecCommittee from './exec-comm/exec-comm.jsx'
 
 function App() {
   const [user, setUser] = useState(null);
@@ -69,6 +70,7 @@ function App() {
             <Route path='/cancel' element={<Cancel />} />
             <Route path='/members' element={<Members />} />
             <Route path='/program' element={<EventsPage />} />
+            <Route path='/exec-comm' element={<ExecCommittee />} />
           
             <Route
               path="/profile"
