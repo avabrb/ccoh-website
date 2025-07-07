@@ -13,7 +13,7 @@ export default function TopBanner() {
         const snapshot = await getDocs(collection(db, 'national-days'));
         snapshot.forEach(doc => {
           const data = doc.data();
-          if (data.imgUrl) setImageUrl(data.imgUrl);
+          if (data.imgURL) setImageUrl(data.imgURL);
         });
       } catch (error) {
         console.error('Error fetching image:', error);
