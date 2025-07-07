@@ -46,7 +46,7 @@ const ExecCommittee = () => {
       <div className="exec-comm-grid">
         {members.map((member) => (
           <div
-            className="member-card"
+            className="members-card"
             key={member.id}
             onClick={() => handleFlip(member.id)}
           >
