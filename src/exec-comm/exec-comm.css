@@ -29,7 +29,6 @@
 }
 
 
-
 /* Card container (has perspective) */
 .members-card {
   width: 100%;
@@ -52,7 +51,7 @@
   transition: transform 0.8s;
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
+  background-color: #f3f4ff;
 }
 
 .card-inner.flipped {

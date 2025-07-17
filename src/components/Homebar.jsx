@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import './Homebar.css';
 import { auth, db, handleSignOut } from '../login/Login';
 import { doc, getDoc } from 'firebase/firestore';
 
 export function HomeBar() {
     const navigate = useNavigate();
+    const location = useLocation();
     const [isMenu, setMenu] = useState(false);
     const [isAdmin, setIsAdmin] = useState(false);
 
@@ -51,7 +52,11 @@ export function HomeBar() {
 
             <ul className={`nav-links ${isMenu ? 'open' : ''}`}>
                 {barSegments.map((segment, index) => (
-                    <li key={index} onClick={() => navigateTo(segment.link)}>
+                    <li
+                        key={index}
+                        onClick={() => navigateTo(segment.link)}
+                        className={location.pathname === segment.link ? 'nav-active' : ''}
+                    >
                         {segment.title}
                     </li>
                 ))}

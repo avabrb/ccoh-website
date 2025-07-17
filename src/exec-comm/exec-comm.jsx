@@ -43,6 +43,10 @@ const ExecCommittee = () => {
         Meet the <span class="highlight">Executive Committee Officers</span> of the Consular Corps of Houston.
       </h2>
 
+      <p>
+        Click each profile for more information.
+      </p>
+
       <div className="exec-comm-grid">
         {members.map((member) => (
           <div

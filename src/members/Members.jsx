@@ -4,11 +4,13 @@ import { collection, getDocs, doc, getDoc } from 'firebase/firestore';
 import { FaFilter } from 'react-icons/fa';
 import Select from 'react-select';
 import './Members.css';
+import '../exec-comm/exec-comm.css'; 
 
 const Members = () => {
   const [members, setMembers] = useState([]);
   const [isActive, setIsActive] = useState(false);
   const [isSignedIn, setIsSignedIn] = useState(false);
+  const [flippedCards, setFlippedCards] = useState([]);
 
   const [selectedCountries, setSelectedCountries] = useState([]);
   const [selectedTitles, setSelectedTitles] = useState([]);
@@ -65,7 +67,15 @@ const Members = () => {
   };
 
   return (
-    <div className="members-page">
+    <div className="exec-committee">
+      <h2 className="section-title">
+        Meet the <span className="highlight">Members</span> of the Consular Corps of Houston
+      </h2>
+
+      <p>
+        Click each profile for more information.
+      </p>
+
       {isActive && (
         <>
           <div className="top-bar">
@@ -95,7 +105,6 @@ const Members = () => {
                 />
               </div>
 
-
               <div className="filter-group">
                 <strong>Filter by Title:</strong>
                 {uniqueTitles.map(title => (
@@ -117,38 +126,49 @@ const Members = () => {
           )}
         </>
       )}
-      
-      <ul className="member-list">
-        {filteredMembers.map(member => {
-          const showFull = isSignedIn && isActive;
-          const name = showFull
-            ? `${member.firstName} ${member.lastName}`
-            : `${member.firstName} ${member.lastName?.charAt(0) || ''}.`;
 
-          return (
-            <li key={member.id} className="member-card">
-              <img
-                src={member.profileImage || '/default-profile.png'}
-                alt={`${member.firstName}'s profile`}
-                className="member-avatar"
-              />
-              <div className="member-info">
-                <strong>{name}</strong>
-                {showFull && (
+      <div className="exec-comm-grid">
+        {filteredMembers.map((member) => (
+          <div
+            className="members-card"
+            key={member.id}
+            onClick={() =>
+              setFlippedCards((prev) =>
+                prev.includes(member.id)
+                  ? prev.filter((id) => id !== member.id)
+                  : [...prev, member.id]
+              )
+            }
+          >
+            <div className={`card-inner ${flippedCards.includes(member.id) ? 'flipped' : ''}`}>
+              <div className="card-front">
+                <img
+                  src={member.profileImage || '/default-profile.png'}
+                  alt={`${member.firstName} ${member.lastName}`}
+                  className="member-photo"
+                />
+                <h3>{member.firstName} {member.lastName}</h3>
+                <p><strong>{member.title}</strong></p>
+              </div>
+              <div className="card-back">
+                <h3>{member.firstName} {member.lastName}</h3>
+                {isSignedIn && isActive ? (
                   <>
-                    <div>{member.title}</div>
-                    <div>{member.country}</div>
-                    <div>{member.email}</div>
-                    <div>{member.phoneNumber}</div>
+                    <p>{member.country}</p>
+                    <p>{member.email}</p>
+                    <p>{member.phoneNumber}</p>
                   </>
+                ) : (
+                  <p>Sign in to view full details</p>
                 )}
               </div>
-            </li>
-          );
-        })}
-      </ul>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
+
 };
 
 export default Members;

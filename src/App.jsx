@@ -47,7 +47,7 @@ function App() {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return null;
   }
   if (user && profileComplete === null) return <div>Checking profile...</div>;
 
