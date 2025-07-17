@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../firebase.js"; 
 
 const API_KEY = import.meta.env.VITE_API_KEY
 const CALENDAR_ID = import.meta.env.VITE_CALENDAR_ID
@@ -36,36 +38,33 @@ export async function getUpcomingEvents () {
     }
 }
 
-
 export function useHomeImages() {
-    const [loadedImages, setLoadedImages] = useState([]);
-  
-    useEffect(() => {
-      const tryLoadImages = async () => {
-        const promises = [];
-  
-        for (let i = 1; i <= 15; i++) {
-          const path = `/images/slider/slidepic${i}.png`;
-  
-          const p = new Promise((resolve) => {
-            const img = new Image();
-            img.src = path;
-            img.onload = () => resolve(path);
-            img.onerror = () => resolve(null);
-          });
-  
-          promises.push(p);
-        }
-  
-        const results = await Promise.all(promises);
-        const validImages = results.filter((path) => path !== null);
-        setLoadedImages(validImages);
-      };
-  
-      tryLoadImages();
-    }, []);
-  
-    return loadedImages;
+  const [loadedImages, setLoadedImages] = useState([]);
+
+  useEffect(() => {
+    const fetchImages = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, "home-slider"));
+        const urls = [];
+
+        querySnapshot.forEach((doc) => {
+          const data = doc.data();
+          if (data["imgURL"]) {
+            urls.push(data["imgURL"]);
+          }
+        });
+
+        setLoadedImages(urls);
+      } catch (error) {
+        console.error("Error fetching images from Firestore:", error);
+        setLoadedImages([]);
+      }
+    };
+
+    fetchImages();
+  }, []);
+
+  return loadedImages;
 }
 
 export default getUpcomingEvents;

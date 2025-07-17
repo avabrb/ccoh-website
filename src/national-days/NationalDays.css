@@ -6,11 +6,11 @@
 }
 
 h1 {
-  font-size: clamp(28px, 6vw, 50px);
-  font-weight: bold;
+  font-size: clamp(28px, 6vw, 2rem);
+  font-weight: 700;
   text-align: left;
-  line-height: 1.3;
 }
+
 
 .highlight {
   color: #005DFF;
@@ -64,132 +64,99 @@ h1 {
   padding: 20px;
 }
 
+
+
+
 .month-box {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 18px 0;
+  padding: 12px 0;
+  gap: 20px;
   font-size: clamp(16px, 2.5vw, 20px);
   font-weight: 500;
-  flex-wrap: wrap;
+  overflow: hidden;
+  flex-wrap: nowrap;
 }
 
+/* Entire LEFT SIDE: date + country + flag in one row */
+.left-side {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex: 2 1 200px;
+  min-width: 150px;
+  overflow: hidden;
+}
+
+/* DATE & COUNTRY together */
 .date-country {
   display: flex;
   align-items: center;
-  gap: 20px;
-  flex: 1;
-  flex-wrap: wrap;
+  gap: 8px;
+  flex: 3 1 150px;
+  min-width: 100px;
+  overflow: hidden;
 }
 
+/* FLAG tight and left-aligned */
 .flag-event {
   display: flex;
   align-items: center;
-  gap: 16px;
-  flex: 1;
-  flex-wrap: wrap;
+  justify-content: flex-start;
+  flex: 1 1 50px;
+  min-width: 40px;
 }
 
+/* FLAG image/emoji size */
 .flag-wrapper {
-  margin-left: -40px;
-  min-width: 30px;
   display: flex;
-  justify-content: flex-start;
+  align-items: center;
+  justify-content: center;
+  min-width: 30px;
 }
 
 .flag {
   object-fit: contain;
-  font-size: clamp(24px, 4vw, 36px);
+  font-size: clamp(20px, 3.5vw, 32px);
 }
 
 .date {
-  min-width: 60px;
   font-weight: bold;
+  white-space: nowrap;
 }
 
 .country {
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
+/* EVENT name on right gets most space */
 .event {
-  margin-left: 160px;
+  flex: 3 1 300px;
+  text-align: right;
   font-size: clamp(16px, 2.5vw, 20px);
   color: #333;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-/* Scroll container */
-.scroll-container {
-  display: flex;
-  gap: 30px;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  animation: scroll-left 40s linear infinite;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-}
 
-.scroll-container::-webkit-scrollbar {
-  display: none;
-}
 
-/* Image styling */
-.image-item {
-  width: 40vh;
-  height: 40vh;
-  object-fit: cover;
-}
 
-.zigzag-container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: calc(3vw);
-  max-width: 90vw;
-  padding: 0 5vw;
-  margin: 0 auto;
-}
 
-.zigzag-item:nth-child(2) {
-  margin-top: 3vh;
-}
 
-.zigzag-item:nth-child(5) {
-  margin-top: 5vh;
-}
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .zigzag-container {
-    grid-template-columns: repeat(2, 1fr);
-    gap: calc(4vw);
-  }
 
-  .image-item {
-    width: calc((90vw - 12vw) / 2);
-    height: calc((90vw - 12vw) / 2);
-  }
 
-  .zigzag-item:nth-child(2),
-  .zigzag-item:nth-child(5) {
-    margin-top: calc((90vw - 12vw) / 8);
-  }
-
-  .event {
-    margin-left: 0;
-    margin-top: 10px;
-  }
-
-  .flag-wrapper {
-    margin-left: 0;
-  }
-}
-
-/* Scroll animation */
-@keyframes scroll-left {
-  0% {
-    transform: translateX(0%);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
+.top-banner {
+  width: 100%;
+  height: 300px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  z-index: 1;
 }

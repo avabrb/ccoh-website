@@ -12,6 +12,10 @@ import './program.css';
 const CALENDAR_ID = import.meta.env.VITE_CALENDAR_ID
 const API_KEY = import.meta.env.VITE_API_KEY;
 
+const Highlight = ({ children }) => {
+    return <span className="highlight">{children}</span>;
+};  
+
 const EventsPage = () => {
   const [events, setEvents] = useState([]);
   const [user, setUser] = useState(null);
@@ -68,7 +72,7 @@ const EventsPage = () => {
 
     return (
     <div className="events-page">
-        <h1 className="page-title">Check out the upcoming events this month.</h1>
+        <h1 className="page-title">Check out the <Highlight>upcoming events</Highlight> this month</h1>
 
         <div className="calendar-wrapper">
         <FullCalendar
@@ -114,7 +118,7 @@ const EventsPage = () => {
         </div>
         )}
 
-        <h1 className="section-title">Photos from past events:</h1>
+        <h1 className="section-title">Photos from <Highlight>past events</Highlight> :</h1>
 
         <div className="photo-grid">
           <PhotoFeed />

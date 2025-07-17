@@ -72,19 +72,20 @@ const DaysModel = () => {
   const CountryRow = ({ date, country, flag, event, month }) => {
     return (
       <div className="month-box">
-        <div className="date-country">
-          <p className="date">{month}{" "}{toSuperscript(date)}</p>
-          <p className="country">{country}</p>
-        </div>
-        <div className="flag-event">
-          <div className="flag-wrapper">
-            <Flag
-              countryCode={flag}
-              svg
-              className="flag"
-            />
+        <div class="left-side">
+          <div className="date-country">
+            <p className="date">{month}{" "}{toSuperscript(date)}</p>
+            <p className="country">{country}</p>
           </div>
-
+          <div className="flag-event">
+            <div className="flag-wrapper">
+              <Flag
+                countryCode={flag}
+                svg
+                className="flag"
+              />
+            </div>
+        </div>
           <p className="event">{event}</p>
         </div>
       </div>

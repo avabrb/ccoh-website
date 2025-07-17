@@ -96,7 +96,7 @@ const HomeView = ({ events}) => {
         slidesToShow: 1,
         slidesToScroll: 1,
         autoplay: true,         // Enable autoplay
-        autoplaySpeed: 8000,    // Change slides every 1 second (1000ms)
+        autoplaySpeed: 5000,    // Change slides every 1 second (1000ms)
         pauseOnHover: false,    // Do not pause on hover (ensures it keeps autoplaying)
         pauseOnFocus: false,    // Do not pause on focus
         cssEase: "cubic-bezier(0.47, 0, 0.745, 0.715)",      // Makes the transition smoother
