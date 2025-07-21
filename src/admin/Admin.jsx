@@ -1,59 +1,41 @@
-import React, { useState, useEffect } from 'react';
-import { db } from '../login/Login';
-import { collection, getDocs } from 'firebase/firestore';
-import './Admin.css';
+import { useState } from 'react';
+import ExecCommitteeUpload from './ExecCommitteeUpload.jsx';
+import MemberUpload from './MemberUpload.jsx';
+import MemberManager from './MemberManager.jsx';
+import ProgramImagesManager from './ProgramImagesManager.jsx';
 
-const Admin = () => {
-    const [users, setUsers] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const currentYear = new Date().getFullYear();
+export default function AdminDashboard() {
+  const [tab, setTab] = useState('members');
 
-    useEffect(() => {
-        const fetchUsers = async () => {
-            try {
-                const usersCollection = collection(db, 'users-ccoh');
-                const userDocs = await getDocs(usersCollection);
-                const userData = userDocs.docs.map(doc => ({
-                    id: doc.id,
-                    ...doc.data(),
-                }));
-                setUsers(userData);
-                setLoading(false);
-            } catch (error) {
-                console.error('Error fetching users:', error);
-            }
-        };
+  return (
+    <div>
+      <nav>
+        {['members','import-roles','exec','images'].map(t => (
+          <button
+            key={t}
+            onClick={() => setTab(t)}
+            // style={{ fontWeight: tab===t?'bold':'normal' }}
+            className={tab===t ? 'active' : ''}
+          >
+            {t === 'members' && 'Manage Members'}
+            {t === 'import-roles' && 'Import Members'}
+            {t === 'exec' && 'Exec Committee'}
+            {t === 'images' && 'Program Images'}
+          </button>
+        ))}
+      </nav>
 
-        fetchUsers();
-    }, []);
-
-    if (loading) {
-        return <div>Loading users...</div>;
-    }
-
-    return (
-        <div className="admin-dashboard">
-            <h1>Admin Dashboard</h1>
-            <table className="admin-table">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Admin Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {users.map(user => (
-                        <tr key={user.id}>
-                            <td>{user.firstName} {user.lastName}</td>
-                            <td>{user.email}</td>
-                            <td>{user.admin ? 'Yes' : 'No'}</td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-        </div>
-    );
-};
-
-export default Admin;
+      <main style={{ marginTop: 20 }}>
+        {tab === 'members' && <MemberManager />}
+        {tab === 'import-roles' && <MemberUpload />}
+        {tab === 'exec' && (
+          <>
+            <ExecCommitteeUpload />
+            {/* later: ExecCommitteeManager */}
+          </>
+        )}
+        {tab === 'images' && <ProgramImagesManager />}
+      </main>
+    </div>
+  );
+}

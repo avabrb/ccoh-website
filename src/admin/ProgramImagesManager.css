@@ -1,0 +1,46 @@
+.images-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.image-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: transform 0.2s;
+  background: #fff;
+}
+
+.image-card img {
+  display: block;
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+.image-card:hover img {
+  transform: scale(1.08);
+}
+
+.image-delete-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  opacity: 0.85;
+  z-index: 2;
+  padding: 4px 10px;
+  font-size: 0.95em;
+  border-radius: 6px;
+  background: #e3342f;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.image-card:hover .image-delete-btn {
+  opacity: 1;
+}

@@ -1,44 +1,69 @@
 import { useEffect, useState } from 'react';
-import { collection, query, orderBy, onSnapshot, limit } from "firebase/firestore";
+import { collection, query, orderBy, onSnapshot } from "firebase/firestore";
 import { db } from '../login/Login.jsx';
 import './program.css';
 
 const PhotoFeed = () => {
-  const [columns, setColumns] = useState([[], [], []]);
+  const [images, setImages] = useState([]);
+  const [users,  setUsers]  = useState({});
 
   useEffect(() => {
-    const q = query(collection(db, "photo-feed"), orderBy("uploadedAt", "desc"), limit(99));
-    const unsubscribe = onSnapshot(q, (snapshot) => {
-      const seenIds = new Set();
-      const imageList = snapshot.docs
-        .map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }))
-        .filter((img) => {
-          if (!img.uploadId) return true; // backward compatibility
-          if (seenIds.has(img.uploadId)) return false;
-          seenIds.add(img.uploadId);
-          return true;
-        });
+    // 1) listen to photo-feed, ordered by newest
+    const qImages = query(
+      collection(db, "photo-feed"),
+      orderBy("uploadedAt", "desc")
+    );
+    const unsubImages = onSnapshot(qImages, snap =>
+      setImages(snap.docs.map(d => ({ id: d.id, ...d.data() })))
+    );
 
-      const newColumns = [[], [], []];
-      imageList.forEach((img, idx) => {
-        newColumns[idx % 3].push(img);
-      });
-      setColumns(newColumns);
-    });
+    // 2) listen to all users to resolve uploader info
+    const unsubUsers = onSnapshot(
+      collection(db, "users-ccoh"),
+      snap => {
+        const map = {};
+        snap.forEach(d => { map[d.id] = d.data(); });
+        setUsers(map);
+      }
+    );
 
-    return () => unsubscribe();
+    return () => {
+      unsubImages();
+      unsubUsers();
+    };
   }, []);
+
+  // 3) split into 3 columns
+  const numCols = 3;
+  const cols = Array.from({ length: numCols }, () => []);
+  images.forEach((img, idx) => {
+    cols[idx % numCols].push(img);
+  });
 
   return (
     <div className="masonry-flow">
-      {columns.map((column, colIdx) => (
-        <div className="masonry-column" key={colIdx}>
-          {column.map((img, i) => (
-            <div className="photo-tile" key={img.id}>
-              <img src={img.url} alt={`event-${i}`} />
+      {cols.map((columnImages, ci) => (
+        <div key={ci} className="masonry-column">
+          {columnImages.map(img => (
+            <div key={img.id} className="photo-tile">
+              <img
+                src={img.url}
+                alt={img.name || 'event photo'}
+              />
+              <div className="photo-meta">
+                <div>
+                  <strong>Posted:</strong>{" "}
+                  {img.uploadedAt?.toDate
+                    ? img.uploadedAt.toDate().toLocaleDateString()
+                    : 'Unknown'}
+                </div>
+                <div>
+                  <strong>By:</strong>{" "}
+                  {users[img.uploader]?.firstName
+                    ? `${users[img.uploader].firstName} ${users[img.uploader].lastName}`
+                    : users[img.uploader]?.email || 'Unknown'}
+                </div>
+              </div>
             </div>
           ))}
         </div>

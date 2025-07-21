@@ -26,12 +26,13 @@ const Profile = () => {
         profileImage: '',
         showEmail: false,
         showPhone: false,
-        membershipPaymentAllowed: false,
+        membershipPaymentAllowed: true,
         membershipPayment: false,
         membershipPaymentDate: '',
         membershipPaymentYear: '',
         activeStatus: false,
-        isProfileComplete: false
+        isProfileComplete: false,
+        isImported: false
     });
     const [originalUserData, setOriginalUserData] = useState(null); // Store original data
 
@@ -51,6 +52,7 @@ const Profile = () => {
                     title: data.title || 'Consul General', // Default value for title
                     status: data.status || 'Current',      // Default value for status
                     email: auth.currentUser.email,
+                    isImported: !!data.isImported,
                 });
                 setOriginalUserData({
                     ...data,
@@ -192,6 +194,9 @@ const Profile = () => {
         }
     };
 
+    const importedFields = ['firstName','lastName','title','status','country'];
+
+
     // --- UI ---
     return (
         <div className="profile-container">
@@ -240,7 +245,7 @@ const Profile = () => {
                             value={userData.firstName || ''}
                             onChange={handleChange}
                             required
-                            disabled={!isEditing}
+                            disabled={!isEditing || (userData.isImported && importedFields.includes('firstName'))}
                             className="profile-input"
                             placeholder="Enter your first name"
                         />
@@ -255,7 +260,7 @@ const Profile = () => {
                             value={userData.lastName || ''}
                             onChange={handleChange}
                             required
-                            disabled={!isEditing}
+                            disabled={!isEditing || (userData.isImported && importedFields.includes('lastName'))}
                             className="profile-input"
                             placeholder="Enter your last name"
                         />
@@ -269,7 +274,7 @@ const Profile = () => {
                             value={userData.title || ''}
                             onChange={handleChange}
                             required
-                            disabled={!isEditing}
+                            disabled={!isEditing || (userData.isImported && importedFields.includes('title'))}
                             className="profile-input"
                         >
                             <option value="" disabled>Select Title</option>
@@ -286,7 +291,7 @@ const Profile = () => {
                             value={userData.status || ''}
                             onChange={handleChange}
                             required
-                            disabled={!isEditing}
+                            disabled={!isEditing || (userData.isImported && importedFields.includes('status'))}
                             className="profile-input"
                         >
                             <option value="" disabled>Select Status</option>
@@ -303,7 +308,7 @@ const Profile = () => {
                             value={userData.country || ''}
                             onChange={handleChange}
                             required
-                            disabled={!isEditing}
+                            disabled={!isEditing || (userData.isImported && importedFields.includes('country'))}
                             className="profile-input"
                         >
                             {/* <option value="">Pre-filled from registration</option> */}
@@ -326,7 +331,7 @@ const Profile = () => {
                             name="socialMedia"
                             value={userData.socialMedia || ''}
                             onChange={handleChange}
-                            disabled={!isEditing}
+                            disabled={!isEditing || (userData.isImported && importedFields.includes('socialMedia'))}
                             className="profile-input"
                             placeholder="@socialmedia on Facebook"
                         />
@@ -338,7 +343,7 @@ const Profile = () => {
                             name="websites"
                             value={userData.websites || ''}
                             onChange={handleChange}
-                            disabled={!isEditing}
+                            disabled={!isEditing || (userData.isImported && importedFields.includes('websites'))}
                             className="profile-input"
                             placeholder="www.websiteexample.com"
                         />
@@ -349,7 +354,7 @@ const Profile = () => {
                             name="biography"
                             value={userData.biography || ''}
                             onChange={handleChange}
-                            disabled={!isEditing}
+                            disabled={!isEditing || (userData.isImported && importedFields.includes('biography'))}
                             className="profile-input"
                             placeholder="Here is my example biography...."
                             style={{ minHeight: 60, resize: 'vertical' }}
@@ -364,7 +369,7 @@ const Profile = () => {
                             value={userData.paymentYear || ''}
                             onChange={handleChange}
                             required
-                            disabled={!isEditing}
+                            disabled={!isEditing || (userData.isImported && importedFields.includes('paymentYear'))}
                             className="profile-input"
                         >
                             <option value="">Select Year</option>
@@ -397,7 +402,7 @@ const Profile = () => {
                         defaultCountry="US"
                         value={userData.phoneNumber}
                         onChange={(value) => setUserData(prev => ({ ...prev, phoneNumber: value }))}
-                        disabled={!isEditing}
+                        disabled={!isEditing || (userData.isImported && importedFields.includes('phoneNumber'))}
                         className="profile-input"
                     />
                     </div>

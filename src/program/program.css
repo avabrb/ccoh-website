@@ -171,3 +171,18 @@
     flex: 1 1 100%;
   }
 }
+
+.see-more-btn {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 12px 32px;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+.see-more-btn:hover {
+  background: #1746a0;
+}

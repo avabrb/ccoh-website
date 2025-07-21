@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import './Homebar.css';
 import { auth, db, handleSignOut } from '../login/Login';
 import { doc, getDoc } from 'firebase/firestore';
+import { getAuth } from "firebase/auth";
 
 export function HomeBar() {
     const navigate = useNavigate();
@@ -10,19 +11,34 @@ export function HomeBar() {
     const [isMenu, setMenu] = useState(false);
     const [isAdmin, setIsAdmin] = useState(false);
 
-    useEffect(() => {
-        const fetchAdminStatus = async () => {
-            if (auth.currentUser) {
-                const userDoc = doc(db, 'users-ccoh', auth.currentUser.uid);
-                const docSnap = await getDoc(userDoc);
-                if (docSnap.exists()) {
-                    const userData = docSnap.data();
-                    setIsAdmin(userData.admin || false);
-                }
-            }
-        };
+    // useEffect(() => {
+    //     const fetchAdminStatus = async () => {
+    //         if (auth.currentUser) {
+    //             const userDoc = doc(db, 'users-ccoh', auth.currentUser.uid);
+    //             const docSnap = await getDoc(userDoc);
+    //             if (docSnap.exists()) {
+    //                 const userData = docSnap.data();
+    //                 setIsAdmin(userData.admin || false);
+    //             }
+    //         }
+    //     };
 
-        fetchAdminStatus();
+    //     fetchAdminStatus();
+    // }, []);
+
+    useEffect(() => {
+    const checkAdminClaim = async () => {
+        const user = getAuth().currentUser;
+        if (!user) return;
+
+        await user.getIdToken(true); 
+
+        const tokenResult = await user.getIdTokenResult();
+        setIsAdmin(tokenResult.claims.admin === true);
+        console.log("Admin claim:", tokenResult.claims.admin);
+    };
+
+    checkAdminClaim();
     }, []);
 
     const navigateTo = (link) => {

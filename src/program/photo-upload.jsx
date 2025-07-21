@@ -5,14 +5,13 @@ import { storage, db } from '../login/Login.jsx';
 import { v4 as uuidv4 } from 'uuid';
 import "./program.css";
 
+function logDebug(msg, ...args) {
+  console.log(`[PhotoUploader][${new Date().toISOString()}] ${msg}`, ...args);
+}
+
 // Global lock to ensure single upload at a time across the page
 if (typeof window !== "undefined" && window.__PHOTO_UPLOAD_LOCK__ === undefined) {
   window.__PHOTO_UPLOAD_LOCK__ = false;
-}
-
-// Count instances for debugging
-if (typeof window !== "undefined" && window.__PHOTO_UPLOADER_INSTANCE_COUNT__ === undefined) {
-  window.__PHOTO_UPLOADER_INSTANCE_COUNT__ = 0;
 }
 
 const PhotoUploader = ({ user }) => {
@@ -20,62 +19,67 @@ const PhotoUploader = ({ user }) => {
   const [uploading, setUploading] = useState(false);
 
   useEffect(() => {
-    window.__PHOTO_UPLOADER_INSTANCE_COUNT__ += 1;
-    console.log("PhotoUploader MOUNTED. Instance count:", window.__PHOTO_UPLOADER_INSTANCE_COUNT__);
-
-    return () => {
-      console.log("PhotoUploader UNMOUNTED - clearing file");
-      setFile(null);
-    };
+    const id = Math.random().toString(36).substr(2, 5);
+    logDebug("PhotoUploader mounted with id:", id);
+    return () => logDebug("PhotoUploader unmounted with id:", id);
   }, []);
 
-  const handleUpload = async () => {
-    console.log("HANDLE UPLOAD CALLED");
+  useEffect(() => {
+    logDebug("file state changed:", file);
+  }, [file]);
 
-    if (window.__PHOTO_UPLOAD_LOCK__) {
-      console.log("Global lock active - skipping upload.");
+  useEffect(() => {
+    if (file && !uploading) {
+      logDebug("Upload button rendered for file:", file.name);
+    }
+  }, [file, uploading]);
+
+  const handleUpload = async () => {
+    if (uploading || window.__PHOTO_UPLOAD_LOCK__) {
+      logDebug("Upload prevented: already uploading or lock is set.");
       return;
     }
+    setUploading(true);
     window.__PHOTO_UPLOAD_LOCK__ = true;
+    logDebug("Upload lock set.");
 
     if (!file || !user) {
-      console.log("No file or user, exiting early.");
+      logDebug("No file or user, exiting early.");
+      setUploading(false);
       window.__PHOTO_UPLOAD_LOCK__ = false;
       return;
     }
-
-    console.log("Starting upload...");
-    setUploading(true);
 
     try {
       const uploadId = uuidv4();
       const filename = `${uploadId}-${file.name}`;
       const storageRef = ref(storage, `photo-feed-images/${filename}`);
-      console.log("Uploading to:", filename);
+      logDebug("Uploading to:", filename);
 
       await uploadBytes(storageRef, file);
-      console.log("Upload complete - getting download URL");
+      logDebug("Upload complete - getting download URL");
 
       const downloadURL = await getDownloadURL(storageRef);
-      console.log("Got download URL:", downloadURL);
+      logDebug("Got download URL:", downloadURL);
 
       await addDoc(collection(db, 'photo-feed'), {
         url: downloadURL,
         name: filename,
         uploadedAt: serverTimestamp(),
         uploader: user.uid,
-        uploadId
+        uploadId,
+        debugClientId: uuidv4(), // Add this
       });
 
-      console.log("Firestore document added successfully");
+      logDebug("Firestore document added successfully");
       setFile(null);
 
     } catch (error) {
-      console.error("Upload error:", error);
+      logDebug("Upload error:", error);
     } finally {
       setUploading(false);
       window.__PHOTO_UPLOAD_LOCK__ = false;
-      console.log("Upload lock released");
+      logDebug("Upload lock released. uploading:", uploading, "lock:", window.__PHOTO_UPLOAD_LOCK__);
     }
   };
 
@@ -96,11 +100,11 @@ const PhotoUploader = ({ user }) => {
         onChange={(e) => {
           if (e.target.files && e.target.files.length > 0) {
             const selectedFile = e.target.files[0];
-            console.log("File selected:", selectedFile.name);
+            logDebug("File selected:", selectedFile.name);
             setFile(selectedFile);
             e.target.value = '';
           } else {
-            console.log("No file selected in onChange!");
+            logDebug("No file selected in onChange!");
           }
         }}
         style={{ display: 'none' }}
@@ -112,8 +116,11 @@ const PhotoUploader = ({ user }) => {
 
       <p className="space"></p>
 
-      {file && !window.__PHOTO_UPLOAD_LOCK__ && !uploading && (
-        <button onClick={handleUpload}>
+      {file && !uploading && (
+        <button
+          onClick={handleUpload}
+          disabled={uploading || window.__PHOTO_UPLOAD_LOCK__}
+        >
           {uploading ? 'Uploading...' : 'Upload Photo'}
         </button>
       )}

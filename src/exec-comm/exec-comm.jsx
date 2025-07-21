@@ -62,21 +62,21 @@ const ExecCommittee = () => {
               <div className="card-front">
                 <img
                   src={member.photoURL}
-                  alt={`${member.FirstName} ${member.LastName}`}
+                  alt={`${member.firstName} ${member.lastName}`}
                   className="member-photo"
                 />
                 <h3>
-                  {member.FirstName} {member.LastName}
+                  {member.firstName} {member.lastName}
                 </h3>
                 <p>
-                  <strong>Position:</strong> {member.Position}
+                  <strong>Position:</strong> {member.position}
                 </p>
               </div>
               <div className="card-back">
                 <h3>
-                  {member.FirstName} {member.LastName}
+                  {member.firstName} {member.lastName}
                 </h3>
-                <p>{member.Description || 'No description available.'}</p>
+                <p>{member.description || 'No description available.'}</p>
               </div>
             </div>
           </div>
