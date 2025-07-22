@@ -303,7 +303,7 @@ select:focus {
 
 
 
-.modal-overlay {
+/* .modal-overlay {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
   background: rgba(0,0,0,0.3);
@@ -335,4 +335,109 @@ select:focus {
   padding: 6px 8px;
   border-radius: 4px;
   border: 1px solid #ccc;
+} */
+
+/*────────────────────────────────*/
+/* Modal overlay & container */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 2rem;
+  border-radius: var(--radius);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  width: auto;
+  max-width: 700px;    /* ↑ bump this so two columns fit */
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+/*────────────────────────────────*/
+/* Scoped font + colors for the modal only */
+.modal-content,
+.modal-content label,
+.modal-content input,
+.modal-content textarea {
+  font-family: 'Roboto', sans-serif;
+  color: #333;
+}
+
+/*────────────────────────────────*/
+/* 2‑column grid inside the modal */
+.modal-content .modal-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem 2rem;
+  margin-bottom: 1.5rem;
+  justify-items: start;  /* left‑align each cell */
+  align-items: center;   /* vertically center label+control */
+}
+
+/* each form‑group stacks its label+control */
+.modal-content .modal-form .form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+/* biography spans both columns */
+.modal-content .modal-form .form-group.full-width {
+  grid-column: 1 / -1;
+}
+
+/* make inputs & textareas fill their cell */
+.modal-content .modal-form input[type="text"],
+.modal-content .modal-form textarea {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/*────────────────────────────────*/
+/* The “Save / Cancel” footer */
+.modal-content .modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e0e0e0;
+}
+.modal-content .modal-footer .btn {
+  min-width: 100px;
+}
+
+/*────────────────────────────────*/
+/* Bottom toggles (already working) */
+/*────────────────────────────────*/
+/* Flexible bottom‐row: auto‑fit into up to 4 columns */
+.modal-content .modal-form .bottom-row {
+  display: grid;
+  /* try for up to 4 columns, each at least 180px wide */
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem 2rem;
+  margin-bottom: 1.5rem;
+  align-items: center;
+}
+
+/* keep each label+control on one line */
+.modal-content .modal-form .bottom-row .form-group {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+/* tidy up labels and checkbox/icon spacing */
+.modal-content .modal-form .bottom-row .form-group label {
+  margin-right: .5rem;
+  font-weight: 500;
+}
+.modal-content .modal-form .bottom-row .form-group input[type="checkbox"],
+.modal-content .modal-form .bottom-row .form-group span {
+  margin-left: .25rem;
 }

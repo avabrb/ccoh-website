@@ -264,169 +264,220 @@ const deleteUser = async (userId, userName) => {
 
 
       {editingUser && (
-        console.log('Modal should render for:', editingUser),
         <div className="modal-overlay">
           <div className="modal-content">
             <h3>Edit Member: {editingUser.firstName} {editingUser.lastName}</h3>
-            <form
-              onSubmit={async (e) => {
-                e.preventDefault();
-                await editUser(editingUser.id, editFields);
-                setEditingUser(null);
-              }}
-            >
-              {/* Example for all fields */}
-              <label>
-                First Name:
-                <input
-                  value={editFields.firstName || ''}
-                  onChange={e => setEditFields(f => ({ ...f, firstName: e.target.value }))}
-                />
-              </label>
-              <label>
-                Last Name:
-                <input
-                  value={editFields.lastName || ''}
-                  onChange={e => setEditFields(f => ({ ...f, lastName: e.target.value }))}
-                />
-              </label>
-              <label>
-                Title:
-                <input
-                  value={editFields.title || ''}
-                  onChange={e => setEditFields(f => ({ ...f, title: e.target.value }))}
-                />
-              </label>
-              <label>
-                Status:
-                <input
-                  value={editFields.status || ''}
-                  onChange={e => setEditFields(f => ({ ...f, status: e.target.value }))}
-                />
-              </label>
-              <label>
-                Country:
-                <input
-                  value={editFields.country || ''}
-                  onChange={e => setEditFields(f => ({ ...f, country: e.target.value }))}
-                />
-              </label>
-              <label>
-                Payment Year:
-                <input
-                  value={editFields.paymentYear || ''}
-                  onChange={e => setEditFields(f => ({ ...f, paymentYear: e.target.value }))}
-                />
-              </label>
-              <label>
-                Email:
-                <input
-                  value={editFields.email || ''}
-                  onChange={e => setEditFields(f => ({ ...f, email: e.target.value }))}
-                />
-              </label>
-              <label>
-                Phone Number:
-                <input
-                  value={editFields.phoneNumber || ''}
-                  onChange={e => setEditFields(f => ({ ...f, phoneNumber: e.target.value }))}
-                />
-              </label>
-              <label>
-                Social Media:
-                <input
-                  value={editFields.socialMedia || ''}
-                  onChange={e => setEditFields(f => ({ ...f, socialMedia: e.target.value }))}
-                />
-              </label>
-              <label>
-                Websites:
-                <input
-                  value={editFields.websites || ''}
-                  onChange={e => setEditFields(f => ({ ...f, websites: e.target.value }))}
-                />
-              </label>
-              <label>
-                Biography:
-                <textarea
-                  value={editFields.biography || ''}
-                  onChange={e => setEditFields(f => ({ ...f, biography: e.target.value }))}
-                />
-              </label>
-              <label>
-                Profile Image URL:
-                <input
-                  value={editFields.profileImage || ''}
-                  onChange={e => setEditFields(f => ({ ...f, profileImage: e.target.value }))}
-                />
-              </label>
-              <label>
-                Show Email:
-                <input
-                  type="checkbox"
-                  checked={!!editFields.showEmail}
-                  onChange={e => setEditFields(f => ({ ...f, showEmail: e.target.checked }))}
-                />
-              </label>
-              <label>
-                Show Phone:
-                <input
-                  type="checkbox"
-                  checked={!!editFields.showPhone}
-                  onChange={e => setEditFields(f => ({ ...f, showPhone: e.target.checked }))}
-                />
-              </label>
-              <label>
-                Membership Payment Allowed:
-                <input
-                  type="checkbox"
-                  checked={!!editFields.membershipPaymentAllowed}
-                  onChange={e => setEditFields(f => ({ ...f, membershipPaymentAllowed: e.target.checked }))}
-                />
-              </label>
-              <label>
-                Membership Payment:
-                <input
-                  type="checkbox"
-                  checked={!!editFields.membershipPayment}
-                  onChange={e => setEditFields(f => ({ ...f, membershipPayment: e.target.checked }))}
-                />
-              </label>
-              <label>
-                Membership Payment Date:
-                <input
-                  value={editFields.membershipPaymentDate || ''}
-                  onChange={e => setEditFields(f => ({ ...f, membershipPaymentDate: e.target.value }))}
-                />
-              </label>
-              <label>
-                Membership Payment Year:
-                <input
-                  value={editFields.membershipPaymentYear || ''}
-                  onChange={e => setEditFields(f => ({ ...f, membershipPaymentYear: e.target.value }))}
-                />
-              </label>
-              <label>
-                Active Status:
-                <input
-                  type="checkbox"
-                  checked={!!editFields.activeStatus}
-                  onChange={e => setEditFields(f => ({ ...f, activeStatus: e.target.checked }))}
-                />
-              </label>
-              <label>
-                Is Profile Complete:
-                <input
-                  type="checkbox"
-                  checked={!!editFields.isProfileComplete}
-                  onChange={e => setEditFields(f => ({ ...f, isProfileComplete: e.target.checked }))}
-                />
-              </label>
-              <div style={{ marginTop: 16 }}>
-                <button className="btn btn-success" type="submit">Save</button>
-                <button className="btn btn-danger" type="button" onClick={() => setEditingUser(null)}>Cancel</button>
-              </div>
-            </form>
+            <form className="modal-form" id="edit-member-form" onSubmit={async (e) => {
+  e.preventDefault();
+  await editUser(editingUser.id, editFields);
+  setEditingUser(null);
+}}>
+  {/* FIRST ROW */}
+  <div className="form-group">
+    <label htmlFor="firstName">First Name:</label>
+    <input
+      id="firstName"
+      type="text"
+      value={editFields.firstName || ''}
+      onChange={e => setEditFields(f => ({ ...f, firstName: e.target.value }))}
+    />
+  </div>
+  <div className="form-group">
+    <label htmlFor="lastName">Last Name:</label>
+    <input
+      id="lastName"
+      type="text"
+      value={editFields.lastName || ''}
+      onChange={e => setEditFields(f => ({ ...f, lastName: e.target.value }))}
+    />
+  </div>
+
+  {/* SECOND ROW */}
+  <div className="form-group">
+    <label htmlFor="title">Title:</label>
+    <input
+      id="title"
+      type="text"
+      value={editFields.title || ''}
+      onChange={e => setEditFields(f => ({ ...f, title: e.target.value }))}
+    />
+  </div>
+  <div className="form-group">
+    <label htmlFor="status">Status:</label>
+    <input
+      id="status"
+      type="text"
+      value={editFields.status || ''}
+      onChange={e => setEditFields(f => ({ ...f, status: e.target.value }))}
+    />
+  </div>
+
+  {/* THIRD ROW */}
+  <div className="form-group">
+    <label htmlFor="country">Country:</label>
+    <input
+      id="country"
+      type="text"
+      value={editFields.country || ''}
+      onChange={e => setEditFields(f => ({ ...f, country: e.target.value }))}
+    />
+  </div>
+  <div className="form-group">
+    <label htmlFor="paymentYear">Payment Year:</label>
+    <input
+      id="paymentYear"
+      type="text"
+      value={editFields.paymentYear || ''}
+      onChange={e => setEditFields(f => ({ ...f, paymentYear: e.target.value }))}
+    />
+  </div>
+
+  {/* FOURTH ROW */}
+  <div className="form-group">
+    <label htmlFor="email">Email:</label>
+    <input
+      id="email"
+      type="text"
+      value={editFields.email || ''}
+      onChange={e => setEditFields(f => ({ ...f, email: e.target.value }))}
+    />
+  </div>
+  <div className="form-group">
+    <label htmlFor="phoneNumber">Phone Number:</label>
+    <input
+      id="phoneNumber"
+      type="text"
+      value={editFields.phoneNumber || ''}
+      onChange={e => setEditFields(f => ({ ...f, phoneNumber: e.target.value }))}
+    />
+  </div>
+
+  {/* FIFTH ROW */}
+  <div className="form-group">
+    <label htmlFor="socialMedia">Social Media:</label>
+    <input
+      id="socialMedia"
+      type="text"
+      value={editFields.socialMedia || ''}
+      onChange={e => setEditFields(f => ({ ...f, socialMedia: e.target.value }))}
+    />
+  </div>
+  <div className="form-group">
+    <label htmlFor="websites">Websites:</label>
+    <input
+      id="websites"
+      type="text"
+      value={editFields.websites || ''}
+      onChange={e => setEditFields(f => ({ ...f, websites: e.target.value }))}
+    />
+  </div>
+
+  {/* SIXTH ROW */}
+  <div className="form-group">
+    <label htmlFor="profileImage">Profile Image URL:</label>
+    <input
+      id="profileImage"
+      type="text"
+      value={editFields.profileImage || ''}
+      onChange={e => setEditFields(f => ({ ...f, profileImage: e.target.value }))}
+    />
+  </div>
+  {/* Empty cell for grid alignment */}
+  <div></div>
+
+  {/* BIOGRAPHY SPANS BOTH COLUMNS */}
+  <div className="form-group full-width">
+    <label htmlFor="biography">Biography:</label>
+    <textarea
+      id="biography"
+      value={editFields.biography || ''}
+      onChange={e => setEditFields(f => ({ ...f, biography: e.target.value }))}
+    />
+  </div>
+
+  {/* BOTTOM ROWS */}
+  <div className="bottom-row">
+    <div className="form-group">
+      <input
+        type="checkbox"
+        checked={!!editFields.showEmail}
+        onChange={e => setEditFields(f => ({ ...f, showEmail: e.target.checked }))}
+      />
+      <label>Show Email</label>
+    </div>
+    <div className="form-group">
+      <input
+        type="checkbox"
+        checked={!!editFields.showPhone}
+        onChange={e => setEditFields(f => ({ ...f, showPhone: e.target.checked }))}
+      />
+      <label>Show Phone</label>
+    </div>
+    <div className="form-group">
+      <input
+        type="checkbox"
+        checked={!!editFields.membershipPaymentAllowed}
+        onChange={e => setEditFields(f => ({ ...f, membershipPaymentAllowed: e.target.checked }))}
+      />
+      <label>Membership Payment Allowed</label>
+    </div>
+    <div className="form-group">
+      <input
+        type="checkbox"
+        checked={!!editFields.membershipPayment}
+        onChange={e => setEditFields(f => ({ ...f, membershipPayment: e.target.checked }))}
+      />
+      <label>Membership Payment</label>
+    </div>
+    <div className="form-group">
+      <input
+        type="checkbox"
+        checked={!!editFields.activeStatus}
+        onChange={e => setEditFields(f => ({ ...f, activeStatus: e.target.checked }))}
+      />
+      <label>Active Status</label>
+    </div>
+    <div className="form-group">
+      <input
+        type="checkbox"
+        checked={!!editFields.isProfileComplete}
+        onChange={e => setEditFields(f => ({ ...f, isProfileComplete: e.target.checked }))}
+      />
+      <label>Profile Complete</label>
+    </div>
+  </div>
+  <div className="bottom-row">
+    <div className="form-group">
+      <label>Payment Date</label>
+      <input
+        type="text"
+        value={editFields.membershipPaymentDate || ''}
+        onChange={e => setEditFields(f => ({ ...f, membershipPaymentDate: e.target.value }))}
+      />
+    </div>
+    <div className="form-group">
+      <label>Payment Year</label>
+      <input
+        type="text"
+        value={editFields.membershipPaymentYear || ''}
+        onChange={e => setEditFields(f => ({ ...f, membershipPaymentYear: e.target.value }))}
+      />
+    </div>
+  </div>
+</form>
+
+<div className="modal-footer">
+  <button className="btn btn-success" type="submit" form="edit-member-form">
+    Save
+  </button>
+  <button
+    className="btn btn-danger"
+    type="button"
+    onClick={() => setEditingUser(null)}
+  >
+    Cancel
+  </button>
+</div>
           </div>
         </div>
       )}
