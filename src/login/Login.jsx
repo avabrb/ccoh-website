@@ -165,7 +165,13 @@ const Login = () => {
           </button>
 
           <div className="link-row">
-            <a href="#">Forgot password?</a>
+            <button
+              type="button"
+              className="btn btn-secondary"
+              style={{ padding: 0, background: "none", border: "none", color: "#1746a0", textDecoration: "underline", cursor: "pointer" }}
+              onClick={() => setErrorMessage("Please contact the administrators to reset your password. They can resend you a password setup link.")}>
+              Forgot password?
+            </button>
             <a onClick={() => setIsSignUp(!isSignUp)}>{isSignUp ? 'Log In' : 'Sign Up'}</a>
           </div>
         </form>

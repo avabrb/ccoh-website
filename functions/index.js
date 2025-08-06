@@ -229,10 +229,10 @@ exports.resendPasswordLink = onRequest(
       try {
         const resetLink = await admin.auth().generatePasswordResetLink(email);
         await transporter.sendMail({
-          from:    `"CCOH Admin" <${gmailEmail}>`,
+          from:    `"Consular Corps of Houston Admin" <${gmailEmail}>`,
           to:      email,
           subject: "Your CCOH Password Setup Link",
-          html:    `<p>Click <a href="${resetLink}">here</a> to set your password.</p>`,
+          html:    `<p>Click <a href="${resetLink}">here</a> to set or reset your password.</p>`,
         });
         return res.status(200).send("Link sent");
       } catch (err) {
