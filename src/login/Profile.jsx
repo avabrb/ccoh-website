@@ -32,7 +32,8 @@ const Profile = () => {
         membershipPaymentYear: '',
         activeStatus: false,
         isProfileComplete: false,
-        isImported: false
+        isImported: false,
+        phoneDisplay: true, // New field to control phone number visibility
     });
     const [originalUserData, setOriginalUserData] = useState(null); // Store original data
 
@@ -395,17 +396,32 @@ const Profile = () => {
                     </div> */}
 
                     <div className="profile-field">
-                    <label>
-                        Phone Number <span className="required-asterisk">*</span>
-                    </label>
-                    <PhoneInput
-                        defaultCountry="US"
-                        value={userData.phoneNumber}
-                        onChange={(value) => setUserData(prev => ({ ...prev, phoneNumber: value }))}
-                        disabled={!isEditing || (userData.isImported && importedFields.includes('phoneNumber'))}
-                        className="profile-input"
-                    />
+                        <label className="profile-label-with-toggle">
+                            <span>
+                                Phone Number <span className="required-asterisk">*</span>
+                            </span>
+                            <label className="phone-hide-toggle">
+                                <input
+                                    type="checkbox"
+                                    checked={!userData.phoneDisplay}
+                                    onChange={(e) =>
+                                        setUserData(prev => ({ ...prev, phoneDisplay: !e.target.checked }))
+                                    }
+                                    disabled={!isEditing}
+                                />
+                                Keep this information hidden from other members
+                            </label>
+                        </label>
+
+                        <PhoneInput
+                            defaultCountry="US"
+                            value={userData.phoneNumber}
+                            onChange={(value) => setUserData(prev => ({ ...prev, phoneNumber: value }))}
+                            disabled={!isEditing || (userData.isImported && importedFields.includes('phoneNumber'))}
+                            className="profile-input"
+                        />
                     </div>
+
 
                     <div className="profile-field">
                         <label>Email</label>

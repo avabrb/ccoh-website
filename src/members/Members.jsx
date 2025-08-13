@@ -156,7 +156,7 @@ const Members = () => {
                   <>
                     <p>{member.country}</p>
                     <p>{member.email}</p>
-                    <p>{member.phoneNumber}</p>
+                    {member.phoneDisplay && <p>{member.phoneNumber}</p>}
                   </>
                 ) : (
                   <p>Sign in to view full details</p>
