@@ -27,18 +27,38 @@ export function HomeBar() {
     // }, []);
 
     useEffect(() => {
-    const checkAdminClaim = async () => {
-        const user = getAuth().currentUser;
-        if (!user) return;
+        const checkAdminClaim = async () => {
+            const user = getAuth().currentUser;
+            if (!user) {
+                setIsAdmin(false);
+                return;
+            }
 
-        await user.getIdToken(true); 
+            try {
+                await user.getIdToken(true); // Force token refresh
+                const tokenResult = await user.getIdTokenResult();
+                setIsAdmin(tokenResult.claims.admin === true);
+                console.log("Admin claim:", tokenResult.claims.admin);
+            } catch (error) {
+                console.error("Error checking admin status:", error);
+                setIsAdmin(false);
+            }
+        };
 
-        const tokenResult = await user.getIdTokenResult();
-        setIsAdmin(tokenResult.claims.admin === true);
-        console.log("Admin claim:", tokenResult.claims.admin);
-    };
+        // Set up auth state listener
+        const unsubscribe = auth.onAuthStateChanged((user) => {
+            if (!user) {
+                setIsAdmin(false);
+            } else {
+                checkAdminClaim();
+            }
+        });
 
-    checkAdminClaim();
+        // Initial check
+        checkAdminClaim();
+
+        // Cleanup
+        return () => unsubscribe();
     }, []);
 
     const navigateTo = (link) => {

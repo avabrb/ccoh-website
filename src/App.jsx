@@ -29,20 +29,37 @@ function App() {
   
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
-      setUser(currentUser);
+      if (!currentUser) {
+        setUser(null);
+        setIsAdmin(false);
+        setProfileComplete(false);
+        setLoading(false);
+        return;
+      }
 
-      if (currentUser) {
+      try {
+        await currentUser.getIdToken(true); // Force token refresh
+        const tokenResult = await currentUser.getIdTokenResult();
         const userDocRef = doc(db, 'users-ccoh', currentUser.uid);
         const userSnap = await getDoc(userDocRef);
+
         if (userSnap.exists()) {
           const userData = userSnap.data();
           setProfileComplete(userData.isProfileComplete || false);
-          setIsAdmin(userData.admin || false); // Check if the user is an admin
+        } else {
+          setProfileComplete(false);
         }
+
+        setIsAdmin(tokenResult.claims.admin === true);
+        setUser(currentUser);
+      } catch (error) {
+        console.error("Error checking user status:", error);
+        setIsAdmin(false);
       }
 
       setLoading(false);
     });
+    
     return () => unsubscribe();
   }, []);
 

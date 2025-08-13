@@ -6,7 +6,7 @@ admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
 });
 
-const email = "email";
+const email = "consularcorpsofhouston@gmail.com";
 
 async function makeAdmin() {
   try {
