@@ -303,3 +303,30 @@ textarea.profile-input {
   padding: 12px 16px;
   font-size: 16px;
 }
+
+
+
+.profile-label-with-toggle {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-weight: bold;
+}
+
+.phone-hide-toggle {
+    font-weight: normal;
+    font-size: 0.85rem;
+    color: #555;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+}
+
+.phone-hide-toggle input[type="checkbox"] {
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+
+

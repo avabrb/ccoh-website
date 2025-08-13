@@ -118,7 +118,7 @@ const EventsPage = () => {
         </div>
         )}
 
-        <h1 className="section-title">Photos from <Highlight>past events</Highlight> :</h1>
+        <h1 className="section-title">Photos from <Highlight>past events</Highlight></h1>
 
         <div className="photo-grid">
           <PhotoFeed />
