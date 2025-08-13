@@ -24,8 +24,13 @@ const Profile = () => {
         websites: '',
         biography: '',
         profileImage: '',
+        showFullName: false,
+        showCountry: false,
         showEmail: false,
         showPhone: false,
+        showSocialMedia: false,
+        showWebsites: false,
+        showBiography: false,
         membershipPaymentAllowed: true,
         membershipPayment: false,
         membershipPaymentDate: '',
@@ -418,6 +423,85 @@ const Profile = () => {
                         />
                     </div>
                 </div>
+
+                <div className="profile-public-section">
+                    <div className="profile-public-title">
+                        Display on my public profile (visible to other active Consular Corps members only):
+                    </div>
+                    <div className="profile-public-checkboxes">
+                        <label className="profile-public-checkbox">
+                            <input
+                                type="checkbox"
+                                name="showFullName"
+                                checked={userData.showFullName}
+                                onChange={e => setUserData(prev => ({ ...prev, showFullName: e.target.checked }))}
+                                disabled={!isEditing}
+                            />
+                            Full Name
+                        </label>
+                        <label className="profile-public-checkbox">
+                            <input
+                                type="checkbox"
+                                name="showCountry"
+                                checked={userData.showCountry}
+                                onChange={e => setUserData(prev => ({ ...prev, showCountry: e.target.checked }))}
+                                disabled={!isEditing}
+                            />
+                            Country
+                        </label>
+                        <label className="profile-public-checkbox">
+                            <input
+                                type="checkbox"
+                                name="showEmail"
+                                checked={userData.showEmail}
+                                onChange={e => setUserData(prev => ({ ...prev, showEmail: e.target.checked }))}
+                                disabled={!isEditing}
+                            />
+                            Email
+                        </label>
+                        <label className="profile-public-checkbox">
+                            <input
+                                type="checkbox"
+                                name="showPhone"
+                                checked={userData.showPhone}
+                                onChange={e => setUserData(prev => ({ ...prev, showPhone: e.target.checked }))}
+                                disabled={!isEditing}
+                            />
+                            Phone Number
+                        </label>
+                        <label className="profile-public-checkbox">
+                            <input
+                                type="checkbox"
+                                name="showSocialMedia"
+                                checked={userData.showSocialMedia}
+                                onChange={e => setUserData(prev => ({ ...prev, showSocialMedia: e.target.checked }))}
+                                disabled={!isEditing}
+                            />
+                            Social Media Links
+                        </label>
+                        <label className="profile-public-checkbox">
+                            <input
+                                type="checkbox"
+                                name="showWebsites"
+                                checked={userData.showWebsites}
+                                onChange={e => setUserData(prev => ({ ...prev, showWebsites: e.target.checked }))}
+                                disabled={!isEditing}
+                            />
+                            Website(s)
+                        </label>
+                        <label className="profile-public-checkbox">
+                            <input
+                                type="checkbox"
+                                name="showBiography"
+                                checked={userData.showBiography}
+                                onChange={e => setUserData(prev => ({ ...prev, showBiography: e.target.checked }))}
+                                disabled={!isEditing}
+                            />
+                            Biography
+                        </label>
+                    </div>
+                </div>
+
                 <div className="profile-actions">
                     {isEditing ? (
                         <>
@@ -435,33 +519,7 @@ const Profile = () => {
                     ) : null}
                 </div>
             </form>
-            {/* <div className="profile-public-section">
-                <div className="profile-public-title">
-                    Display on my public profile (open to other Consular Corps members only):
-                </div>
-                <div className="profile-public-checkboxes">
-                    <label className="profile-public-checkbox">
-                        <input
-                            type="checkbox"
-                            name="showEmail"
-                            checked={userData.showEmail}
-                            onChange={e => setUserData(prev => ({ ...prev, showEmail: e.target.checked }))}
-                            disabled={!isEditing}
-                        />
-                        {userData.email}
-                    </label>
-                    <label className="profile-public-checkbox">
-                        <input
-                            type="checkbox"
-                            name="showPhone"
-                            checked={userData.showPhone}
-                            onChange={e => setUserData(prev => ({ ...prev, showPhone: e.target.checked }))}
-                            disabled={!isEditing}
-                        />
-                        {userData.phoneNumber}
-                    </label>
-                </div>
-            </div> */}
+
             <div className="profile-bottom-buttons">
                 <button
                     className="profile-pay-btn"

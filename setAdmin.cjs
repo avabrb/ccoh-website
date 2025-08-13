@@ -1,13 +1,12 @@
 const admin = require("firebase-admin");
 
-// Load your service account key
 const serviceAccount = require("./service-account-key.json");
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
 });
 
-const email = "linda_krajcik@gmail.com";
+const email = "email";
 
 async function makeAdmin() {
   try {

@@ -147,19 +147,36 @@ const Members = () => {
                   alt={`${member.firstName} ${member.lastName}`}
                   className="member-photo"
                 />
-                <h3>{member.firstName} {member.lastName}</h3>
+                <h3>
+                  {(isSignedIn && isActive && member.showFullName)
+                    ? `${member.firstName} ${member.lastName}`
+                    : `${member.firstName} ${member.lastName?.charAt(0)}.`}
+                </h3>
                 <p><strong>{member.title}</strong></p>
               </div>
               <div className="card-back">
-                <h3>{member.firstName} {member.lastName}</h3>
                 {isSignedIn && isActive ? (
                   <>
-                    <p>{member.country}</p>
-                    <p>{member.email}</p>
-                    <p>{member.phoneNumber}</p>
+                    <h3>
+                      {member.showFullName 
+                        ? `${member.firstName} ${member.lastName}`
+                        : `${member.firstName} ${member.lastName?.charAt(0)}.`}
+                    </h3>
+                    {member.showCountry && <p>{member.country}</p>}
+                    {member.showEmail && <p>{member.email}</p>}
+                    {member.showPhone && <p>{member.phoneNumber}</p>}
+                    {member.showSocialMedia && member.socialMedia && <p>{member.socialMedia}</p>}
+                    {member.showWebsites && member.websites && <p>{member.websites}</p>}
+                    {member.showBiography && member.biography && <p className="member-biography">{member.biography}</p>}
+                    {!member.showCountry && !member.showEmail && !member.showPhone && 
+                     !member.showSocialMedia && !member.showWebsites && !member.showBiography && 
+                      <p>No additional information has been shared by this member.</p>}
                   </>
                 ) : (
-                  <p>Sign in to view full details</p>
+                  <>
+                    <h3>{member.firstName} {member.lastName?.charAt(0)}.</h3>
+                    <p>You must be an active member to see details. Contact the administrator if you believe this is a mistake.</p>
+                  </>
                 )}
               </div>
             </div>

@@ -11,6 +11,7 @@ import {
 import { db } from '../login/Login.jsx';
 import './Admin.css';
 import { getAuth } from "firebase/auth";
+import { countries } from 'countries-list';
 
 export default function MemberManager() {
   const [members, setMembers] = useState([]);
@@ -146,8 +147,13 @@ const deleteUser = async (userId, userName) => {
         websites: updatedFields.websites ?? '',
         biography: updatedFields.biography ?? '',
         profileImage: updatedFields.profileImage ?? '',
+        showFullName: updatedFields.showFullName ?? false,
+        showCountry: updatedFields.showCountry ?? false,
         showEmail: updatedFields.showEmail ?? false,
         showPhone: updatedFields.showPhone ?? false,
+        showSocialMedia: updatedFields.showSocialMedia ?? false,
+        showWebsites: updatedFields.showWebsites ?? false,
+        showBiography: updatedFields.showBiography ?? false,
         membershipPaymentAllowed: updatedFields.membershipPaymentAllowed ?? false,
         membershipPayment: updatedFields.membershipPayment ?? false,
         membershipPaymentDate: updatedFields.membershipPaymentDate ?? '',
@@ -272,197 +278,269 @@ const deleteUser = async (userId, userName) => {
   await editUser(editingUser.id, editFields);
   setEditingUser(null);
 }}>
-  {/* FIRST ROW */}
-  <div className="form-group">
-    <label htmlFor="firstName">First Name:</label>
-    <input
-      id="firstName"
-      type="text"
-      value={editFields.firstName || ''}
-      onChange={e => setEditFields(f => ({ ...f, firstName: e.target.value }))}
-    />
-  </div>
-  <div className="form-group">
-    <label htmlFor="lastName">Last Name:</label>
-    <input
-      id="lastName"
-      type="text"
-      value={editFields.lastName || ''}
-      onChange={e => setEditFields(f => ({ ...f, lastName: e.target.value }))}
-    />
-  </div>
+  <section className="form-section">
+    <h4>Profile Information</h4>
+    <div className="profile-fields">
+      <div className="form-group">
+        <label htmlFor="firstName">First Name:</label>
+        <input
+          id="firstName"
+          type="text"
+          value={editFields.firstName || ''}
+          onChange={e => setEditFields(f => ({ ...f, firstName: e.target.value }))}
+          className="profile-input"
+        />
+      </div>
+      <div className="form-group">
+        <label htmlFor="lastName">Last Name:</label>
+        <input
+          id="lastName"
+          type="text"
+          value={editFields.lastName || ''}
+          onChange={e => setEditFields(f => ({ ...f, lastName: e.target.value }))}
+          className="profile-input"
+        />
+      </div>
 
-  {/* SECOND ROW */}
-  <div className="form-group">
-    <label htmlFor="title">Title:</label>
-    <input
-      id="title"
-      type="text"
-      value={editFields.title || ''}
-      onChange={e => setEditFields(f => ({ ...f, title: e.target.value }))}
-    />
-  </div>
-  <div className="form-group">
-    <label htmlFor="status">Status:</label>
-    <input
-      id="status"
-      type="text"
-      value={editFields.status || ''}
-      onChange={e => setEditFields(f => ({ ...f, status: e.target.value }))}
-    />
-  </div>
+      <div className="form-group">
+        <label htmlFor="title">Title:</label>
+        <select
+          id="title"
+          value={editFields.title || ''}
+          onChange={e => setEditFields(f => ({ ...f, title: e.target.value }))}
+          className="profile-input"
+        >
+          <option value="" disabled>Select Title</option>
+          <option value="Consul General">Consul General</option>
+          <option value="Honorary Consul">Honorary Consul</option>
+        </select>
+      </div>
 
-  {/* THIRD ROW */}
-  <div className="form-group">
-    <label htmlFor="country">Country:</label>
-    <input
-      id="country"
-      type="text"
-      value={editFields.country || ''}
-      onChange={e => setEditFields(f => ({ ...f, country: e.target.value }))}
-    />
-  </div>
-  <div className="form-group">
-    <label htmlFor="paymentYear">Payment Year:</label>
-    <input
-      id="paymentYear"
-      type="text"
-      value={editFields.paymentYear || ''}
-      onChange={e => setEditFields(f => ({ ...f, paymentYear: e.target.value }))}
-    />
-  </div>
+      <div className="form-group">
+        <label htmlFor="status">Status:</label>
+        <select
+          id="status"
+          value={editFields.status || ''}
+          onChange={e => setEditFields(f => ({ ...f, status: e.target.value }))}
+          className="profile-input"
+        >
+          <option value="" disabled>Select Status</option>
+          <option value="Current">Current</option>
+          <option value="Emeritus">Emeritus</option>
+        </select>
+      </div>
 
-  {/* FOURTH ROW */}
-  <div className="form-group">
-    <label htmlFor="email">Email:</label>
-    <input
-      id="email"
-      type="text"
-      value={editFields.email || ''}
-      onChange={e => setEditFields(f => ({ ...f, email: e.target.value }))}
-    />
-  </div>
-  <div className="form-group">
-    <label htmlFor="phoneNumber">Phone Number:</label>
-    <input
-      id="phoneNumber"
-      type="text"
-      value={editFields.phoneNumber || ''}
-      onChange={e => setEditFields(f => ({ ...f, phoneNumber: e.target.value }))}
-    />
-  </div>
+      <div className="form-group">
+        <label htmlFor="country">Country:</label>
+        <select
+          id="country"
+          value={editFields.country || ''}
+          onChange={e => setEditFields(f => ({ ...f, country: e.target.value }))}
+          className="profile-input"
+        >
+          <option value="" disabled>Select Country</option>
+          {Object.values(countries).map((country) => (
+            <option key={country.name} value={country.name}>
+              {country.name}
+            </option>
+          ))}
+        </select>
+      </div>
 
-  {/* FIFTH ROW */}
-  <div className="form-group">
-    <label htmlFor="socialMedia">Social Media:</label>
-    <input
-      id="socialMedia"
-      type="text"
-      value={editFields.socialMedia || ''}
-      onChange={e => setEditFields(f => ({ ...f, socialMedia: e.target.value }))}
-    />
-  </div>
-  <div className="form-group">
-    <label htmlFor="websites">Websites:</label>
-    <input
-      id="websites"
-      type="text"
-      value={editFields.websites || ''}
-      onChange={e => setEditFields(f => ({ ...f, websites: e.target.value }))}
-    />
-  </div>
+      <div className="form-group">
+        <label htmlFor="email">Email:</label>
+        <input
+          id="email"
+          type="email"
+          value={editFields.email || ''}
+          onChange={e => setEditFields(f => ({ ...f, email: e.target.value }))}
+          className="profile-input"
+        />
+      </div>
 
-  {/* SIXTH ROW */}
-  <div className="form-group">
-    <label htmlFor="profileImage">Profile Image URL:</label>
-    <input
-      id="profileImage"
-      type="text"
-      value={editFields.profileImage || ''}
-      onChange={e => setEditFields(f => ({ ...f, profileImage: e.target.value }))}
-    />
-  </div>
-  {/* Empty cell for grid alignment */}
-  <div></div>
+      <div className="form-group">
+        <label htmlFor="phoneNumber">Phone Number:</label>
+        <input
+          id="phoneNumber"
+          type="tel"
+          value={editFields.phoneNumber || ''}
+          onChange={e => setEditFields(f => ({ ...f, phoneNumber: e.target.value }))}
+          className="profile-input"
+        />
+      </div>
 
-  {/* BIOGRAPHY SPANS BOTH COLUMNS */}
-  <div className="form-group full-width">
-    <label htmlFor="biography">Biography:</label>
-    <textarea
-      id="biography"
-      value={editFields.biography || ''}
-      onChange={e => setEditFields(f => ({ ...f, biography: e.target.value }))}
-    />
-  </div>
+      <div className="form-group">
+        <label htmlFor="socialMedia">Social Media:</label>
+        <input
+          id="socialMedia"
+          type="text"
+          value={editFields.socialMedia || ''}
+          onChange={e => setEditFields(f => ({ ...f, socialMedia: e.target.value }))}
+          className="profile-input"
+          placeholder="@socialmedia on Facebook"
+        />
+      </div>
 
-  {/* BOTTOM ROWS */}
-  <div className="bottom-row">
-    <div className="form-group">
-      <input
-        type="checkbox"
-        checked={!!editFields.showEmail}
-        onChange={e => setEditFields(f => ({ ...f, showEmail: e.target.checked }))}
-      />
-      <label>Show Email</label>
+      <div className="form-group">
+        <label htmlFor="websites">Websites:</label>
+        <input
+          id="websites"
+          type="text"
+          value={editFields.websites || ''}
+          onChange={e => setEditFields(f => ({ ...f, websites: e.target.value }))}
+          className="profile-input"
+          placeholder="www.example.com"
+        />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="profileImage">Profile Image URL:</label>
+        <input
+          id="profileImage"
+          type="text"
+          value={editFields.profileImage || ''}
+          onChange={e => setEditFields(f => ({ ...f, profileImage: e.target.value }))}
+          className="profile-input"
+        />
+      </div>
+
+      <div className="form-group full-width">
+        <label htmlFor="biography">Biography:</label>
+        <textarea
+          id="biography"
+          value={editFields.biography || ''}
+          onChange={e => setEditFields(f => ({ ...f, biography: e.target.value }))}
+          className="profile-input"
+          style={{ minHeight: 60, resize: 'vertical' }}
+        />
+      </div>
     </div>
-    <div className="form-group">
-      <input
-        type="checkbox"
-        checked={!!editFields.showPhone}
-        onChange={e => setEditFields(f => ({ ...f, showPhone: e.target.checked }))}
-      />
-      <label>Show Phone</label>
-    </div>
-    <div className="form-group">
-      <input
-        type="checkbox"
-        checked={!!editFields.membershipPaymentAllowed}
-        onChange={e => setEditFields(f => ({ ...f, membershipPaymentAllowed: e.target.checked }))}
-      />
-      <label>Membership Payment Allowed</label>
-    </div>
-    <div className="form-group">
-      <input
-        type="checkbox"
-        checked={!!editFields.membershipPayment}
-        onChange={e => setEditFields(f => ({ ...f, membershipPayment: e.target.checked }))}
-      />
-      <label>Membership Payment</label>
-    </div>
-    <div className="form-group">
-      <input
-        type="checkbox"
-        checked={!!editFields.activeStatus}
-        onChange={e => setEditFields(f => ({ ...f, activeStatus: e.target.checked }))}
-      />
-      <label>Active Status</label>
-    </div>
-    <div className="form-group">
-      <input
-        type="checkbox"
-        checked={!!editFields.isProfileComplete}
-        onChange={e => setEditFields(f => ({ ...f, isProfileComplete: e.target.checked }))}
-      />
-      <label>Profile Complete</label>
-    </div>
-  </div>
-  <div className="bottom-row">
-    <div className="form-group">
-      <label>Payment Date</label>
-      <input
-        type="text"
-        value={editFields.membershipPaymentDate || ''}
-        onChange={e => setEditFields(f => ({ ...f, membershipPaymentDate: e.target.value }))}
-      />
-    </div>
-    <div className="form-group">
-      <label>Payment Year</label>
-      <input
-        type="text"
-        value={editFields.membershipPaymentYear || ''}
-        onChange={e => setEditFields(f => ({ ...f, membershipPaymentYear: e.target.value }))}
-      />
-    </div>
+  </section>
+
+  {/* Settings Sections */}
+  <div className="settings-sections">
+    <section className="settings-section">
+      <h4>Member Status</h4>
+      <div className="status-grid">
+        <div className="checkbox-grid">
+          <label className="checkbox-item">
+            <input
+              type="checkbox"
+              checked={!!editFields.membershipPaymentAllowed}
+              onChange={e => setEditFields(f => ({ ...f, membershipPaymentAllowed: e.target.checked }))}
+            />
+            Membership Payment Allowed
+          </label>
+          <label className="checkbox-item">
+            <input
+              type="checkbox"
+              checked={!!editFields.membershipPayment}
+              onChange={e => setEditFields(f => ({ ...f, membershipPayment: e.target.checked }))}
+            />
+            Membership Payment
+          </label>
+          <label className="checkbox-item">
+            <input
+              type="checkbox"
+              checked={!!editFields.activeStatus}
+              onChange={e => setEditFields(f => ({ ...f, activeStatus: e.target.checked }))}
+            />
+            Active Status
+          </label>
+          <label className="checkbox-item">
+            <input
+              type="checkbox"
+              checked={!!editFields.isProfileComplete}
+              onChange={e => setEditFields(f => ({ ...f, isProfileComplete: e.target.checked }))}
+            />
+            Profile Complete
+          </label>
+        </div>
+        <div className="payment-info">
+          <div className="form-group">
+            <label htmlFor="paymentYear">Payment Year:</label>
+            <select
+              id="paymentYear"
+              value={editFields.membershipPaymentYear || ''}
+              onChange={e => setEditFields(f => ({ ...f, membershipPaymentYear: e.target.value }))}
+              className="profile-input"
+            >
+              <option value="">Select Year</option>
+              <option value={new Date().getFullYear()}>{new Date().getFullYear()}</option>
+              <option value={new Date().getFullYear() + 1}>{new Date().getFullYear() + 1}</option>
+            </select>
+          </div>
+          <div className="form-group">
+            <label>Last Payment:</label>
+            <div className="payment-date">
+              {editFields.membershipPaymentDate ? new Date(editFields.membershipPaymentDate.seconds * 1000).toLocaleDateString() : 'No payment recorded'}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section className="settings-section">
+      <h4>Display Preferences</h4>
+      <div className="checkbox-grid">
+        <label className="checkbox-item">
+          <input
+            type="checkbox"
+            checked={!!editFields.showFullName}
+            onChange={e => setEditFields(f => ({ ...f, showFullName: e.target.checked }))}
+          />
+          Show Full Name
+        </label>
+        <label className="checkbox-item">
+          <input
+            type="checkbox"
+            checked={!!editFields.showCountry}
+            onChange={e => setEditFields(f => ({ ...f, showCountry: e.target.checked }))}
+          />
+          Show Country
+        </label>
+        <label className="checkbox-item">
+          <input
+            type="checkbox"
+            checked={!!editFields.showEmail}
+            onChange={e => setEditFields(f => ({ ...f, showEmail: e.target.checked }))}
+          />
+          Show Email
+        </label>
+        <label className="checkbox-item">
+          <input
+            type="checkbox"
+            checked={!!editFields.showPhone}
+            onChange={e => setEditFields(f => ({ ...f, showPhone: e.target.checked }))}
+          />
+          Show Phone
+        </label>
+        <label className="checkbox-item">
+          <input
+            type="checkbox"
+            checked={!!editFields.showSocialMedia}
+            onChange={e => setEditFields(f => ({ ...f, showSocialMedia: e.target.checked }))}
+          />
+          Show Social Media
+        </label>
+        <label className="checkbox-item">
+          <input
+            type="checkbox"
+            checked={!!editFields.showWebsites}
+            onChange={e => setEditFields(f => ({ ...f, showWebsites: e.target.checked }))}
+          />
+          Show Website(s)
+        </label>
+        <label className="checkbox-item">
+          <input
+            type="checkbox"
+            checked={!!editFields.showBiography}
+            onChange={e => setEditFields(f => ({ ...f, showBiography: e.target.checked }))}
+          />
+          Show Biography
+        </label>
+      </div>
+    </section>
   </div>
 </form>
 
