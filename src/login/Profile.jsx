@@ -38,7 +38,6 @@ const Profile = () => {
         activeStatus: false,
         isProfileComplete: false,
         isImported: false,
-        phoneDisplay: true, // New field to control phone number visibility
     });
     const [originalUserData, setOriginalUserData] = useState(null); // Store original data
 
@@ -405,17 +404,6 @@ const Profile = () => {
                             <span>
                                 Phone Number <span className="required-asterisk">*</span>
                             </span>
-                            <label className="phone-hide-toggle">
-                                <input
-                                    type="checkbox"
-                                    checked={!userData.phoneDisplay}
-                                    onChange={(e) =>
-                                        setUserData(prev => ({ ...prev, phoneDisplay: !e.target.checked }))
-                                    }
-                                    disabled={!isEditing}
-                                />
-                                Keep this information hidden from other members
-                            </label>
                         </label>
 
                         <PhoneInput
