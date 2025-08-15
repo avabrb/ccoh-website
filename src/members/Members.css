@@ -84,14 +84,14 @@
 }
 
 .member-info strong {
-  font-size: 1.25rem;
-  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  margin-bottom: 0.1rem;
 }
 
 .member-info div {
-  font-size: 0.95rem;
+  font-size: 0.5rem;
   color: #333;
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.1rem;
   word-break: break-word;
 }
 
@@ -202,4 +202,93 @@
 .country-select .react-select__control {
   border-radius: 6px;
   min-height: 42px;
+}
+
+
+
+
+/* === Members Page Styles === */
+
+/* Modal overlay */
+.bio-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+/* Modal content box */
+.bio-modal-content {
+  background: #005DFF; /* Blue background */
+  color: white; /* White text */
+  padding: 20px;
+  border-radius: 12px;
+  max-width: 600px;
+  max-height: 80vh;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Close button */
+.bio-close {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: white; /* White close icon */
+}
+
+/* Scrollable bio text */
+.bio-scroll {
+  overflow-y: auto;
+  max-height: 70vh;
+  padding-right: 8px;
+}
+.bio-scroll p {
+  color: white; /* Ensure text inside scroll is white */
+}
+
+
+/* Bio button styling */
+.bio-button {
+  background-color: #007BFF;
+  color: white;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 8px;
+}
+.bio-button:hover {
+  background-color: #0056b3;
+}
+
+
+
+
+/*fix card spacing and line height issues*/
+.member-info {
+  line-height: 0.1; /* shrink line spacing */
+}
+
+.member-info > * {
+    display: inline-block;
+}
+
+
+.member-info strong,
+.member-info div,
+.member-info a {
+  line-height: 0.1; /* match container line height */
 }

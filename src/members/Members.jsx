@@ -17,6 +17,10 @@ const Members = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [showFilters, setShowFilters] = useState(false);
 
+  // New state for bio modal
+  const [showBioModal, setShowBioModal] = useState(false);
+  const [selectedBio, setSelectedBio] = useState('');
+
   useEffect(() => {
     const fetchMembers = async () => {
       const user = auth.currentUser;
@@ -66,8 +70,14 @@ const Members = () => {
     setSearchQuery('');
   };
 
+
+  const openBioModal = (bio) => {
+    setSelectedBio(bio);
+    setShowBioModal(true);
+  };
+
   return (
-    <div className="exec-committee">
+    <div className={`exec-committee ${showBioModal ? 'blurred-background' : ''}`}>
       <h2 className="section-title">
         Meet the <span className="highlight">Members</span> of the Consular Corps of Houston
       </h2>
@@ -167,7 +177,17 @@ const Members = () => {
                     {member.showPhone && <p>{member.phoneNumber}</p>}
                     {member.showSocialMedia && member.socialMedia && <p>{member.socialMedia}</p>}
                     {member.showWebsites && member.websites && <p>{member.websites}</p>}
-                    {member.showBiography && member.biography && <p className="member-biography">{member.biography}</p>}
+                    {member.showBiography && member.biography && (
+                      <button 
+                        className="bio-button" 
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          openBioModal(member.biography);
+                        }}
+                      >
+                        Check out my bio!
+                      </button>
+                    )}
                     {!member.showCountry && !member.showEmail && !member.showPhone && 
                      !member.showSocialMedia && !member.showWebsites && !member.showBiography && 
                       <p>No additional information has been shared by this member.</p>}
@@ -183,6 +203,16 @@ const Members = () => {
           </div>
         ))}
       </div>
+      {showBioModal && (
+        <div className="bio-modal-overlay" onClick={() => setShowBioModal(false)}>
+          <div className="bio-modal-content" onClick={(e) => e.stopPropagation()}>
+            <button className="bio-close" onClick={() => setShowBioModal(false)}>×</button>
+            <div className="bio-scroll">
+              <p>{selectedBio}</p>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 
