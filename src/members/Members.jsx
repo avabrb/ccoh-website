@@ -4,7 +4,7 @@ import { collection, getDocs, doc, getDoc } from 'firebase/firestore';
 import { FaFilter } from 'react-icons/fa';
 import Select from 'react-select';
 import './Members.css';
-import '../exec-comm/exec-comm.css'; 
+/*import '../exec-comm/exec-comm.css'; */
 
 const Members = () => {
   const [members, setMembers] = useState([]);
