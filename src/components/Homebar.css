@@ -9,7 +9,7 @@
 
 /* Logo */
 .logo img {
-    height: clamp(40px, 8vw, 80px);
+    height: clamp(20px, 6vw, 60px);
     cursor: pointer;
 }
 
