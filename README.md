@@ -47,10 +47,10 @@ This project is a web platform built for the Consular Corps of Houston (CCoH) to
 - Calendar Integration: Google Calendar API
 
 ## Project Structure
-
+```
 /src
-  /components      # Reusable UI components
-  /admin           # Admin dashboard page
+  /components      # Reusable UI components 
+  /admin           # Admin dashboard page 
   /home            # Home page (model, view, and view model)
   /login           # Authentication system
   /members         # Members page and database
@@ -64,11 +64,11 @@ This project is a web platform built for the Consular Corps of Houston (CCoH) to
   firebase.js      # Firebase set-up
   main.jsx         # Render root
   index.css        # Root styling
-
+```
 ## Environment Variables
 
 To run the project locally, create a .env file with the following keys:
-
+```
 VITE_FB_API_KEY=your_api_key
 VITE_AUTH_DOMAIN=your_auth_domain
 VITE_PROJECT_ID=your_project_id
@@ -81,7 +81,7 @@ VITE_STRIPE_PUBLISH=your_publish_id
 VITE_FETCH_URL=your_fetch_url
 VITE_API_KEY=your_calendar_api_key
 VITE_CALENDAR_ID=your_calendar_id
-
+```
 ## Getting Started
 
 1. Clone the repository:
