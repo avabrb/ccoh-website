@@ -41,7 +41,7 @@ This project is a web platform built for the Consular Corps of Houston (CCoH) to
 
 - Frontend: React, Vite
 - Styling: CSS
-- Backend / Database: Firebase (Firestore, Authentication, Storage)
+- Backend / Database: Firebase (Firestore, Authentication, Storage), Stripe
 - Authentication: Firebase Authentication
 - Hosting: Vercel
 - Calendar Integration: Google Calendar API
@@ -50,25 +50,37 @@ This project is a web platform built for the Consular Corps of Houston (CCoH) to
 
 /src
   /components      # Reusable UI components
-  /pages           # Main pages (Members, Events, Profile, Admin, etc.)
+  /admin           # Admin dashboard page
+  /home            # Home page (model, view, and view model)
   /login           # Authentication system
-  /exec-comm       # Executive committee pages
+  /members         # Members page and database
+  /exec-comm       # Executive committee page
+  /program         # Events page (upcoming events calendar and event photos)
+  /national-days   # National days page
+  /payment         # Payment integrated system
   /assets          # Images and static files
-  App.js           # Main app entry
-  index.js         # Render root
+  App.jsx          # Main app entry
+  App.css          # Main app stylings
+  firebase.js      # Firebase set-up
+  main.jsx         # Render root
+  index.css        # Root styling
 
 ## Environment Variables
 
 To run the project locally, create a .env file with the following keys:
 
-VITE_FIREBASE_API_KEY=your_api_key
-VITE_FIREBASE_AUTH_DOMAIN=your_auth_domain
-VITE_FIREBASE_PROJECT_ID=your_project_id
-VITE_FIREBASE_STORAGE_BUCKET=your_storage_bucket
-VITE_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
-VITE_FIREBASE_APP_ID=your_app_id
-VITE_GOOGLE_CALENDAR_API_KEY=your_calendar_api_key
-VITE_GOOGLE_CALENDAR_ID=your_calendar_id
+VITE_FB_API_KEY=your_api_key
+VITE_AUTH_DOMAIN=your_auth_domain
+VITE_PROJECT_ID=your_project_id
+VITE_STORAGE_BUCKET=your_storage_bucket
+VITE_MSG_ID=your_sender_id
+VITE_APP_ID=your_app_id
+VITE_MEASUREMENT_ID=your_measurement_id
+VITE_STRIPE_SECRET_KEY=your_stripe_key
+VITE_STRIPE_PUBLISH=your_publish_id
+VITE_FETCH_URL=your_fetch_url
+VITE_API_KEY=your_calendar_api_key
+VITE_CALENDAR_ID=your_calendar_id
 
 ## Getting Started
 
